@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+#include <stdio.h>
 
 int main (int arc , char ** argv)
 {
+	printf("Prueba Manu\n");
 	return (0);
 }

@@ -33,7 +33,7 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 # Includes
 INC			=	-I ./inc/\
 				-I ./libft/\
-				-I ./minilibx-linux/
+				-I ./minilibx/
 
 # Main rule
 all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)

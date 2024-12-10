@@ -8,7 +8,7 @@ BONUS = 0
 
 # Compiler and compilation flags
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall #-g3 -fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall -g3 -fsanitize=address
 
 # Minilibx linux
 MLX_PATH	= minilibx/
@@ -22,7 +22,7 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # Sources
 SRC_PATH = ./src/
-SRC		= 	main.c
+SRC		= 	main.c get_map.c prints.c frees.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -31,7 +31,7 @@ OBJ			= $(SRC:.c=.o)
 OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
 # Includes
-INC			=	-I ./includes/\
+INC			=	-I ./inc/\
 				-I ./libft/\
 				-I ./minilibx-linux/
 

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42barcel>       +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/04 19:55:43 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/02/04 20:20:40 by mgimon-c         ###   ########.fr       */
+/*   Created: 2024/12/10 04:56:51 by mgimon-c          #+#    #+#             */
+/*   Updated: 2024/12/10 04:57:48 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/cub3d.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void    matrix_free(char **matrix)
 {
-	t_list	*lst_temp;
+	int	i;
 
-	while (*lst != NULL)
+	i = 0;
+	while (matrix[i])
 	{
-		lst_temp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = lst_temp;
+		free(matrix[i]);
+		i++;
 	}
+	free(matrix);
 }

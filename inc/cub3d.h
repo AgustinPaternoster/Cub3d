@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/10 17:06:51 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:17:46 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 typedef struct s_tmap
 {
 	char	**matrix;
+	void 	*mlx_connection;
+	void	*mlx_window;
 }			t_tmap;
 
 // prints.c
@@ -33,7 +35,7 @@ void    printline_fd(int fd, char *str);
 void    printmatrix_fd(int fd, char **str);
 
 // frees.c
-void    matrix_free(char **matrix);
+void    clean_close(t_tmap map);
 
 // get_map.c
 void    get_map(t_tmap *tmap, char *filename);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:52:26 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/10 04:43:33 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:32:19 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*read_line(int fd)
 	return (line);
 }
 
-int get_mapsize(char *filename)
+int	get_mapsize(char *filename)
 {
 	int		fd;
 	int		n;
@@ -56,7 +56,7 @@ int get_mapsize(char *filename)
 	return (n > 8 ? n - 8 : 0);
 }
 
-void    get_map(t_tmap *tmap, char *filename)
+void	get_map(t_tmap *tmap, char *filename)
 {
 	int			fd;
 	int			i;
@@ -68,10 +68,10 @@ void    get_map(t_tmap *tmap, char *filename)
 	map_size = get_mapsize(filename);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0 || map_size <= 0)
-    {
-        printline_fd(2, "Open failed or invalid map size\n");
-        return ;
-    }
+	{
+		printline_fd(2, "Open failed or invalid map size\n");
+		return ;
+	}
 	result = malloc(sizeof(char *) * (map_size + 1));
 	i = 0;
 	k = 0;

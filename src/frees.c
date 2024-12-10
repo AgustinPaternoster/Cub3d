@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 04:56:51 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/10 04:57:48 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:32:22 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void    matrix_free(char **matrix)
+void	clean_close(t_tmap map)
 {
 	int	i;
 
 	i = 0;
-	while (matrix[i])
+	while (map.matrix[i])
 	{
-		free(matrix[i]);
+		free(map.matrix[i]);
 		i++;
 	}
-	free(matrix);
+	free(map.matrix);
+	mlx_destroy_window(map.mlx_connection, map.mlx_window);
 }

@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   prints.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:59:10 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/10 04:38:40 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:32:11 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void    printline_fd(int fd, char *str)
+void	printline_fd(int fd, char *str)
 {
-    while (*str)
-        write(fd, str++, 1);
+	while (*str)
+		write(fd, str++, 1);
 }
 
-void    printmatrix_fd(int fd, char **str)
+void	printmatrix_fd(int fd, char **str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!str || !str[i])
-        return ;
-    while (str[i])
-    {
-        printline_fd(fd, str[i]);
-        write(fd, "\n", 1);
-        i++;
-    }
+	i = 0;
+	if (!str || !str[i])
+		return ;
+	while (str[i])
+	{
+		printline_fd(fd, str[i]);
+		write(fd, "\n", 1);
+		i++;
+	}
 }

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/10 03:27:21 by mgimon-c         ###   ########.fr       */
+/*   Created: 2024/02/02 22:19:20 by mgimon-c          #+#    #+#             */
+/*   Updated: 2024/02/02 22:40:14 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "libft.h"
 
-int main (int argc , char ** argv)
+t_list	*ft_lstnew(void *content)
 {
-	(void)argc;
-	(void)argv;
-	printf("Prueba Manu\n");
-	return (0);
+	t_list	*new;
+
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new == NULL)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

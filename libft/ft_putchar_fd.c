@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/10 03:27:21 by mgimon-c         ###   ########.fr       */
+/*   Created: 2024/02/05 15:58:34 by mgimon-c          #+#    #+#             */
+/*   Updated: 2024/02/05 15:59:29 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "libft.h"
 
-int main (int argc , char ** argv)
+void	ft_putchar_fd(char c, int fd)
 {
-	(void)argc;
-	(void)argv;
-	printf("Prueba Manu\n");
-	return (0);
+	write(fd, &c, 1);
 }

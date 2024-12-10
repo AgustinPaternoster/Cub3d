@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/10 03:27:21 by mgimon-c         ###   ########.fr       */
+/*   Created: 2024/01/23 19:14:28 by mgimon-c          #+#    #+#             */
+/*   Updated: 2024/01/23 19:18:38 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "libft.h"
 
-int main (int argc , char ** argv)
+void	ft_putstr_fd(char *s, int fd)
 {
-	(void)argc;
-	(void)argv;
-	printf("Prueba Manu\n");
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
 }

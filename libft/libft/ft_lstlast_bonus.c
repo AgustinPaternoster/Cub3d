@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/10 03:27:21 by mgimon-c         ###   ########.fr       */
+/*   Created: 2024/02/03 19:41:42 by mgimon-c          #+#    #+#             */
+/*   Updated: 2024/02/03 20:00:19 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "libft.h"
 
-int main (int argc , char ** argv)
+t_list	*ft_lstlast(t_list *lst)
 {
-	(void)argc;
-	(void)argv;
-	printf("Prueba Manu\n");
-	return (0);
+	t_list	*lst_ptr;
+
+	lst_ptr = lst;
+	if (lst_ptr == NULL)
+		return (NULL);
+	while (lst_ptr->next != NULL)
+		lst_ptr = lst_ptr->next;
+	return (lst_ptr);
 }

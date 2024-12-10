@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/10 03:27:21 by mgimon-c         ###   ########.fr       */
+/*   Created: 2024/02/04 19:40:49 by mgimon-c          #+#    #+#             */
+/*   Updated: 2024/02/04 19:52:44 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "libft.h"
 
-int main (int argc , char ** argv)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	(void)argc;
-	(void)argv;
-	printf("Prueba Manu\n");
-	return (0);
+	del(lst->content);
+	free(lst);
 }

@@ -8,10 +8,10 @@ BONUS = 0
 
 # Compiler and compilation flags
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -g3 #-fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall #-g3 -fsanitize=address
 
-# Minilibx
-MLX_PATH	= minilibx-linux/
+# Minilibx linux
+MLX_PATH	= minilibx/
 MLX_NAME	= libmlx.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
 

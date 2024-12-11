@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/11 05:03:34 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:03:31 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,27 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+typedef struct s_player
+{
+	int 	x_pos;
+	int 	y_pos;
+	
+}t_player;
 typedef struct s_tmap
 {
 	char	**matrix;
+	int 	size_y;
+	int 	size_x;
+}			t_tmap;
+
+typedef struct s_game
+{
 	void 	*mlx_connection;
 	void	*mlx_window;
-}			t_tmap;
+	t_player *player;
+	t_tmap 	*map;
+}t_game;
+
 
 // prints.c
 void    printline_fd(int fd, char *str);

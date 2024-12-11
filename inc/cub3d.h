@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/10 17:17:46 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/11 05:03:34 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,19 @@ void    printmatrix_fd(int fd, char **str);
 
 // frees.c
 void    clean_close(t_tmap map);
+void	matrix_free(char **str);
 
 // get_map.c
 void    get_map(t_tmap *tmap, char *filename);
+
+// check_map.c
+int check_map(char **matrix);
+
+// check_map_utils.c
+int get_full_height(char **matrix);
+int check_line_ends(char *str);
+int get_num_rows(char **matrix);
+int even_map(char **matrix);
+int validate_holes(char **matrix);
 
 #endif

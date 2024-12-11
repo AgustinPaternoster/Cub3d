@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 04:56:51 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/10 17:32:22 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:06:46 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,19 @@ void	clean_close(t_tmap map)
 	}
 	free(map.matrix);
 	mlx_destroy_window(map.mlx_connection, map.mlx_window);
+}
+
+void	matrix_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/11 15:54:48 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:17:22 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,22 @@ typedef struct s_tmap
 	void	*mlx_window;
 }			t_tmap;
 
+
+typedef struct  s_imgdata
+{
+	void *img;
+	char *addr;
+	int  bits_per_pixel;
+	int line_length;
+	int endian; 
+}t_imgdata;
+
 // prints.c
 void    printline_fd(int fd, char *str);
 void    printmatrix_fd(int fd, char **str);
 
 // frees.c
-void    clean_close(t_tmap map);
+void	clean_close(t_tmap *map, t_imgdata *img);
 void	matrix_free(char **str);
 
 // get_map.c

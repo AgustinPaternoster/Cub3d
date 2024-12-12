@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/11 14:03:31 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:51:30 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+//defines
+#define MALLOC "Malloc error\n"
 
 typedef struct s_player
 {
@@ -50,8 +53,9 @@ void    printline_fd(int fd, char *str);
 void    printmatrix_fd(int fd, char **str);
 
 // frees.c
-void    clean_close(t_tmap map);
+void	clean_close(t_game *game);
 void	matrix_free(char **str);
+void	error_exit(char *msg, int exit_code, t_game *game);
 
 // get_map.c
 void    get_map(t_tmap *tmap, char *filename);

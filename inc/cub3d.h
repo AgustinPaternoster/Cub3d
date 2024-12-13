@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/13 20:26:56 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:51:27 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	matrix_free(char **str);
 void	error_exit(char *msg, int exit_code, t_game *game);
 
 // get_map.c
-void    get_map(t_tmap *tmap, char *filename);
+int		get_map(t_tmap *tmap, char *filename);
 
 // check_map.c
 int check_map(char **matrix);

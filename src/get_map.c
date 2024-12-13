@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:52:26 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/12 16:38:26 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:51:15 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_mapsize(char *filename)
 	return (n > 8 ? n - 8 : 0);
 }
 
-void	get_map(t_tmap *tmap, char *filename)
+int	get_map(t_tmap *tmap, char *filename)
 {
 	int			fd;
 	int			i;
@@ -70,7 +70,7 @@ void	get_map(t_tmap *tmap, char *filename)
 	if (fd < 0 || map_size <= 0)
 	{
 		printline_fd(2, "Open failed or invalid map size\n");
-		return ;
+		return (1);
 	}
 	result = malloc(sizeof(char *) * (map_size + 1));
 	i = 0;
@@ -87,7 +87,7 @@ void	get_map(t_tmap *tmap, char *filename)
 					free(result[k]);
 				free(result);
 				close(fd);
-				return ;
+				return (1);
 			}
 		}
 		else
@@ -97,6 +97,7 @@ void	get_map(t_tmap *tmap, char *filename)
 	result[k] = NULL;
 	close(fd);
 	tmap->matrix = result;
+	return (0);
 }
 
 /*void get_map(t_tmap *tmap, char *filename)

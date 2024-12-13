@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/13 20:18:58 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:55:18 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	init_game(&game);
-	get_map(game.map, "maps/test_map.cub");
+	if (get_map(game.map, "maps/test_map.cub") == 1)
+		return (1);
 	if (check_map(game.map->matrix) == 0)
 		printline_fd(2, "\nThe map is valid\n\n");
 	else

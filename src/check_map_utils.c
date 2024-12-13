@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 05:00:30 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/11 05:01:54 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:26:46 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,28 @@ int validate_holes(char **matrix)
         i++;
     }
     return 1;
+}
+
+int validate_chars(char **matrix)
+{
+    int i;
+    int j;
+
+    i = 0;
+    if (!matrix)
+        return (1);
+    while (matrix[i])
+    {
+        j = 0;
+        while (matrix[i][j])
+        {
+            if (matrix[i][j] != '1' && matrix[i][j] != '0' && matrix[i][j] != ' '
+                && matrix[i][j] != 'W' && matrix[i][j] != 'E'
+                && matrix[i][j] != 'S' && matrix[i][j] != 'N')
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
 }

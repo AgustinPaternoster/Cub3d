@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 21:10:59 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/11 05:02:00 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:27:36 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,39 @@ int is_player_free(char **matrix)
     return 1;
 }
 
+int is_player_inside(char **matrix)
+{
+    int i;
+    int j;
+    char *row;
+
+    i = 0;
+    while ((row = matrix[i]) != NULL)
+    {
+        j = 0;
+        while (row[j] != '\0')
+        {
+            if (row[j] == 'N' || row[j] == 'E' || row[j] == 'S' || row[j] == 'W')
+            {
+                if ((j > 0 && row[j - 1] == ' ') || (row[j + 1] == ' ') ||
+                    (i > 0 && matrix[i - 1][j] == ' ') || (matrix[i + 1] != NULL && matrix[i + 1][j] == ' '))
+                    return (1);
+                return (0);
+            }
+            j++;
+        }
+        i++;
+    }
+    return (0);   
+}
+
 int check_map(char **matrix)
 {
     int full_height;
     int closed;
     int player;
     int player_valid;
+    int player_inside;
 
     if (!matrix || !matrix[0])
         return (1);
@@ -108,11 +135,15 @@ int check_map(char **matrix)
         printline_fd(2, "Error: the map is uneven. Fill with spaces to make it even\n");
         return (1);
     }
+    if (validate_chars(matrix))
+        return (1);
     full_height = get_full_height(matrix);
     closed = is_it_closed(matrix, full_height);
     player = does_player_exist(matrix);
     player_valid = is_player_free(matrix);
-    if (closed == 0 && player == 0 && player_valid == 0)
+    player_inside = is_player_inside(matrix);
+    if (closed == 0 && player == 0
+        && player_valid == 0 && player_inside == 0)
         return (0);
     return (1);
 }

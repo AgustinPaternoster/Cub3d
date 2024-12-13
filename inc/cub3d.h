@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/12 16:51:30 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:26:56 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int check_line_ends(char *str);
 int get_num_rows(char **matrix);
 int even_map(char **matrix);
 int validate_holes(char **matrix);
+int validate_chars(char **matrix);
 
 #endif

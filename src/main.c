@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/12 17:04:34 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:18:58 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	get_map(game.map, "maps/test_map.cub");
 	if (check_map(game.map->matrix) == 0)
-		printline_fd(2, "The map is valid\n");
+		printline_fd(2, "\nThe map is valid\n\n");
 	else
-		printline_fd(2, "The map is invalid\n");
+		printline_fd(2, "\nError: the map is invalid\n\n");
 	printmatrix_fd(2, game.map->matrix);
 	clean_close(&game);
 	return (0);

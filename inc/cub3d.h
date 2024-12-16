@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/11 18:17:22 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:07:54 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -22,13 +23,6 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-typedef struct s_tmap
-{
-	void 	*mlx_connection;
-	void	*mlx_window;
-}			t_tmap;
-
 
 typedef struct  s_imgdata
 {
@@ -38,6 +32,16 @@ typedef struct  s_imgdata
 	int line_length;
 	int endian; 
 }t_imgdata;
+
+typedef struct s_tmap
+{
+	void 	*mlx_connection;
+	void	*mlx_window;
+	t_imgdata *img;
+}			t_tmap;
+
+
+
 
 // prints.c
 void    printline_fd(int fd, char *str);

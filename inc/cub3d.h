@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/13 18:07:54 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:45:36 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,15 @@ typedef struct s_tmap
 {
 	void 	*mlx_connection;
 	void	*mlx_window;
+	char 	**map;
+	int 	sizex;
+	int 	sizey;
 	t_imgdata *img;
 }			t_tmap;
 
-
+//// test minilibx
+void img_pixel_put(t_imgdata *img, int x, int y, int color);
+void screen(t_tmap *map, int color, int size, int offset );
 
 
 // prints.c

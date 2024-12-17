@@ -6,21 +6,11 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/13 18:53:19 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:07:05 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void screen(t_tmap *map, int color, int size, int offset );
-
-void img_pixel_put(t_imgdata *img, int x, int y, int color)
-{
-	char *pixel;
-
-	pixel = img->addr + y * img->line_length + x * (img->bits_per_pixel / 8);
-	*(int*)pixel = color;
-}
 
 int handle_key(int keycode, t_tmap *map)
 {
@@ -55,25 +45,7 @@ void	clean_close(t_tmap *map, t_imgdata *img)
 	
 }
 
-void screen(t_tmap *map, int color, int size, int offset )
-{
-	int x;
-	int y;
 
-	x = offset;
-	y = offset;
-	size += offset;
-	while (x < size)
-	{
-		y = offset;
-		while (y < size)
-		{
-			img_pixel_put(map->img, x, y , color);
-			y++;
-		}
-		x++;
-	}
-}
 static void	start_game(t_tmap *map)
 {
 	int h = 700;
@@ -93,12 +65,24 @@ int	main(int argc, char **argv)
 {
 	t_tmap	map;
 	t_imgdata img;
-
+	
+	char *mapa[5];
+	mapa[0] = ft_strdup("111111");
+	mapa[1] = ft_strdup("100001");
+	mapa[2] = ft_strdup("100001");
+	mapa[3] = ft_strdup("100001");
+	mapa[4] = ft_strdup("111111");
 	(void)argc;
 	(void)argv;
-	map.img = &img;
-	start_game(&map);
-	//free(tmap.mlx_connection);
-	clean_close(&map, &img);
+	//map.img = &img;
+	map.map = mapa;
+	map.sizey =  5;
+	map.sizex = 6;
+	for (int i = 0; i < 5; i++)
+		printf("%s\n", map.map[i]);
+	// start_game(&map);
+	//clean_close(&map, &img);
+	for (int i = 0; i < 5; i++)
+		free(map.map[i]);
 	return (0);
 }

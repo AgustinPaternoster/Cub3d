@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:18:50 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/17 19:23:36 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:22:46 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void draw_pixels(t_tmap *map, int color, int size, int offset_x, int offset_y)
 	int y;
 
 	
-	x = offset_x;
-	while(x < size + offset_x)
+	x = offset_x + 1;
+	while(x < size + offset_x - 1)
 	{
-		y = offset_y;
-		while(y < size + offset_y)
+		y = offset_y + 1;
+		while(y < size + offset_y - 1)
 		{
 			mlx_pixel_put(map->mlx_connection,map->mlx_window,x,y,color);
 			y++;

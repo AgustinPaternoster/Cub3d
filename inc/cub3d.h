@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/18 17:22:21 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:42:06 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <unistd.h>
 
 # define GRIDSIZE 100
+# define PLAYERSIZE 10
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 255
@@ -38,21 +39,33 @@ typedef struct  s_imgdata
 	int endian; 
 }t_imgdata;
 
-typedef struct s_tmap
+typedef struct s_map
 {
-	void 	*mlx_connection;
-	void	*mlx_window;
 	char 	**map;
 	int 	sizex;
 	int 	sizey;
+}t_map;
+
+typedef struct s_player
+{
+	int pos_x;
+	int pos_y;
+}t_player;
+
+typedef struct s_game
+{
+	void 	*mlx_connection;
+	void	*mlx_window;
+	t_map	*map;
+	t_player *player;
 	t_imgdata *img;
-}			t_tmap;
+}			t_game;
 
 //// test minilibx
 void img_pixel_put(t_imgdata *img, int x, int y, int color);
-void screen(t_tmap *map, int color, int size, int offset );
-void	clean_close(t_tmap *map, t_imgdata *img);
-void draw_pixels(t_tmap *map, int color, int size, int offset_x, int offset_y);
+void screen(t_game *game, int color, int size, int offset );
+void	clean_close(t_game *game, t_imgdata *img);
+void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 
 
 
@@ -61,11 +74,11 @@ void    printline_fd(int fd, char *str);
 void    printmatrix_fd(int fd, char **str);
 
 // frees.c
-void	clean_close(t_tmap *map, t_imgdata *img);
+//void	clean_close(t_tmap *map, t_imgdata *img);
 void	matrix_free(char **str);
 
 // get_map.c
-void    get_map(t_tmap *tmap, char *filename);
+//void    get_map(t_tmap *tmap, char *filename);
 
 // check_map.c
 int check_map(char **matrix);

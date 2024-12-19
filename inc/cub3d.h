@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/18 18:42:06 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:17:39 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
 
 # define GRIDSIZE 100
 # define PLAYERSIZE 10
@@ -66,7 +67,9 @@ void img_pixel_put(t_imgdata *img, int x, int y, int color);
 void screen(t_game *game, int color, int size, int offset );
 void	clean_close(t_game *game, t_imgdata *img);
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
-
+int handle_key(int keycode, t_game *game);
+void draw_player(t_game *game);
+void draw_map(t_game *game);
 
 
 // prints.c

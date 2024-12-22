@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 04:56:51 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/12 17:06:01 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/22 05:53:28 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ void	clean_close(t_game *game)
 		i++;
 	}
 	free(game->map->matrix);
+	i = 0;
+	if (game->map->cub)
+	{
+		while (game->map->cub[i])
+		{
+			free(game->map->cub[i]);
+			i++;
+		}
+	}
+	free(game->map->cub);
+	free(game->map->no_texture);
+	free(game->map->ea_texture);
+	free(game->map->we_texture);
+	free(game->map->so_texture);
 	free(game->map);
 	free(game->player);
 	mlx_destroy_window(game->mlx_connection, game->mlx_window);

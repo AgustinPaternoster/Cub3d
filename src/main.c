@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/13 21:07:43 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2024/12/22 05:52:29 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ int	main(int argc, char **argv)
 			printline_fd(2, "You must provide a .cub map route as "),
 			printline_fd(2, "only argument to the program\n\n"), 1);
 	init_game(&game);
-	if (get_map(game.map, argv[1]) == 1)
+	if (get_map(&game, argv[1]) == 1)
 		return (1);
 	if (check_map(game.map->matrix) == 0)
+	{
 		printline_fd(2, "\nThe map is valid\n\n");
+		init_resources(&game, argv[1]);
+		print_game_data(&game);
+	}
 	else
 		printline_fd(2, "\nError: the map is invalid\n\n");
-	printmatrix_fd(2, game.map->matrix);
 	clean_close(&game);
 	return (0);
 }

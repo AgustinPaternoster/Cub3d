@@ -22,7 +22,8 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # Sources
 SRC_PATH = ./src/
-SRC		= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c
+SRC		= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c \
+			resources.c resources_utils.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

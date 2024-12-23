@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/19 19:01:58 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:40:29 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static void	start_game(t_game *game)
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img, 0, 0);
 	mlx_key_hook(game->mlx_window,handle_key,game);
 	mlx_loop(game->mlx_connection);
+}
+
+void player_pos(t_game *game, int posx, int posy)
+{
+	game->player->pos_x = (posx * GRIDSIZE) + (GRIDSIZE / 2);
+	game->player->pos_y = (posy * GRIDSIZE) + (GRIDSIZE / 2);
 }
 
 int	main(int argc, char **argv)
@@ -51,8 +57,7 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player.pos_x = 4;
-	player.pos_y = 4;
+	player_pos(&game, 1,5);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game, &img);

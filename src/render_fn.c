@@ -6,11 +6,19 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/19 19:00:05 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:05:29 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void img_pixel_put(t_imgdata *img, int x, int y, int color)
+{
+	char *pixel;
+
+	pixel = img->addr + y * img->line_length + x * (img->bits_per_pixel / 8);
+	*(int*)pixel = color;
+}
 
 void draw_player(t_game *game)
 {
@@ -19,15 +27,15 @@ void draw_player(t_game *game)
 	int posx;
 	int posy;
 	
-	posx = (game->player->pos_x * GRIDSIZE) + (GRIDSIZE / 2) - PLAYERSIZE / 2;
-	posy = (game->player->pos_y * GRIDSIZE) + (GRIDSIZE / 2) - PLAYERSIZE / 2;
-	x = 0;
-	while (x < PLAYERSIZE)
+	posx = game->player->pos_x;
+	posy = game->player->pos_y;
+	x = posx - PLAYERSIZE;
+	while (x <= posx + PLAYERSIZE)
 	{
-		y = 0;
-		while (y < PLAYERSIZE)
+		y = posy - PLAYERSIZE;
+		while (y <= posy + PLAYERSIZE)
 		{
-			img_pixel_put(game->img,posx + x ,posy + y,GREEN);
+			img_pixel_put(game->img, x ,y,GREEN);
 			//mlx_pixel_put(game->mlx_connection, game->mlx_window, posx + x , posy + y , GREEN);
 			y++;
 		}
@@ -35,6 +43,29 @@ void draw_player(t_game *game)
 	}	
 }
 
+void paint_window(t_game *game, int color)
+{
+	int x;
+	int y;
+	int size_x;
+	int size_y;	
+
+	size_x = game->map->sizex * GRIDSIZE;
+	size_y = game->map->sizey * GRIDSIZE;
+
+	x = 0;
+	while(x < size_x)
+	{
+		y = 0;
+		while (y < size_y)
+		{
+			
+			img_pixel_put(game->img, x, y, color);
+			y++;
+		}
+		x++;
+	}
+}
 void draw_map(t_game *game)
 {
 	int x;
@@ -42,7 +73,8 @@ void draw_map(t_game *game)
 	int offset;
 
 	y = 0;
-	offset = 0;
+	
+	paint_window(game, 0);
 	while (y < game->map->sizey)
 	{
 		x = 0;
@@ -61,4 +93,24 @@ void draw_map(t_game *game)
 		}
 		y++;
 	}
+}
+
+
+void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
+{
+	int x;
+	int y;
+
+	
+	x = offset_x + 1;
+	while(x < size + offset_x - 1)
+	{
+		y = offset_y + 1;
+		while(y < size + offset_y - 1)
+		{
+			img_pixel_put(game->img, x, y, color);
+			y++;
+		}
+		x++;
+	}		
 }

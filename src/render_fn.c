@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/20 18:05:29 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:25:46 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void draw_player(t_game *game)
 			y++;
 		}
 		x++;
-	}	
+	}
 }
 
 void paint_window(t_game *game, int color)

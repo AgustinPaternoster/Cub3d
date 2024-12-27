@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/20 18:51:09 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:29:43 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 255
+# define PI 3.141592
+# define LINE_SIZE 10
 
 typedef struct  s_imgdata
 {
@@ -52,6 +54,9 @@ typedef struct s_player
 {
 	int pos_x;
 	int pos_y;
+	int direction;
+	int dx;
+	int dy;
 }t_player;
 
 typedef struct s_game
@@ -71,7 +76,11 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
 void draw_player(t_game *game);
 void draw_map(t_game *game);
+void draw_ray(t_player *player);
 
+
+// Math
+float to_radians(int degrees);
 
 // prints.c
 void    printline_fd(int fd, char *str);

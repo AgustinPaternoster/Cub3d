@@ -22,7 +22,7 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # Sources
 SRC_PATH = ./src/
-SRC		= 	main.c test.c events.c render_fn.c
+SRC		= 	main.c test.c events.c render_fn.c math_fn.c raycast_fn.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -34,6 +34,7 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 INC			=	-I ./inc/\
 				-I ./libft/\
 				-I ./minilibx/
+
 
 # Main rule
 all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:39:59 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/28 16:17:30 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:18:56 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void draw_ray(t_game *game, t_player *player)
 		m = (float) player->dy / player->dx;
 		while(x != x1)
 		{
-			img_pixel_put(game->img, x,y,LIGHT_BLUE);
+			img_pixel_put(game->img, x,y,GREEN);
 			x += set_increment(player->pos_x, x1);
 			y = round(m*(x - player->pos_x) + player->pos_y);
 		}

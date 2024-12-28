@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:18:50 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/28 18:01:57 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:15:28 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,38 @@
 
 
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
-int	key_hook(int keycode, t_vars *vars)
+void screen(t_game *game, int color, int size, int offset )
 {
-	printf("Hello from key_hook!\n");
-	return (0);
+	int x;
+	int y;
+
+	x = offset;
+	y = offset;
+	size += offset;
+	while (x < size)
+	{
+		y = offset;
+		while (y < size)
+		{
+			img_pixel_put(game->img, x, y , color);
+			y++;
+		}
+		x++;
+	}
 }
 
-int	main(void)
+void	clean_close(t_game *game, t_imgdata *img)
 {
-	t_vars	vars;
-
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_loop(vars.mlx);
+	
+	mlx_destroy_window(game->mlx_connection, game->mlx_window);
+	mlx_destroy_display(game->mlx_connection);
+	mlx_destroy_image(game->mlx_connection, img->img);
+	free(game->mlx_connection);
+	
 }
+
+
+
+
+
+

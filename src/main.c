@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/28 18:05:45 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:13:35 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void init_game(t_game *game)
 static void	start_game(t_game *game)
 {
 	render_frame(game);
-	mlx_key_hook(game->mlx_window,handle_key,game);
+	//mlx_key_hook(game->mlx_window,handle_key,game);
+	mlx_hook(game->mlx_window, 2, 1L<<0, handle_key,game);
 	mlx_loop(game->mlx_connection);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/27 18:29:43 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/28 16:39:58 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 255
+# define LIGHT_BLUE 13434879
 # define PI 3.141592
 # define LINE_SIZE 10
 
@@ -76,8 +77,8 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
 void draw_player(t_game *game);
 void draw_map(t_game *game);
-void draw_ray(t_player *player);
-
+void draw_ray(t_game *game, t_player *player);
+void render_frame(t_game *game);
 
 // Math
 float to_radians(int degrees);

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/27 19:13:52 by apaterno         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:05:45 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ static void init_game(t_game *game)
 
 static void	start_game(t_game *game)
 {
-	draw_map(game);
-	draw_player(game);
-	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img, 0, 0);
+	render_frame(game);
 	mlx_key_hook(game->mlx_window,handle_key,game);
 	mlx_loop(game->mlx_connection);
 }
@@ -58,12 +56,11 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player_pos(&game, 0 , 0, 90);
-	//init_game(&game);
-	//start_game(&game);
-	draw_ray(game.player);
-	//clean_close(&game, &img);
-	for (int i = 0; i < 5; i++)
+	player_pos(&game, 3 , 4, 0);
+	init_game(&game);
+	start_game(&game);
+	clean_close(&game, &img);
+	for (int i = 0; i < 6; i++)
 		free(map.map[i]);
 	return (0);
 }

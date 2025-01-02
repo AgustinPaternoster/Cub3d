@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 03:36:00 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/22 06:25:13 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/02 04:02:11 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,53 +44,41 @@ void    get_texture(char *prefix, t_game *game)
     int     height;
 
     if (ft_strcmp(prefix, "NO") == 0)
-    {
         texture_path = game->map->cub[0] + 3;
-        img_ptr = mlx_xpm_file_to_image(game->mlx_connection, texture_path, &width, &height);
-        if (!img_ptr)
-        {
-            printline_fd(2, "Error: mlx couldn't get the texture\n\n");
-            return ;
-        }
+    else if (ft_strcmp(prefix, "SO") == 0)
+        texture_path = game->map->cub[1] + 3;
+    else if (ft_strcmp(prefix, "WE") == 0)
+        texture_path = game->map->cub[2] + 3;
+    else if (ft_strcmp(prefix, "EA") == 0)
+        texture_path = game->map->cub[3] + 3;
+    if (texture_path[ft_strlen(texture_path) - 1] == '\n')
+            texture_path[ft_strlen(texture_path) - 1] = '\0';
+    img_ptr = mlx_xpm_file_to_image(game->mlx_connection, texture_path, &width, &height);
+    if (!img_ptr)
+    {
+        printline_fd(2, "Error: mlx couldn't get one texture\n\n");
+        return ;
+    }
+    if (ft_strcmp(prefix, "NO") == 0)
+    {
         game->map->no_texture->img_ptr = img_ptr;
         game->map->no_texture->width = width;
         game->map->no_texture->height = height;
     }
     else if (ft_strcmp(prefix, "SO") == 0)
     {
-        texture_path = game->map->cub[1] + 3;
-        img_ptr = mlx_xpm_file_to_image(game->mlx_connection, texture_path, &width, &height);
-        if (!img_ptr)
-        {
-            printline_fd(2, "Error: mlx couldn't get the texture\n\n");
-            return ;
-        }
         game->map->so_texture->img_ptr = img_ptr;
         game->map->so_texture->width = width;
         game->map->so_texture->height = height;
     }
     else if (ft_strcmp(prefix, "WE") == 0)
     {
-        texture_path = game->map->cub[2] + 3;
-        img_ptr = mlx_xpm_file_to_image(game->mlx_connection, texture_path, &width, &height);
-        if (!img_ptr)
-        {
-            printline_fd(2, "Error: mlx couldn't get the texture\n\n");
-            return ;
-        }
         game->map->we_texture->img_ptr = img_ptr;
         game->map->we_texture->width = width;
         game->map->we_texture->height = height;
     }
     else if (ft_strcmp(prefix, "EA") == 0)
     {
-        texture_path = game->map->cub[3] + 3;
-        img_ptr = mlx_xpm_file_to_image(game->mlx_connection, texture_path, &width, &height);
-        if (!img_ptr)
-        {
-            printline_fd(2, "Error: mlx couldn't get the texture\n\n");
-            return ;
-        }
         game->map->ea_texture->img_ptr = img_ptr;
         game->map->ea_texture->width = width;
         game->map->ea_texture->height = height;

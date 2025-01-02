@@ -1,7 +1,7 @@
-NO textures/wet_sponge.xpm
-SO textures/netherrack.xpm
-WE textures/basalt_top.xpm
-EA textures/bookshelf.xpm
+NO /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
+SO /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
+WE /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
+EA /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
 
 C 53,41,34
 F 45,33,27

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/28 18:13:35 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:23:29 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void player_pos(t_game *game, int posx, int posy, int direction)
 {
 	game->player->pos_x = (posx * GRIDSIZE) + (GRIDSIZE / 2);
 	game->player->pos_y = (posy * GRIDSIZE) + (GRIDSIZE / 2);
+	game->player->accum_x = (float)game->player->pos_x;
+	game->player->accum_y= (float)game->player->pos_y;
 	game->player->direction = direction;
+	calculate_delta(game);
 }
 
 int	main(int argc, char **argv)

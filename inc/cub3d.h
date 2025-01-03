@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/28 16:39:58 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:45:00 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ typedef struct s_player
 	int pos_x;
 	int pos_y;
 	int direction;
-	int dx;
-	int dy;
+	float dx;
+	float dy;
+	float accum_x;
+	float accum_y;
 }t_player;
 
 typedef struct s_game
@@ -72,7 +74,7 @@ typedef struct s_game
 //// test minilibx
 void img_pixel_put(t_imgdata *img, int x, int y, int color);
 void screen(t_game *game, int color, int size, int offset );
-void	clean_close(t_game *game, t_imgdata *img);
+void clean_close(t_game *game, t_imgdata *img);
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
 void draw_player(t_game *game);
@@ -82,6 +84,7 @@ void render_frame(t_game *game);
 
 // Math
 float to_radians(int degrees);
+void calculate_delta(t_game *game);
 
 // prints.c
 void    printline_fd(int fd, char *str);

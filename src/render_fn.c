@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/28 16:39:26 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:00:09 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void draw_player(t_game *game)
 		while (y <= posy + PLAYERSIZE)
 		{
 			img_pixel_put(game->img, x ,y,GREEN);
-			//mlx_pixel_put(game->mlx_connection, game->mlx_window, posx + x , posy + y , GREEN);
 			y++;
 		}
 		x++;

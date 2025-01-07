@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/03 19:23:29 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/07 03:54:36 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	start_game(t_game *game)
 {
 	render_frame(game);
 	//mlx_key_hook(game->mlx_window,handle_key,game);
+	mlx_hook(game->mlx_window, 17, 0, handle_close, game);
 	mlx_hook(game->mlx_window, 2, 1L<<0, handle_key,game);
 	mlx_loop(game->mlx_connection);
 }

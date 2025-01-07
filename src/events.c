@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/03 19:26:59 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/07 03:54:34 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,13 @@ int handle_key(int keycode, t_game *game)
 	if (keycode == XK_a)
 		rotate_player(game, keycode);
 	return (0);
+}
+
+int handle_close(t_game *game)
+{
+    mlx_destroy_window(game->mlx_connection, game->mlx_window);
+    mlx_destroy_display(game->mlx_connection);
+    free(game->mlx_connection);
+    exit(0);
+    return (0);
 }

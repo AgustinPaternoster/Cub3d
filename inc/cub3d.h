@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/03 18:45:00 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/07 03:55:41 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void screen(t_game *game, int color, int size, int offset );
 void clean_close(t_game *game, t_imgdata *img);
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
+int handle_close(t_game *game);
 void draw_player(t_game *game);
 void draw_map(t_game *game);
 void draw_ray(t_game *game, t_player *player);

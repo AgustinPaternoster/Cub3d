@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/07 03:54:36 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/07 19:00:26 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	
 	char *mapa[6];
 	mapa[0] = ft_strdup("1111111");
-	mapa[1] = ft_strdup("1000001");
+	mapa[1] = ft_strdup("1N00001");
 	mapa[2] = ft_strdup("1011001");
 	mapa[3] = ft_strdup("1000001");
 	mapa[4] = ft_strdup("1000001");
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player_pos(&game, 3 , 4, 0);
+	player_pos(&game, 1 , 1, 45);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game, &img);

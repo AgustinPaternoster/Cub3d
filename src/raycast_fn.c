@@ -6,11 +6,23 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:39:59 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/03 19:25:37 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:33:33 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+
+int check_wall(t_game *game, float x , float y)
+{
+		t_map *mapa;
+		int x1 = x / 100;
+		int y1 = y / 100;
+		mapa = game->map;
+		if(mapa->map[y1][x1] == '1')
+			return (0);
+		return (1);
+}
 
 static int set_increment(int v0, int v1)
 {
@@ -71,14 +83,19 @@ void draw_ray(t_game *game, t_player *player)
 	i = 0;
 	x = (float)player->pos_x;
 	y = (float)player->pos_y;
-	//(x_i > 0 && x_i < 800) && (y_i > 0 && y_i < 600 )
-	while ((x_i > 0 && x_i < 700) && (y_i > 0 && y_i < 600 ))
+	//(x_i > 0 && x_i < 700) && (y_i > 0 && y_i < 600 )
+	while(check_wall(game, x, y))
 	{
 		x += player->dx;
 		y -= player->dy;
 		x_i = round(x);
 		y_i = round(y);
 		img_pixel_put(game->img, x_i, y_i,GREEN);
-		i++;
+		// if (y_i % GRIDSIZE == 0 || x_i % GRIDSIZE == 0)
+		// {
+		// 	if (check_wall(game, x_i, y_i))
+		// 		break;
+		// }
+		//i++;
 	}
 }

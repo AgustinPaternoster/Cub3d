@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/03 17:32:12 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/08 17:35:12 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,4 @@ void calculate_delta(t_game *game)
 	game->player->dx = cos(to_radians(direction));
 	game->player->dy = sin(to_radians(direction));	
 }
+

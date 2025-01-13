@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/07 03:55:41 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/08 17:59:58 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void render_frame(t_game *game);
 // Math
 float to_radians(int degrees);
 void calculate_delta(t_game *game);
+float calculate_sx(t_game *game);
+float calculate_sy(t_game *game);
+
 
 // prints.c
 void    printline_fd(int fd, char *str);

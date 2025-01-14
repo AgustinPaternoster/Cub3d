@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:39:59 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/14 20:20:44 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/14 22:10:41 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,6 @@ int check_wall(t_game *game, float x , float y)
 }
 
 /*void draw_ray(t_game *game, t_player *player)
-{
-	int i;
-	float y;
-	float x;
-	int x_i;
-	int y_i;
-	
-	i = 0;
-	x = (float)player->pos_x;
-	y = (float)player->pos_y;
-	while(check_wall(game, x, y))
-	{
-		x += player->dx;
-		y -= player->dy;
-		x_i = round(x);
-		y_i = round(y);
-		img_pixel_put(game->img, x_i, y_i,GREEN);
-	}
-}*/
-
-void draw_ray(t_game *game, t_player *player)
 {
     int i;
     float ray_angle;
@@ -69,5 +48,86 @@ void draw_ray(t_game *game, t_player *player)
         }
         ray_angle += step_angle;
 		i++;
+    }
+}*/
+
+/*void draw_ray(t_game *game, t_player *player)
+{
+    int i;
+    float ray_angle;
+    float step_angle = to_radians(V_ANGLE) / (1000 - 1);  // 1000 rays
+    float x, y;
+    int x_i, y_i;
+    float distance;
+
+    ray_angle = to_radians(player->direction) - (to_radians(V_ANGLE) / 2);
+    i = 0;
+    while (i < 1000)
+    {
+        x = (float)player->pos_x;
+        y = (float)player->pos_y;
+        while (check_wall(game, x, y)) 
+        {
+            x += cos(ray_angle);
+            y -= sin(ray_angle);
+            x_i = round(x);
+            y_i = round(y);
+            img_pixel_put(game->img, x_i, y_i, GREEN);
+        }
+
+        distance = sqrt(pow(x - player->pos_x, 2) + pow(y - player->pos_y, 2));
+        //int line_height = (int)(WINDOW_HEIGHT / (distance + 0.0001));
+		int line_height = (int)((game->map->sizey * GRIDSIZE) / (distance + 0.0001));
+        //int center_x = (i * WINDOW_WIDTH) / 1000;
+		int center_x = (i * (game->map->sizex * GRIDSIZE)) / 1000;
+        //int start_y = (WINDOW_HEIGHT - line_height) / 2;
+		int start_y = ((game->map->sizey * GRIDSIZE) - line_height) / 2;
+        int end_y = start_y + line_height;
+
+        for (int y = start_y; y < end_y; y++)
+				img_pixel_put(game->img, center_x, y, WHITE);
+        ray_angle += step_angle;
+        i++;
+    }
+}*/
+
+void draw_ray(t_game *game, t_player *player)
+{
+    int i;
+    float ray_angle;
+    float step_angle = to_radians(V_ANGLE) / (1000 - 1);  // 1000 rays
+    float x, y;
+    int x_i, y_i;
+    float distance;
+
+    ray_angle = to_radians(player->direction) - (to_radians(V_ANGLE) / 2);
+    i = 0;
+    while (i < 1000)
+    {
+        x = (float)player->pos_x;
+        y = (float)player->pos_y;
+        while (check_wall(game, x, y)) 
+        {
+            x += cos(ray_angle);
+            y -= sin(ray_angle);
+        }
+        if (x < 0 || x >= game->map->sizex * GRIDSIZE || y < 0 || y >= game->map->sizey * GRIDSIZE)
+            distance = -1;
+        else
+            distance = sqrt(pow(x - player->pos_x, 2) + pow(y - player->pos_y, 2));
+        int line_height = (distance == -1) ? game->map->sizey * GRIDSIZE : (int)((game->map->sizey * GRIDSIZE) / ((distance + 0.0001) * WALL_SIZE));
+        int center_x = (i * (game->map->sizex * GRIDSIZE)) / 1000;
+        int start_y = ((game->map->sizey * GRIDSIZE) - line_height) / 2;
+        int end_y = start_y + line_height;
+        
+        for (int y = 0; y < game->map->sizey * GRIDSIZE; y++)
+        {
+            if (y < start_y || y >= end_y)
+            {
+                img_pixel_put(game->img, center_x, y, 0);
+            }
+        }
+        ray_angle += step_angle;
+        i++;
     }
 }

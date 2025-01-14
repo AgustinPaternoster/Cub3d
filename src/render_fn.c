@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_fn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/03 19:00:09 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:59:17 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,9 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 
 void render_frame(t_game *game)
 {
-	draw_map(game);
-	draw_player(game);
+	//draw_map(game);
+	//draw_player(game);
+	paint_window(game, WHITE);
 	draw_ray(game,game->player);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }

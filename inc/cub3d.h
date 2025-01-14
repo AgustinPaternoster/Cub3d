@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/14 20:21:00 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/14 22:13:40 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@
 # include <unistd.h>
 
 
-# define VELOCITY 5
+# define VELOCITY 6
 # define V_ANGLE 90
+# define WALL_SIZE 0.05
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
+# define WHITE 16777215
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 255

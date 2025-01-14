@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/14 19:11:21 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/14 22:13:56 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static void move_player(t_game *game, int keycode)
 
 static void rotate_player(t_game *game, int keycode)
 {
-	if (keycode == XK_d)
+	if (keycode == XK_a)
 	{
 		if (game->player->direction == 0)
 			game->player->direction = 360 - VELOCITY;
 		else
 			game->player->direction -= VELOCITY;
 	}
-	if (keycode == XK_a)
+	if (keycode == XK_d)
 	{
 		if (game->player->direction == 360)
 			game->player->direction = 0;

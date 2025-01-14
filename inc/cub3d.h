@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/14 19:05:37 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:21:00 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 
 # define VELOCITY 5
+# define V_ANGLE 90
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
 # define RED 16711680

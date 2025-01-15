@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/07 03:54:34 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:22:18 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,17 @@
 
 static void move_player(t_game *game, int keycode)
 {
-		if (keycode == XK_w && game->player->pos_y > PLAYERSIZE + 1)
+		if (keycode == XK_w && round(game->player->pos_y * 100) > PLAYERSIZE + 1)
 		{	
 			//if (game->player->pos_y > PLAYERSIZE + 1)
-				game->player->accum_y -= game->player->dy;
-				game->player->accum_x += game->player->dx;
-				game->player->pos_x = round(game->player->accum_x);
-				game->player->pos_y = round(game->player->accum_y);	
+				game->player->pos_y -= game->player->dy * 0.01;
+				game->player->pos_x += game->player->dx * 0.01;
 		}
 		if (keycode == XK_s &&
 			game->player->pos_y < (game->map->sizey * GRIDSIZE) - PLAYERSIZE * 2) 
 		{
-				game->player->accum_y += game->player->dy;
-				game->player->accum_x -= game->player->dx;
-				game->player->pos_x = round(game->player->accum_x);
-				game->player->pos_y = round(game->player->accum_y);	
+				game->player->pos_y += game->player->dy * 0.01;
+				game->player->pos_x -= game->player->dx * 0.01;
 		}
 		render_frame(game);
 }

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/03 19:00:09 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:07:39 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void draw_player(t_game *game)
 	int posx;
 	int posy;
 	
-	posx = game->player->pos_x;
-	posy = game->player->pos_y;
+	posx = round(game->player->pos_x * GRIDSIZE);
+	posy = round(game->player->pos_y * GRIDSIZE);
 	x = posx - PLAYERSIZE;
 	while (x <= posx + PLAYERSIZE)
 	{
@@ -100,7 +100,7 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 	int x;
 	int y;
 
-	
+
 	x = offset_x + 1;
 	while(x < size + offset_x - 1)
 	{
@@ -118,6 +118,7 @@ void render_frame(t_game *game)
 {
 	draw_map(game);
 	draw_player(game);
-	draw_ray(game,game->player);
+	// draw_ray(game,game->player);
+	//calculate_x_ray(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }

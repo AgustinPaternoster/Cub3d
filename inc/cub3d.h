@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/08 17:59:58 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:22:23 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@
 # define PI 3.141592
 # define LINE_SIZE 10
 
+typedef struct t_ray
+{
+	/* data */
+}s_ray;
+
 typedef struct  s_imgdata
 {
 	void *img;
@@ -53,13 +58,11 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int pos_x;
-	int pos_y;
+	float pos_x;
+	float pos_y;
 	int direction;
 	float dx;
 	float dy;
-	float accum_x;
-	float accum_y;
 }t_player;
 
 typedef struct s_game
@@ -82,6 +85,7 @@ void draw_player(t_game *game);
 void draw_map(t_game *game);
 void draw_ray(t_game *game, t_player *player);
 void render_frame(t_game *game);
+int is_wall(char **mapa, float x , float y);
 
 // Math
 float to_radians(int degrees);
@@ -89,6 +93,8 @@ void calculate_delta(t_game *game);
 float calculate_sx(t_game *game);
 float calculate_sy(t_game *game);
 
+//DDA
+void calculate_x_ray(t_game *game);
 
 // prints.c
 void    printline_fd(int fd, char *str);

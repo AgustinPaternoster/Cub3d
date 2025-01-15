@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/08 17:21:40 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:19:18 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ static void	start_game(t_game *game)
 
 void player_pos(t_game *game, int posx, int posy, int direction)
 {
-	game->player->pos_x = (posx * GRIDSIZE) + (GRIDSIZE / 2);
-	game->player->pos_y = (posy * GRIDSIZE) + (GRIDSIZE / 2);
-	game->player->accum_x = (float)game->player->pos_x;
-	game->player->accum_y= (float)game->player->pos_y;
+	game->player->pos_x = (float)posx + 0.5;
+	game->player->pos_y = (float)posy + 0.5;
 	game->player->direction = direction;
 	calculate_delta(game);
 }
@@ -60,7 +58,7 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player_pos(&game, 1 , 1, 45);
+	player_pos(&game, 1 , 4, 90);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game, &img);

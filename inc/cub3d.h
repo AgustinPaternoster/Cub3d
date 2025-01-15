@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/15 18:27:09 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:43:39 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # include <unistd.h>
 
 
-# define VELOCITY 5
+# define VELO_MOV 0.01
+# define VELO_ROT 5
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
 # define RED 16711680

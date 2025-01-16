@@ -45,20 +45,52 @@ int	main(int argc, char **argv)
 	t_map	map;
 	t_player player;
 	
-	char *mapa[13];
+	char *mapa[6];
 	mapa[0] = ft_strdup("1111111");
 	mapa[1] = ft_strdup("1N00001");
-	mapa[2] = ft_strdup("1011101");
-	mapa[3] = ft_strdup("1010101");
-	mapa[4] = ft_strdup("1010101");
-	mapa[5] = ft_strdup("1010101");
-	mapa[6] = ft_strdup("1010101");
-	mapa[7] = ft_strdup("1010101");
-	mapa[8] = ft_strdup("1010101");
-	mapa[9] = ft_strdup("1010101");
-	mapa[10] = ft_strdup("1000001");
-	mapa[11] = ft_strdup("1000001");
-	mapa[12] = ft_strdup("1111111");
+	mapa[2] = ft_strdup("1011001");
+	mapa[3] = ft_strdup("1000001");
+	mapa[4] = ft_strdup("1000001");
+	mapa[5] = ft_strdup("1111111");
+	(void)argc;
+	(void)argv;
+	game.img = &img;
+	game.map = &map;
+	game.player = &player;
+	map.map = mapa;
+	map.sizey =  6;
+	map.sizex = 7;
+	player_pos(&game, 1 , 1, 45);
+	init_game(&game);
+	start_game(&game);
+	clean_close(&game, &img);
+	for (int i = 0; i < 6; i++)
+		free(map.map[i]);
+	return (0);
+}
+
+/*
+int	main(int argc, char **argv)
+{
+	t_game	game;
+	t_imgdata img;
+	t_map	map;
+	t_player player;
+	
+	char *mapa[13];
+	 mapa[0] = ft_strdup("11111111111111111");
+	 mapa[1] = ft_strdup("1N000000000000001");
+	 mapa[2] = ft_strdup("10111000001000101");
+	 mapa[3] = ft_strdup("10101000001000101");
+	 mapa[4] = ft_strdup("10101000001000101");
+	 mapa[5] = ft_strdup("10101000001000101");
+	 mapa[6] = ft_strdup("10101000001000101");
+	 mapa[7] = ft_strdup("10101000001000101");
+	 mapa[8] = ft_strdup("10101111111000101");
+	 mapa[9] = ft_strdup("10100000000000101");
+	mapa[10] = ft_strdup("10111111111111101");
+	mapa[11] = ft_strdup("10000000000000001");
+	mapa[12] = ft_strdup("11111111111111111");
 	(void)argc;
 	(void)argv;
 	game.img = &img;
@@ -66,7 +98,7 @@ int	main(int argc, char **argv)
 	game.player = &player;
 	map.map = mapa;
 	map.sizey =  13;
-	map.sizex = 7;
+	map.sizex = 20;
 	player_pos(&game, 1 , 1, 45);
 	init_game(&game);
 	start_game(&game);
@@ -75,3 +107,4 @@ int	main(int argc, char **argv)
 		free(map.map[i]);
 	return (0);
 }
+*/

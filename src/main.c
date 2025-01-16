@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 }
 
 /*
+
 int	main(int argc, char **argv)
 {
 	t_game	game;

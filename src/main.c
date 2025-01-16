@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+
 	if (argc != 2)
 		return (printline_fd(2, "\nError: invalid arguments\n"),
 			printline_fd(2, "You must provide a .cub map route as "),

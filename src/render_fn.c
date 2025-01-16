@@ -118,7 +118,7 @@ void render_frame(t_game *game)
 {
 	//draw_map(game);
 	//draw_player(game);
-	paint_window(game, WHITE);
+	paint_window(game, 0);
 	draw_ray(game,game->player);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }

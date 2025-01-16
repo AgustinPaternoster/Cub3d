@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	mapa[0] = ft_strdup("1111111");
 	mapa[1] = ft_strdup("1N00001");
 	mapa[2] = ft_strdup("1011001");
-	mapa[3] = ft_strdup("1000001");
+	mapa[3] = ft_strdup("1001001");
 	mapa[4] = ft_strdup("1000001");
 	mapa[5] = ft_strdup("1111111");
 	(void)argc;

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 13:43:18 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:20:31 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void run_dda_al(t_game *game)
 		else
 		{
 			ray->map_pos[1] += ray->stepy;
-			ray->delta_dis_y += ray->side_dis_x;
+			ray->delta_dis_y += ray->side_dis_y;
 			ray->side = 1;
 		}
 	}
@@ -85,7 +85,7 @@ void print_point(t_game *game)
 	if(ray->side == 0)
 		distance = ray->delta_dis_x - ray->side_dis_x;
 	else
-		distance = ray->delta_dis_y - ray->side_dis_x;
+		distance = ray->delta_dis_y - ray->side_dis_y;
 	x = round(end_point(distance, game->player->pos_x, game->player->dx));
 	y = round(end_point(distance, game->player->pos_y, game->player->dy));
 	img_pixel_put(game->img, x , y , GREEN);

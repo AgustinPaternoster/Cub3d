@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/15 18:43:39 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:45:44 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,17 @@
 # define PI 3.141592
 # define LINE_SIZE 10
 
-typedef struct t_ray
+typedef struct s_ray
 {
-	/* data */
-}s_ray;
+	float delta_dis_x;
+	float delta_dis_y;
+	float side_dis_x;
+	float side_dis_y;
+	int 	map_pos[2];
+	int 	side;
+	int 	stepx;
+	int 	stepy;
+}t_ray;
 
 typedef struct  s_imgdata
 {
@@ -73,6 +80,7 @@ typedef struct s_game
 	t_map	*map;
 	t_player *player;
 	t_imgdata *img;
+	t_ray		*ray;
 }			t_game;
 
 //// test minilibx
@@ -84,15 +92,16 @@ int handle_key(int keycode, t_game *game);
 int handle_close(t_game *game);
 void draw_player(t_game *game);
 void draw_map(t_game *game);
-void draw_ray(t_game *game, t_player *player);
+void draw_ray(t_game *game);
 void render_frame(t_game *game);
-int is_wall(char **mapa, float x , float y);
+int is_wall(t_game *game, int x , int y);
 
 // Math
 float to_radians(int degrees);
 void calculate_delta(t_game *game);
 float calculate_sx(t_game *game);
 float calculate_sy(t_game *game);
+float end_point(float distance, float start, float dir);
 
 //DDA
 void calculate_x_ray(t_game *game);

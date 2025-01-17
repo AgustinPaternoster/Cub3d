@@ -6,19 +6,18 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:39:59 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/14 16:51:29 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:43:16 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 
-int is_wall(char **mapa, float x , float y)
+int is_wall(t_game *game, int x , int y)
 {
-		
-		int x1 = x / 100;
-		int y1 = y / 100;
-		if(mapa[y1][x1] == '1')
+		char **mapa = game->map->map;
+
+		if(mapa[y][x] == '1')
 			return (1);
 		return (0);
 }
@@ -34,7 +33,7 @@ int is_wall(char **mapa, float x , float y)
 // 	i = 0;
 // 	x = (float)player->pos_x;
 // 	y = (float)player->pos_y;
-// 	while(check_wall(game, x, y))
+// 	while(is_wall(game->map->map, x, y))
 // 	{
 // 		x += player->dx;
 // 		y -= player->dy;

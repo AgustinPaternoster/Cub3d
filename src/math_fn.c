@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 13:38:50 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:43:00 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,24 @@ void calculate_delta(t_game *game)
 // 	return(sqrt(1 + x));
 // }
 
-float calculate_sx(t_game *game)
+float calculate_sx(float angle)
 {
 	float x;
+	float dx = cos(angle);
+	float dy = -1 * sin (angle);
 	
 	// corregir division por 0
-	x = pow((game->player->dy / game->player->dx) ,2);
+	x = pow((dy / dx) ,2);
 	return(sqrt(1 + x));
 }
 
-float calculate_sy(t_game *game)
+float calculate_sy(float angle)
 {
 	float x;
+	float dx = cos(angle);
+	float dy = -1 * sin (angle);
 		// corregir division por 0
-	x = pow((game->player->dx / game->player->dy ), 2);
+	x = pow((dx / dy ), 2);
 	return(sqrt(1 + x));
 }
 

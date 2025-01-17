@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 17:20:31 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:41:24 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 void init_ray(t_game *game)
 {
 	t_ray *ray;
+	int angle;
 
+
+	angle = game->player->direction;
 	ray = game->ray;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
-	ray->side_dis_x = calculate_sx(game);
-	ray->side_dis_y = calculate_sy(game);
+	ray->side_dis_x = calculate_sx(to_radians(angle));
+	ray->side_dis_y = calculate_sy(to_radians(angle));
 }
 
 void setup_ray(t_game *game)

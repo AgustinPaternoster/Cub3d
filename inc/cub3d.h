@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/16 18:45:44 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:40:07 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,11 @@ int is_wall(t_game *game, int x , int y);
 // Math
 float to_radians(int degrees);
 void calculate_delta(t_game *game);
-float calculate_sx(t_game *game);
-float calculate_sy(t_game *game);
+float calculate_sx(float angle);
+float calculate_sy(float angle);
+
+// float calculate_sx(t_game *game);
+// float calculate_sy(t_game *game);
 float end_point(float distance, float start, float dir);
 
 //DDA

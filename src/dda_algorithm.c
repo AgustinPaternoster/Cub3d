@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/16 19:31:26 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:43:18 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void setup_ray(t_game *game)
 	}
 	if(game->player->dy < 0)
 	{
-		ray->stepy = 1;
+		ray->stepy = - 1;
 		ray->delta_dis_y = (game->player->pos_y - ray->map_pos[1]) * ray->side_dis_y;
 	}
 		else
 	{
-		ray->stepy = -1;
+		ray->stepy = 1;
 		ray->delta_dis_y = (ray->map_pos[1] + 1 - game->player->pos_y) * ray->side_dis_y;
 	}
 }

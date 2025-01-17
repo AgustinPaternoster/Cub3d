@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/16 18:53:50 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:48:10 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ void render_frame(t_game *game)
 {
 	draw_map(game);
 	draw_player(game);
-	draw_ray(game);
+	draw_rays(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }

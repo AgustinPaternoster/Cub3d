@@ -6,58 +6,61 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 17:58:17 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:05:27 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static int is_wall(char **mapa, int x , int y)
+{
+		if(mapa[y][x] == '1')
+			return (1);
+		return (0);
+}
 
 static void init_ray(t_game *game, float angle)
 {
 	t_ray *ray;
 
 	ray = game->ray;
+	ray->camera_pos[0] = game->player->pos_x;
+	ray->camera_pos[1] = game->player->pos_y;
+	ray->delta[0] = cos(angle);
+	ray->delta[1] = sin(angle) * -1;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
 	ray->side_dis_x = calculate_sx(angle);
 	ray->side_dis_y = calculate_sy(angle);
 }
 
-void setup_ray(t_game *game)
+static void setup_ray(t_ray *ray)
 {
-	t_ray *ray;
-
-	ray = game->ray;
-	if(game->player->dx < 0)
+	if(ray->delta[0] < 0)
 	{
 		ray->stepx = -1;
-		ray->delta_dis_x = (game->player->pos_x - ray->map_pos[0]) * ray->side_dis_x;
+		ray->delta_dis_x = (ray->camera_pos[0] - ray->map_pos[0]) * ray->side_dis_x;
 	}
 	else
 	{
 		ray->stepx = 1;
-		ray->delta_dis_x = (ray->map_pos[0] + 1 - game->player->pos_x) * ray->side_dis_x;
+		ray->delta_dis_x = (ray->map_pos[0] + 1 - ray->camera_pos[0]) * ray->side_dis_x;
 	}
-	if(game->player->dy < 0)
+	if(ray->delta[1] < 0)
 	{
 		ray->stepy = - 1;
-		ray->delta_dis_y = (game->player->pos_y - ray->map_pos[1]) * ray->side_dis_y;
+		ray->delta_dis_y = (ray->camera_pos[1] - ray->map_pos[1]) * ray->side_dis_y;
 	}
 		else
 	{
 		ray->stepy = 1;
-		ray->delta_dis_y = (ray->map_pos[1] + 1 - game->player->pos_y) * ray->side_dis_y;
+		ray->delta_dis_y = (ray->map_pos[1] + 1 - ray->camera_pos[1]) * ray->side_dis_y;
 	}
 }
 
-void run_dda_al(t_game *game)
+void run_dda_al(t_ray *ray , char **map)
 {
-	int hit;
-	t_ray *ray;
-
-	hit = 0;
-	ray = game->ray;
-	while (!is_wall(game, ray->map_pos[0],ray->map_pos[1]))
+	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
 	{
 		if (ray->delta_dis_x < ray->delta_dis_y)
 		{
@@ -72,34 +75,31 @@ void run_dda_al(t_game *game)
 			ray->side = 1;
 		}
 	}
-}
-
-void print_point(t_game *game)
-{
-	float distance;
-	t_ray *ray;
-	int x;
-	int y;
-	
-	ray = game->ray;
-	if(ray->side == 0)
-		distance = ray->delta_dis_x - ray->side_dis_x;
+	if (ray->side == 0)
+		ray->distance = ray->delta_dis_x - ray->side_dis_x;
 	else
-		distance = ray->delta_dis_y - ray->side_dis_y;
-	x = round(end_point(distance, game->player->pos_x, game->player->dx));
-	y = round(end_point(distance, game->player->pos_y, game->player->dy));
-	img_pixel_put(game->img, x , y , GREEN);
-	
+		ray->distance = ray->delta_dis_y - ray->side_dis_y;
 }
 
 void draw_rays(t_game *game)
 {
 	t_ray *ray;
-	float angle;
+	float start;
+	float increment;
+	int		count;
 	
 	ray = game->ray;
-	init_ray(game , angle);
-	setup_ray(game);
-	run_dda_al(game);
-	print_point(game);
+	start = to_radians(game->player->direction) - M_PI / 4;
+	increment = (M_PI / 2) / (SCREEN_HIGH - 1);
+	count = 0;
+	while (count < SCREEN_HIGH)
+	{
+		init_ray(game , start);
+		setup_ray(ray);
+		run_dda_al(ray, game->map->map);
+		print_point(ray, game->img);
+		start +=increment;
+		count++;
+	}
+	printf("%d",count);
 }

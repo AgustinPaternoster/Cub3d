@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 16:37:41 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:03:45 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	main(int argc, char **argv)
 	
 	char *mapa[6];
 	mapa[0] = ft_strdup("1111111");
-	mapa[1] = ft_strdup("1000001");
+	mapa[1] = ft_strdup("10N0001");
 	mapa[2] = ft_strdup("1011001");
-	mapa[3] = ft_strdup("10N0001");
+	mapa[3] = ft_strdup("1000001");
 	mapa[4] = ft_strdup("1000001");
 	mapa[5] = ft_strdup("1111111");
 	(void)argc;
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player_pos(&game, 2 , 3, 345);
+	player_pos(&game, 2 , 1, 90);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game, &img);

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 17:48:10 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:58:30 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,19 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 		}
 		x++;
 	}		
+}
+
+void print_point(t_ray *ray, t_imgdata *img)
+{
+	int x;
+	int y;
+
+	//x = round(end_point(ray->distance, game->player->pos_x, game->player->dx));
+	x = round(end_point(ray->distance, ray->camera_pos[0], ray->delta[0]));
+	//y = round(end_point(ray->distance, game->player->pos_y, game->player->dy));
+	y = round(end_point(ray->distance, ray->camera_pos[1], ray->delta[1]));
+	img_pixel_put(img, x , y , GREEN);
+	
 }
 
 void render_frame(t_game *game)

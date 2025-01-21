@@ -6,17 +6,15 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:39:59 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/16 18:43:16 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:56:18 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 
-int is_wall(t_game *game, int x , int y)
+int is_wall(char **mapa, int x , int y)
 {
-		char **mapa = game->map->map;
-
 		if(mapa[y][x] == '1')
 			return (1);
 		return (0);

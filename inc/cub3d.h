@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/17 17:48:39 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:14:43 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <unistd.h>
 
 
+# define SCREEN_WITH 800
+# define SCREEN_HIGH 600
 # define VELO_MOV 0.01
 # define VELO_ROT 5
 # define GRIDSIZE 100
@@ -43,9 +45,12 @@ typedef struct s_ray
 	float side_dis_x;
 	float side_dis_y;
 	int 	map_pos[2];
+	float	camera_pos[2];
+	float	delta[2];
 	int 	side;
 	int 	stepx;
 	int 	stepy;
+	float	distance;
 }t_ray;
 
 typedef struct  s_imgdata
@@ -90,12 +95,15 @@ void clean_close(t_game *game, t_imgdata *img);
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
 int handle_close(t_game *game);
+///render
 void draw_player(t_game *game);
 void draw_map(t_game *game);
-void draw_rays(t_game *game);
+void print_point(t_ray *ray, t_imgdata *img);
 void render_frame(t_game *game);
-int is_wall(t_game *game, int x , int y);
+int is_wall(char **mapa, int x , int y);
 
+//DDA_alg
+void draw_rays(t_game *game);
 // Math
 float to_radians(int degrees);
 void calculate_delta(t_game *game);

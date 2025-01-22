@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/21 16:56:39 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:10:36 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void draw_rays(t_game *game)
 	start = to_radians(game->player->direction) - M_PI / 4;
 	increment = (M_PI / 2) / (SCREEN_HIGH - 1);
 	count = 0;
-	while (count <= SCREEN_HIGH)
+	while (count < SCREEN_HIGH)
 	{
 		init_ray(game , start);
 		setup_ray(ray);

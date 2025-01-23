@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/21 16:58:30 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:54:26 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,16 @@ void render_frame(t_game *game)
 	draw_player(game);
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
+}
+
+void draw_walls(t_game *game)
+{
+	float heigh;
+	float start_y;
+	t_ray *ray;
+
+	ray = game->ray;
+	heigh = GRIDSIZE / ray->distance;
+	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
+	 
 }

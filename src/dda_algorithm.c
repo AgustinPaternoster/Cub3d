@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/22 18:05:27 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:11:28 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,4 @@ void draw_rays(t_game *game)
 		start +=increment;
 		count++;
 	}
-	printf("%d",count);
 }

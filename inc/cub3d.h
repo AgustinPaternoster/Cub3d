@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/22 17:29:27 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:19:52 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void draw_player(t_game *game);
 void draw_map(t_game *game);
 void print_point(t_ray *ray, t_imgdata *img);
 void render_frame(t_game *game);
-
+void draw_walls(t_game *game, int column);
 
 //DDA_alg
 void draw_rays(t_game *game);

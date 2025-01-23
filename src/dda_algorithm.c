@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/22 18:11:28 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:21:01 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ void draw_rays(t_game *game)
 		init_ray(game , start);
 		setup_ray(ray);
 		run_dda_al(ray, game->map->map);
-		print_point(ray, game->img);
+		//print_point(ray, game->img);
+		draw_walls(game, count);
+		
 		start +=increment;
 		count++;
 	}

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/22 18:03:45 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:41:10 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static void init_game(t_game *game)
 {
 	game->mlx_connection = mlx_init();
-	game->mlx_window = mlx_new_window(game->mlx_connection, GRIDSIZE * game->map->sizex , GRIDSIZE * game->map->sizey, "cub3D");
-	game->img->img = mlx_new_image(game->mlx_connection, GRIDSIZE * game->map->sizex, GRIDSIZE * game->map->sizey);
+	// linea para imprimir el mapa
+	//game->mlx_window = mlx_new_window(game->mlx_connection, GRIDSIZE * game->map->sizex , GRIDSIZE * game->map->sizey, "cub3D");
+	game->mlx_window = mlx_new_window(game->mlx_connection, SCREEN_WITH , SCREEN_HIGH, "cub3D");
+	// linea para imprimir la imagen del mapa	
+	// game->img->img = mlx_new_image(game->mlx_connection, GRIDSIZE * game->map->sizex, GRIDSIZE * game->map->sizey);
+	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
 }
 
@@ -49,7 +53,7 @@ int	main(int argc, char **argv)
 	mapa[1] = ft_strdup("10N0001");
 	mapa[2] = ft_strdup("1011001");
 	mapa[3] = ft_strdup("1000001");
-	mapa[4] = ft_strdup("1000001");
+	mapa[4] = ft_strdup("10N0001");
 	mapa[5] = ft_strdup("1111111");
 	(void)argc;
 	(void)argv;
@@ -60,7 +64,7 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player_pos(&game, 2 , 1, 90);
+	player_pos(&game, 2 , 4, 90);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game, &img);

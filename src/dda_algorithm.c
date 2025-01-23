@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/23 13:21:01 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:45:03 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void init_ray(t_game *game, float angle)
 	ray->delta[1] = sin(angle) * -1;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
-	ray->side_dis_x = calculate_sx(angle);
-	ray->side_dis_y = calculate_sy(angle);
+	ray->side_dis_x = calculate_sx(ray->delta[0],ray->delta[1]);
+	ray->side_dis_y = calculate_sy(ray->delta[0],ray->delta[1]);
 }
 
 static void setup_ray(t_ray *ray)
@@ -90,9 +90,9 @@ void draw_rays(t_game *game)
 	
 	ray = game->ray;
 	start = to_radians(game->player->direction) - M_PI / 4;
-	increment = (M_PI / 2) / (SCREEN_HIGH - 1);
+	increment = (M_PI / 2) / (SCREEN_WITH - 1);
 	count = 0;
-	while (count < SCREEN_HIGH)
+	while (count < SCREEN_WITH)
 	{
 		init_ray(game , start);
 		setup_ray(ray);

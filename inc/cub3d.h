@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/23 13:19:52 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:28:26 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void draw_rays(t_game *game);
 // Math
 float to_radians(int degrees);
 void calculate_delta(t_game *game);
-float calculate_sx(float angle);
-float calculate_sy(float angle);
+float calculate_sx(float dx , float dy);
+float calculate_sy(float dx , float dy);
 
 // float calculate_sx(t_game *game);
 // float calculate_sy(t_game *game);

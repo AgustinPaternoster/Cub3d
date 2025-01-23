@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/23 13:20:36 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:46:54 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,7 @@ void print_point(t_ray *ray, t_imgdata *img)
 	int x;
 	int y;
 
-	//x = round(end_point(ray->distance, game->player->pos_x, game->player->dx));
 	x = round(end_point(ray->distance, ray->camera_pos[0], ray->delta[0]));
-	//y = round(end_point(ray->distance, game->player->pos_y, game->player->dy));
 	y = round(end_point(ray->distance, ray->camera_pos[1], ray->delta[1]));
 	img_pixel_put(img, x , y , GREEN);
 	
@@ -152,7 +150,7 @@ void draw_walls(t_game *game, int column)
 		end = SCREEN_HIGH;
 	while (start_y < end)
 	{
-		img_pixel_put(game->img,column, start_y,BLUE);
+		img_pixel_put(game->img,column, start_y,GREEN);
 		start_y++;
 	}
 }

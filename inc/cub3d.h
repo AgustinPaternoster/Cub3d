@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/23 18:28:26 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:45:34 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,11 @@ typedef struct s_game
 {
 	void 	*mlx_connection;
 	void	*mlx_window;
+	void 	*mlx_window_map;
 	t_map	*map;
 	t_player *player;
 	t_imgdata *img;
+	t_imgdata *img_map;
 	t_ray		*ray;
 }			t_game;
 

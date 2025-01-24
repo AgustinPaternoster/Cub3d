@@ -119,18 +119,43 @@ void print_point(t_ray *ray, t_imgdata *img)
 	int x;
 	int y;
 
-	//x = round(end_point(ray->distance, game->player->pos_x, game->player->dx));
 	x = round(end_point(ray->distance, ray->camera_pos[0], ray->delta[0]));
-	//y = round(end_point(ray->distance, game->player->pos_y, game->player->dy));
 	y = round(end_point(ray->distance, ray->camera_pos[1], ray->delta[1]));
 	img_pixel_put(img, x , y , GREEN);
 	
 }
 
+void draw_column(t_ray *ray, t_imgdata *img, int count)
+{
+    int x;
+    int height;
+    int y_start;
+    int y_end;
+
+    x = count;
+    height = (int)(SCREEN_HIGH / ray->distance);
+    if (height <= 0)
+        height = 1;
+    y_start = (SCREEN_HIGH - height) / 2;
+    y_end = y_start + height;
+    if (y_start < 0)
+        y_start = 0;
+    if (y_end > SCREEN_HIGH)
+        y_end = SCREEN_HIGH;
+    while (y_start < y_end)
+    {
+        if (x >= 0 && x < SCREEN_WITH && y_start >= 0 && y_start < SCREEN_HIGH) {
+            img_pixel_put(img, x, y_start, WHITE);
+        }
+        y_start++;
+    }
+}
+
 void render_frame(t_game *game)
 {
-	draw_map(game);
-	draw_player(game);
+	//draw_map(game);
+	//draw_player(game);
+	paint_window(game, 0);
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }

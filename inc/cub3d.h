@@ -24,19 +24,20 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-
 # define SCREEN_WITH 800
 # define SCREEN_HIGH 600
-# define VELO_MOV 0.01
-# define VELO_ROT 5
+# define VELO_MOV 0.04
+# define VELO_ROT 7
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
+# define WHITE 16777215
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 255
 # define LIGHT_BLUE 13434879
 # define PI 3.141592
 # define LINE_SIZE 10
+# define FOV 60
 
 typedef struct s_ray
 {
@@ -99,6 +100,7 @@ int handle_close(t_game *game);
 void draw_player(t_game *game);
 void draw_map(t_game *game);
 void print_point(t_ray *ray, t_imgdata *img);
+void draw_column(t_ray *ray, t_imgdata *img, int count);
 void render_frame(t_game *game);
 int is_wall(char **mapa, int x , int y);
 

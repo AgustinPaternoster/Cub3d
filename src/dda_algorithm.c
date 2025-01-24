@@ -76,22 +76,26 @@ void run_dda_al(t_ray *ray , char **map)
 
 void draw_rays(t_game *game)
 {
-	t_ray *ray;
-	float start;
-	float increment;
-	int		count;
-	
-	ray = game->ray;
-	start = to_radians(game->player->direction) - M_PI / 4;
-	increment = (M_PI / 2) / (SCREEN_HIGH - 1);
-	count = 0;
-	while (count < SCREEN_HIGH)
-	{
-		init_ray(game , start);
-		setup_ray(ray);
-		run_dda_al(ray, game->map->map);
-		print_point(ray, game->img);
-		start +=increment;
-		count++;
-	}
+    t_ray *ray;
+    float start;
+    float increment;
+    int count;
+
+    ray = game->ray;
+    start = to_radians(game->player->direction) - (FOV / 2);
+    increment = to_radians(FOV) / SCREEN_WITH;
+    count = 0;
+    while (count < SCREEN_WITH)
+    {
+        init_ray(game, start);
+        setup_ray(ray);
+        run_dda_al(ray, game->map->map);
+        draw_column(ray, game->img, count);
+        start += increment;
+        count++;
+    }
 }
+
+
+
+

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/24 13:45:34 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:10:28 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define GREEN 65280
 # define BLUE 255
 # define LIGHT_BLUE 13434879
+# define GREY 13158600
 # define PI 3.141592
 # define LINE_SIZE 10
 

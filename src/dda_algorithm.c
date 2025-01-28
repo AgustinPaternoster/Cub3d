@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/27 17:31:49 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:41:14 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float fix_distortion(t_ray *ray, float delta_dis, float side_dist)
 	
 	distance = delta_dis - side_dist;
 	ray_angle = atan2(ray->delta[1], ray->delta[0]);
-	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);
+	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
 	angle = camera_angle - ray_angle;
 	return(distance * cos(angle)); 
 }
@@ -117,8 +117,8 @@ void draw_rays(t_game *game)
 	int		count;
 	
 	ray = game->ray;
-	start = to_radians(game->player->direction) + M_PI / 4;
-	increment = (M_PI / 2) / (SCREEN_WITH - 1);
+	start = to_radians(game->player->direction) + (11 * M_PI) / 60;
+	increment = ((11 * M_PI) / 30) / (SCREEN_WITH - 1);
 	count = 0;
 	while (count < SCREEN_WITH)
 	{

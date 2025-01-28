@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/27 17:34:40 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:13:42 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,13 @@ void render_frame(t_game *game)
 
 void draw_walls(t_game *game, int column)
 {
-	float heigh;
-	float start_y;
-	float end;
+	int heigh;
+	int start_y;
+	int end;
 	t_ray *ray;
 
 	ray = game->ray;
-	heigh = (GRIDSIZE / ray->distance) * 1.5 ;
+	heigh = ((GRIDSIZE / ray->distance) * 1.5 );
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
 	if (start_y < 0)

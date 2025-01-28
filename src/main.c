@@ -6,6 +6,11 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/12/16 19:18:47 by apaterno         ###   ########.fr       */
+=======
+/*   Updated: 2024/12/17 18:07:05 by apaterno         ###   ########.fr       */
+>>>>>>> 330a810b38e68be5f1a4c97e346183bce2b6d175
 /*   Updated: 2025/01/28 14:14:45 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -53,7 +58,7 @@ static void	start_game(t_tmap *map)
 	
 	map->mlx_connection = mlx_init();
 	map->mlx_window = mlx_new_window(map->mlx_connection, 1000 , 1000, "cub3D");
-	map->img->img = mlx_xpm_file_to_image(map->mlx_connection,"./image.xpm",&h,&w);
+	//map->img->img = mlx_xpm_file_to_image(map->mlx_connection,"./image.xpm",&h,&w);
 	map->img->addr = mlx_get_data_addr(map->img->img, &map->img->bits_per_pixel, &map->img->line_length, &map->img->endian);
 	// screen(map,2303,1000,0);
 	mlx_put_image_to_window(map->mlx_connection, map->mlx_window,map->img->img, 0, 0);

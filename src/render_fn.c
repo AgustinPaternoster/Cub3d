@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/27 19:13:42 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:50:54 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ void print_point(t_ray *ray, t_imgdata *img)
 
 void render_frame(t_game *game)
 {
-	//draw_map(game);
-	//draw_player(game);
 	paint_window(game, GREY);
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
@@ -142,7 +140,7 @@ void draw_walls(t_game *game, int column)
 	t_ray *ray;
 
 	ray = game->ray;
-	heigh = ((GRIDSIZE / ray->distance) * 1.5 );
+	heigh = ((GRIDSIZE / ray->distance) * 2);
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
 	if (start_y < 0)

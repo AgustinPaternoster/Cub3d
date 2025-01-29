@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/17 17:45:36 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:44:17 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define BLUE 4735733 
+# define RED 16073282
+# define HIGH 1000
+# define WIDTH 1000
 typedef struct  s_imgdata
 {
 	void *img;
@@ -40,12 +44,14 @@ typedef struct s_tmap
 	char 	**map;
 	int 	sizex;
 	int 	sizey;
-	t_imgdata *img;
+	t_imgdata *img_base;
+	t_imgdata *img_tex;
 }			t_tmap;
 
 //// test minilibx
 void img_pixel_put(t_imgdata *img, int x, int y, int color);
-void screen(t_tmap *map, int color, int size, int offset );
+void paint_img(t_imgdata *img, int color , int width , int heigh);
+void pixel_color(t_imgdata *img , int x , int y);
 
 
 // prints.c

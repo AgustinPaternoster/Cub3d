@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/28 14:17:32 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/01/28 19:43:22 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 
 int handle_key(int keycode, t_tmap *map)
 {
-	(void)map;
-	if (keycode == XK_c)
-	{
-		screen(map, 16716032 , 500 , 0 );
-		mlx_put_image_to_window(map->mlx_connection, map->mlx_window,map->img->img,100,100);
-	}
-	if (keycode == XK_d)
-	{
-		screen(map, 2303 , 500 , 0 );
-		mlx_put_image_to_window(map->mlx_connection, map->mlx_window,map->img->img,200,200);
-	}
 	if (keycode == XK_Escape)
 	{
 		mlx_destroy_window(map->mlx_connection, map->mlx_window);
@@ -48,15 +37,23 @@ void	clean_close(t_tmap *map, t_imgdata *img)
 
 static void	start_game(t_tmap *map)
 {
+
 	int h = 700;
 	int w = 525;
-	
+
 	map->mlx_connection = mlx_init();
-	map->mlx_window = mlx_new_window(map->mlx_connection, 1000 , 1000, "cub3D");
-	//map->img->img = mlx_xpm_file_to_image(map->mlx_connection,"./image.xpm",&h,&w);
-	map->img->addr = mlx_get_data_addr(map->img->img, &map->img->bits_per_pixel, &map->img->line_length, &map->img->endian);
-	// screen(map,2303,1000,0);
-	mlx_put_image_to_window(map->mlx_connection, map->mlx_window,map->img->img, 0, 0);
+	map->mlx_window = mlx_new_window(map->mlx_connection, WIDTH , HIGH, "cub3D");
+	//imagen xmp
+	map->img_tex->img = mlx_xpm_file_to_image(map->mlx_connection,"./image.xpm",&h,&w);
+	map->img_tex->addr = mlx_get_data_addr(map->img_tex->img, &map->img_tex->bits_per_pixel, &map->img_tex->line_length, &map->img_tex->endian);
+	//imagen color listo
+	map->img_base->img = mlx_new_image(map->mlx_connection, WIDTH,HIGH);
+	map->img_base->addr = mlx_get_data_addr(map->img_base->img, &map->img_base->bits_per_pixel, &map->img_base->line_length, &map->img_base->endian);
+	paint_img(map->img_tex, RED, 100, 100);
+	
+	//mlx_put_image_to_window(map->mlx_connection, map->mlx_window,map->img_base->img, 0, 0);
+	//mlx_put_image_to_window(map->mlx_connection, map->mlx_window, map->img_tex->img, 100, 100);
+	//pixel_color(map->img_tex->img, 40, 40);
 	mlx_key_hook(map->mlx_window,handle_key,map);
 	mlx_loop(map->mlx_connection);
 }
@@ -67,22 +64,12 @@ int	main(int argc, char **argv)
 	t_imgdata img_base;
 	t_imgdata img_text;
 	
-	char *mapa[5];
-	mapa[0] = ft_strdup("111111");
-	mapa[1] = ft_strdup("100001");
-	mapa[2] = ft_strdup("100001");
-	mapa[3] = ft_strdup("100001");
-	mapa[4] = ft_strdup("111111");
 	(void)argc;
 	(void)argv;
-	map.img = &img;
-	map.map = mapa;
-	map.sizey =  5;
-	map.sizex = 6;
-	for (int i = 0; i < 5; i++)
-		printf("%s\n", map.map[i]);
+	map.img_base = &img_base;
+	map.img_tex = &img_text;
 	start_game(&map);
-	clean_close(&map, &img);
+	clean_close(&map, &img_base);
 	for (int i = 0; i < 5; i++)
 		free(map.map[i]);
 	return (0);

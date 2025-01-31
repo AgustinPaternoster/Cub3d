@@ -26,8 +26,8 @@ void    set_player_pos(t_game *game)
             if (game->map->matrix[i][j] == 'N' || game->map->matrix[i][j] == 'S'
                 || game->map->matrix[i][j] == 'E' || game->map->matrix[i][j] == 'W')
             {
-                game->player->x_pos = j;
-                game->player->y_pos = i;
+                game->player->pos_x = j;
+                game->player->pos_y = i;
                 return ;
             }
             j++;
@@ -61,25 +61,25 @@ void    get_texture(char *prefix, t_game *game)
     }
     if (ft_strcmp(prefix, "NO") == 0)
     {
-        game->map->no_texture->img_ptr = img_ptr;
+        game->map->no_texture->img = img_ptr;
         game->map->no_texture->width = width;
         game->map->no_texture->height = height;
     }
     else if (ft_strcmp(prefix, "SO") == 0)
     {
-        game->map->so_texture->img_ptr = img_ptr;
+        game->map->so_texture->img = img_ptr;
         game->map->so_texture->width = width;
         game->map->so_texture->height = height;
     }
     else if (ft_strcmp(prefix, "WE") == 0)
     {
-        game->map->we_texture->img_ptr = img_ptr;
+        game->map->we_texture->img = img_ptr;
         game->map->we_texture->width = width;
         game->map->we_texture->height = height;
     }
     else if (ft_strcmp(prefix, "EA") == 0)
     {
-        game->map->ea_texture->img_ptr = img_ptr;
+        game->map->ea_texture->img = img_ptr;
         game->map->ea_texture->width = width;
         game->map->ea_texture->height = height;
     }

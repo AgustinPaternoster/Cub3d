@@ -39,7 +39,7 @@ void	print_game_data(t_game *game)
 	printf("\n");
     printf("Ceiling color: %d\n", game->map->ceiling);
     printf("Floor color: %d\n", game->map->floor);
-    printf("Map width: %d\n", game->map->size_x);
-    printf("Map height: %d\n", game->map->size_y);
-    printf("Player position: %dX, %dY\n", game->player->x_pos, game->player->y_pos);
+    printf("Map width: %d\n", game->map->sizex);
+    printf("Map height: %d\n", game->map->sizey);
+    //printf("Player position: %dX, %dY\n", game->player->x_pos, game->player->y_pos);
 }

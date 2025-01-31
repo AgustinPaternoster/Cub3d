@@ -1,14 +1,14 @@
-NO /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
-SO /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
-WE /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
-EA /home/mgimon-c/Cub3d/textures/wet_sponge.xpm
+NO /home/mgimon/Cub3d/textures/wet_sponge.xpm
+SO /home/mgimon/Cub3d/textures/wet_sponge.xpm
+WE /home/mgimon/Cub3d/textures/wet_sponge.xpm
+EA /home/mgimon/Cub3d/textures/wet_sponge.xpm
 
 C 53,41,34
 F 45,33,27
 
-          1111 111111111111111 
-           10011100000000011101
-          10000000011111111111 
-11111111110111111111           
-   10010000W111111111          
-1111111111111111111            
+1111111
+10N0001
+1011001
+1000001
+1N00001
+1111111

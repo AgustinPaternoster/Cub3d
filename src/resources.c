@@ -141,8 +141,8 @@ void	init_resources(t_game *game, char *filename)
         game->map->ceiling = get_hex_from_cubline(game->map->cub[5]);
     if (game->map->cub[6] != NULL)
         game->map->floor = get_hex_from_cubline(game->map->cub[6]);
-    game->map->size_y = get_full_height(game->map->matrix);
-    game->map->size_x = get_full_width(game->map->matrix);
+    game->map->sizey = get_full_height(game->map->matrix);
+    game->map->sizex = get_full_width(game->map->matrix);
     set_player_pos(game);
     get_texture("NO", game);
     get_texture("EA", game);

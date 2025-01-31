@@ -79,10 +79,10 @@ int	get_map(t_game *game, char *filename)
 
 	map_size = get_mapsize(filename);
 	game->map->cub = NULL;
-	game->map->no_texture = malloc(sizeof(t_img));
-	game->map->so_texture = malloc(sizeof(t_img));
-	game->map->ea_texture = malloc(sizeof(t_img));
-	game->map->we_texture = malloc(sizeof(t_img));
+	game->map->no_texture = malloc(sizeof(t_imgdata));
+	game->map->so_texture = malloc(sizeof(t_imgdata));
+	game->map->ea_texture = malloc(sizeof(t_imgdata));
+	game->map->we_texture = malloc(sizeof(t_imgdata));
 	game->map->fd = open(filename, O_RDONLY);
 	if (game->map->fd < 0 || map_size <= 0)
 	{

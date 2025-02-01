@@ -32,10 +32,6 @@ void	clean_close(t_game *game)
 			i++;
 		}
 	}
-	/*mlx_destroy_image(game->mlx_connection, game->map->no_texture->img_ptr);
-	mlx_destroy_image(game->mlx_connection, game->map->so_texture->img_ptr);
-	mlx_destroy_image(game->mlx_connection, game->map->we_texture->img_ptr);
-	mlx_destroy_image(game->mlx_connection, game->map->ea_texture->img_ptr);*/
 	free(game->map->cub);
 	free(game->map->no_texture);
 	free(game->map->ea_texture);
@@ -43,9 +39,12 @@ void	clean_close(t_game *game)
 	free(game->map->so_texture);
 	free(game->map);
 	free(game->player);
-	mlx_destroy_window(game->mlx_connection, game->mlx_window);
-	mlx_destroy_display(game->mlx_connection);
-	free (game->mlx_connection);
+	if (game->mlx_connection)
+	{
+		mlx_destroy_window(game->mlx_connection, game->mlx_window);
+		mlx_destroy_display(game->mlx_connection);
+		free (game->mlx_connection);
+	}
 }
 
 void	error_exit(char *msg, int exit_code, t_game *game)

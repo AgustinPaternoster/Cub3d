@@ -130,7 +130,7 @@ int check_map(char **matrix)
 
     if (!matrix || !matrix[0])
         return (1);
-    if (!even_map(matrix))
+    if (!even_map(matrix) || !map_full_to_bottom(matrix))
     {
         printline_fd(2, "Error: the map is uneven. Fill with spaces to make it even\n");
         return (1);

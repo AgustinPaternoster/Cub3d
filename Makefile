@@ -8,7 +8,7 @@ BONUS = 0
 
 # Compiler and compilation flags
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -g3 -fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall -g -fsanitize=address
 
 # Minilibx linux
 MLX_PATH	= minilibx/

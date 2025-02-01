@@ -41,7 +41,8 @@ void	clean_close(t_game *game)
 	free(game->player);
 	if (game->mlx_connection)
 	{
-		mlx_destroy_window(game->mlx_connection, game->mlx_window);
+		if (game->mlx_window)
+			mlx_destroy_window(game->mlx_connection, game->mlx_window);
 		mlx_destroy_display(game->mlx_connection);
 		free (game->mlx_connection);
 	}
@@ -58,4 +59,11 @@ void	error_exit(char *msg, int exit_code, t_game *game)
 	mlx_destroy_display(game->mlx_connection);
 	free (game->mlx_connection);
 	exit(exit_code);
+}
+
+void	free_structs(t_game *game)
+{
+	free(game->img);
+	free(game->player);
+	free(game->ray);
 }

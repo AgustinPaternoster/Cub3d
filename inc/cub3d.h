@@ -137,6 +137,7 @@ void	print_game_data(t_game *game);
 
 // frees.c
 //void	clean_close(t_tmap *map, t_imgdata *img);
+void	free_structs(t_game *game);
 void	matrix_free(char **str);
 
 // get_map.c
@@ -152,6 +153,7 @@ int get_num_rows(char **matrix);
 int even_map(char **matrix);
 int validate_holes(char **matrix);
 int validate_chars(char **matrix);
+int map_full_to_bottom(char **matrix);
 
 // resources.c
 void	init_resources(t_game *game, char *filename);

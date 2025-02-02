@@ -48,16 +48,24 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void    get_cub(t_game *game, char *filename)
-{
+void get_cub(t_game *game, char *filename) {
     game->map->fd = open(filename, O_RDONLY);
+    if (game->map->fd < 0) {
+        perror("Failed to open file");
+        return;
+    }
 
     char *line = NULL;
     size_t count = 0;
     size_t capacity = 10;
     game->map->cub = malloc(sizeof(char *) * capacity);
-    while ((line = get_next_line(game->map->fd)))
-    {
+    if (!game->map->cub) {
+        perror("Memory allocation failed");
+        close(game->map->fd);
+        return;
+    }
+
+    while ((line = get_next_line(game->map->fd))) {
         if (count >= capacity) {
             capacity *= 2;
             char **new_cub = realloc(game->map->cub, sizeof(char *) * capacity);
@@ -69,8 +77,7 @@ void    get_cub(t_game *game, char *filename)
             }
             game->map->cub = new_cub;
         }
-        game->map->cub[count++] = ft_strdup(line);
-        free(line);
+        game->map->cub[count++] = line;
     }
     game->map->cub[count] = NULL;
     close(game->map->fd);
@@ -79,36 +86,42 @@ void    get_cub(t_game *game, char *filename)
 int get_hex_from_cubline(char *line)
 {
     int colors[3] = {0, 0, 0};
-    int i;
-    int ci;
-    
-    i = 2;
-    ci = 0;
-    if ((line[0] != 'C' && line[0] != 'F') || line[1] != ' ')
-        return (0xFFFFFF);
+    int i = 0;
+    int ci = 0;
+
+    while (line[i] == ' ' || line[i] == '\t')
+        i++;
+    if ((line[i] != 'C' && line[i] != 'F') || line[i + 1] != ' ')
+        return 0xFFFFFF;
+    i += 2;
     while (line[i] && ci < 3)
     {
-        if (!ft_isdigit(line[i]))
-            return (0xFFFFFF);
+        while (line[i] == ' ' || line[i] == '\t')
+            i++;
+        if (!isdigit(line[i]))
+            return 0xFFFFFF;
         colors[ci] = 0;
-        while (ft_isdigit(line[i]))
+        while (isdigit(line[i]))
         {
             colors[ci] = colors[ci] * 10 + (line[i] - '0');
             i++;
         }
         if (colors[ci] < 0 || colors[ci] > 255)
-            return (0xFFFFFF);
-        if (ci < 2) {
+            return 0xFFFFFF;
+        if (ci < 2)
+        {
+            while (line[i] == ' ' || line[i] == '\t')
+                i++;
             if (line[i] != ',')
-                return (0xFFFFFF);
+                return 0xFFFFFF;
             i++;
         }
         ci++;
     }
-    while (line[i] == '\n' || line[i] == '\r' || line[i] == ' ') 
+    while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == '\r')
         i++;
     if (line[i] != '\0')
-        return (0xFFFFFF);
+        return 0xFFFFFF;
     return (colors[0] << 16) | (colors[1] << 8) | colors[2];
 }
 
@@ -132,15 +145,22 @@ int get_full_width(char **matrix)
     return (width);
 }
 
-void	init_resources(t_game *game, char *filename)
+void init_resources(t_game *game, char *filename)
 {
     game->map->ceiling = 0xFFFFFF;
     game->map->floor = 0xFFFFFF;
     get_cub(game, filename);
-    if (game->map->cub[5] != NULL)
-        game->map->ceiling = get_hex_from_cubline(game->map->cub[5]);
-    if (game->map->cub[6] != NULL)
-        game->map->floor = get_hex_from_cubline(game->map->cub[6]);
+    for (int i = 0; game->map->cub[i] != NULL; i++)
+    {
+        if (game->map->cub[i][0] == 'C' || game->map->cub[i][0] == 'F')
+        {
+            int color = get_hex_from_cubline(game->map->cub[i]);
+            if (game->map->cub[i][0] == 'C')
+                game->map->ceiling = color;
+            else
+                game->map->floor = color;
+        }
+    }
     game->map->sizey = get_full_height(game->map->matrix);
     game->map->sizex = get_full_width(game->map->matrix);
     set_player_pos(game);

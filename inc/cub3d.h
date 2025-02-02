@@ -27,7 +27,7 @@
 
 # define SCREEN_WITH 800
 # define SCREEN_HIGH 600
-# define VELO_MOV 0.01
+# define VELO_MOV 0.04
 # define VELO_ROT 5
 # define GRIDSIZE 100
 # define PLAYERSIZE 4

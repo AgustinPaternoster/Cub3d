@@ -35,9 +35,6 @@ void player_pos(t_game *game, int posx, int posy, int direction)
 	calculate_delta(game);
 }
 
-// TO DO
-// get C, F y texturas con cualquier orden
-// get C, F y texturas con espacios/tabs por medio
 int parsing(int argc, char **argv, t_game *game)
 {
 	if (argc != 2)

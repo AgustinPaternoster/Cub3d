@@ -69,6 +69,9 @@ void inits(t_game *game)
 	game->map->sizex = 7;
 }
 
+// TO DO
+// Bloquear ejecucion si no encuentra textura
+// Check bad maps
 int	main(int argc, char **argv)
 {
 	t_game	game;

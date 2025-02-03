@@ -22,7 +22,7 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # Sources
 SRC_PATH = ./src/
-SRC		= 	main.c render_fn.c
+SRC		= 	main.c render_fn.c utilities.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

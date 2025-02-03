@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:41:53 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/29 18:09:14 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:05:35 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,81 @@ int get_color(t_imgdata *img, int x , int y)
 void xmp_to_int(t_tmap *map, char *path) 
 {
 	t_imgdata img;
-	t_textures *txt;
+	t_texture *txt;
 	int i;
 	int j;
 	
-	txt = map->texture;
+	txt = map->txt;
 	img.img = mlx_xpm_file_to_image(map->mlx_connection,path,&txt->heigh,&txt->width);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,&img.line_length, &img.endian);
 	i = 0;
 	while (i < txt->heigh)
 	{
 		j = 0 ;
-		while (j = txt->width)
+		while (j < txt->width)
 		{
-			txt->texture[i][j] = get_color(&img, j, i);
+			txt->texture[i][j] = get_color(&img, i, j);
 			j++;
 		}
 		i++;
 	}
 	mlx_destroy_image(map->mlx_connection,img.img);
+}
+
+void int_to_img(t_tmap *map)
+{
+	t_texture *txt;
+	t_imgdata *img;
+	int i;
+	int j;
+	
+	txt = map->txt;
+	img = map->img_base;
+	i = 0;
+	while (i < txt->heigh)
+	{
+		j = 0;
+		while (j < txt->width)
+		{
+			img_pixel_put(img, i, j, txt->texture[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+void int_to_img_rescaled(t_tmap *map, int distance)
+{
+	t_texture *txt;
+	t_imgdata *img;
+	float index;
+	int new_h;
+	int new_w;
+	int new_i;
+	int new_j;
+	int i;
+	int j;
+	
+	
+	img = map->img_base;
+	txt = map->txt;
+	index = (float)distance / (float)txt->width;
+	new_h = distance;
+	new_w = distance;
+	i = 0;
+	while (i < new_h)
+	{
+		j = 0;
+		new_i = round(i / index);
+		if (new_i >= txt->heigh)
+				new_i = txt->heigh - 1;
+		while (j < new_w)
+		{
+			new_j = round(j / index);
+			if (new_j >= txt->width)
+				new_j = txt->width - 1;
+			img_pixel_put(img, i, j, txt->texture[new_i][new_j]);
+			j++;
+		}
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/28 17:44:17 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:07:24 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@
 # define RED 16073282
 # define HIGH 1000
 # define WIDTH 1000
+# define TXT_H 256
+# define TXT_W 256
+
+typedef struct s_texture
+{
+	int **texture;
+	int width;
+	int heigh;
+}t_texture;
+
+
 typedef struct  s_imgdata
 {
 	void *img;
@@ -45,7 +56,7 @@ typedef struct s_tmap
 	int 	sizex;
 	int 	sizey;
 	t_imgdata *img_base;
-	t_imgdata *img_tex;
+	t_texture *txt;
 }			t_tmap;
 
 //// test minilibx
@@ -53,6 +64,13 @@ void img_pixel_put(t_imgdata *img, int x, int y, int color);
 void paint_img(t_imgdata *img, int color , int width , int heigh);
 void pixel_color(t_imgdata *img , int x , int y);
 
+//utilities
+int **create_txt_array(int with , int heigh);
+void clean_txt(int **txt, int heigh , int width);
+int get_color(t_imgdata *img, int x , int y);
+void xmp_to_int(t_tmap *map, char *path);
+void int_to_img(t_tmap *map);
+void int_to_img_rescaled(t_tmap *map, int distance);
 
 // prints.c
 void    printline_fd(int fd, char *str);

@@ -135,7 +135,7 @@ int is_line_empty(char *line)
         return (0);
     while (line[i] == ' ' || line[i] == '\t')
         i++;
-    if (line[i] != '\0')
+    if (line[i] == '\0')
         return (1);
     return (0);
 }

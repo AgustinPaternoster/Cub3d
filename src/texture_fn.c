@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/04 16:26:35 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:39:04 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int get_color(t_imgdata *img, int x , int y)
 }
 void xmp_to_int(t_text_info *text, char *path, t_game *game) 
 {
-	t_imgdata img;
 	int i;
 	int j;
+	t_imgdata img;
 	
 	img.img = mlx_xpm_file_to_image(game->mlx_connection,path,&text->hight, &text->withd);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,&img.line_length, &img.endian);

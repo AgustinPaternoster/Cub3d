@@ -6,11 +6,34 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/04 17:24:17 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:54:41 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void int_to_img(t_game *game)
+{
+	t_text_info *txt;
+	t_imgdata *img;
+	int i;
+	int j;
+	
+	txt = game->texture;
+	img = game->img;
+	i = 0;
+	while (i < txt->hight)
+	{
+		j = 0;
+		while (j < txt->withd)
+		{
+			img_pixel_put(img, i, j, txt->texture[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
 
 static int get_color(t_imgdata *img, int x , int y)
 {

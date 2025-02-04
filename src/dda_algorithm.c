@@ -6,21 +6,28 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/27 20:41:14 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:45:40 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+void calculate_endpoint(t_ray *ray) 
+{
+	if (ray->side == 0)
+		ray->endpoint = end_point(ray->distance, )	
+}
+
 
 float fix_distortion(t_ray *ray, float delta_dis, float side_dist)
 {
 	float ray_angle;
 	float camera_angle;
 	float distance;
-	//borrar
 	float angle;
 	
 	distance = delta_dis - side_dist;
+	
+	
 	ray_angle = atan2(ray->delta[1], ray->delta[0]);
 	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
 	angle = camera_angle - ray_angle;
@@ -49,8 +56,6 @@ static void init_ray(t_game *game, float angle)
 	ray->side_dis_y = calculate_sy(ray->delta[0],ray->delta[1]);
 	ray->camara_dir[0] = game->player->dx;
 	ray->camara_dir[1] = game->player->dy;
-	
-	
 }
 
 static void setup_ray(t_ray *ray)
@@ -79,7 +84,6 @@ static void setup_ray(t_ray *ray)
 
 void run_dda_al(t_ray *ray , char **map)
 {
-	//borrar
 	float test;
 	
 	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
@@ -99,12 +103,10 @@ void run_dda_al(t_ray *ray , char **map)
 	}
 	if (ray->side == 0)
 	{
-			//ray->distance = ray->delta_dis_x - ray->side_dis_x;
-			ray->distance = fix_distortion(ray, ray->delta_dis_x, ray->side_dis_x);
+		ray->distance = fix_distortion(ray, ray->delta_dis_x, ray->side_dis_x);
 	}
 	else
 	{
-		//ray->distance = ray->delta_dis_y - ray->side_dis_y;
 		ray->distance = fix_distortion(ray, ray->delta_dis_y, ray->side_dis_y);
 	}
 }

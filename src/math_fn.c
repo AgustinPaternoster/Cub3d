@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/23 18:27:24 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:23:03 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ float calculate_sy(float dx , float dy)
 	return(sqrt(1 + x));
 }
 
-float end_point(float distance, float start, float dir)
+int  end_point(float distance, float start, float dir)
 {
-	return(start * GRIDSIZE + (distance * dir * GRIDSIZE));
+	int value;
+	
+	value = round(start * GRIDSIZE + (distance * dir * GRIDSIZE));
+	return(value);
 }

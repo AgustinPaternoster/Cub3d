@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/04 16:25:04 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:26:58 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_ray
 	int 	stepy;
 	float	distance;
 	float	camara_dir[2];
+	int 	endpoint;
 }t_ray;
 
 typedef struct s_text_info
@@ -117,6 +118,8 @@ void draw_walls(t_game *game, int column);
 
 // texture
 void init_texture(char *path , t_game *game);
+void int_to_img(t_game *game);
+
 
 //DDA_alg
 void draw_rays(t_game *game);
@@ -128,7 +131,7 @@ float calculate_sy(float dx , float dy);
 
 // float calculate_sx(t_game *game);
 // float calculate_sy(t_game *game);
-float end_point(float distance, float start, float dir);
+int  end_point(float distance, float start, float dir);
 
 //DDA
 void calculate_x_ray(t_game *game);

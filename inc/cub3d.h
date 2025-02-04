@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:36:49 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:25:04 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define GREY 13158600
 # define PI 3.141592
 # define LINE_SIZE 10
+# define TEXTURE_SIZE 100
 
 typedef struct s_ray
 {
@@ -54,6 +55,14 @@ typedef struct s_ray
 	float	distance;
 	float	camara_dir[2];
 }t_ray;
+
+typedef struct s_text_info
+{
+	int ** texture;
+	int hight;
+	int withd;
+}t_text_info;
+
 
 typedef struct  s_imgdata
 {
@@ -88,6 +97,8 @@ typedef struct s_game
 	t_player *player;
 	t_imgdata *img;
 	t_ray		*ray;
+	t_text_info *texture;
+	
 }			t_game;
 
 //// test minilibx
@@ -103,6 +114,9 @@ void draw_map(t_game *game);
 void print_point(t_ray *ray, t_imgdata *img);
 void render_frame(t_game *game);
 void draw_walls(t_game *game, int column);
+
+// texture
+void init_texture(char *path , t_game *game);
 
 //DDA_alg
 void draw_rays(t_game *game);

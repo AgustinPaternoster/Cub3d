@@ -6,13 +6,13 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/04 16:39:04 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:24:17 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int get_color(t_imgdata *img, int x , int y)
+static int get_color(t_imgdata *img, int x , int y)
 {
 	char *pixel;
 	int  color;
@@ -21,7 +21,7 @@ int get_color(t_imgdata *img, int x , int y)
 	color = *(int*)pixel;
 	return(color);
 }
-void xmp_to_int(t_text_info *text, char *path, t_game *game) 
+static void xmp_to_int(t_text_info *text, char *path, t_game *game) 
 {
 	int i;
 	int j;

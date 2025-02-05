@@ -6,32 +6,36 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/04 18:45:40 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:10:31 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-void calculate_endpoint(t_ray *ray) 
-{
-	if (ray->side == 0)
-		ray->endpoint = end_point(ray->distance, )	
-}
 
-
-float fix_distortion(t_ray *ray, float delta_dis, float side_dist)
+static void fix_distortion(t_ray *ray)
 {
 	float ray_angle;
 	float camera_angle;
-	float distance;
 	float angle;
-	
-	distance = delta_dis - side_dist;
-	
 	
 	ray_angle = atan2(ray->delta[1], ray->delta[0]);
 	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
 	angle = camera_angle - ray_angle;
-	return(distance * cos(angle)); 
+	ray->distance *= cos(camera_angle - ray_angle);
+}
+static void calculate_distance(t_ray *ray) 
+{
+	if (ray->side == 0)
+	{
+		ray->distance = ray->delta_dis_x - ray->side_dis_x;
+		ray->endpoint = end_point(ray->distance, ray->camera_pos[1], ray->delta[1]);
+	}
+	else
+	{
+		ray->distance = ray->delta_dis_y - ray->side_dis_y;
+		ray->endpoint = end_point(ray->distance, ray->camera_pos[0], ray->delta[0]);
+	}
+	fix_distortion(ray);
 }
 
 static int is_wall(char **mapa, int x , int y)
@@ -101,14 +105,11 @@ void run_dda_al(t_ray *ray , char **map)
 			ray->side = 1;
 		}
 	}
-	if (ray->side == 0)
-	{
-		ray->distance = fix_distortion(ray, ray->delta_dis_x, ray->side_dis_x);
-	}
-	else
-	{
-		ray->distance = fix_distortion(ray, ray->delta_dis_y, ray->side_dis_y);
-	}
+	calculate_distance(ray);
+	// if (ray->side == 0)
+		// ray->distance = fix_distortion(ray, ray->delta_dis_x, ray->side_dis_x);
+	// else
+		// ray->distance = fix_distortion(ray, ray->delta_dis_y, ray->side_dis_y);
 }
 
 void draw_rays(t_game *game)
@@ -131,6 +132,7 @@ void draw_rays(t_game *game)
 		draw_walls(game, count);
 		start -=increment;
 		count++;
+		printf("--%d\n", ray->endpoint);
 	}
 }
 

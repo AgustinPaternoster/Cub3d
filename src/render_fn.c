@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/04 18:25:26 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:03:16 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void paint_window(t_game *game, int color)
 		x++;
 	}
 }
+
 void draw_map(t_game *game)
 {
 	int x;
@@ -93,7 +94,6 @@ void draw_map(t_game *game)
 		y++;
 	}
 }
-
 
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 {
@@ -131,7 +131,6 @@ void render_frame(t_game *game)
 	//draw_player(game);
 	paint_window(game, GREY);
 	draw_rays(game);
-	int_to_img(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }
 

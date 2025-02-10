@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/04 16:43:07 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:25:51 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	start_game(t_game *game)
 	mlx_loop(game->mlx_connection);
 }
 
-void player_pos(t_game *game, int posx, int posy, int direction)
+void player_pos(t_game *game, int posx, int posy, char dir)
 {
 	game->player->pos_x = (float)posx + 0.5;
 	game->player->pos_y = (float)posy + 0.5;
-	game->player->direction = direction;
-	calculate_delta(game);
+	//game->player->direction = direction;
+	init_player_dir(game, dir);
 }
 
 int	main(int argc, char **argv)
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;
-	player_pos(&game, 1 , 4, 130);
+	player_pos(&game, 1 , 4, 'N');
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game, &img);

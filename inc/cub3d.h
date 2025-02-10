@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/05 15:52:11 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:57:38 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ typedef struct s_ray
 	float side_dis_y;
 	int 	map_pos[2];
 	float	camera_pos[2];
-	float	delta[2];
+	float	ray_dir[2];
 	int 	side;
 	int 	stepx;
 	int 	stepy;
 	float	distance;
-	float	camara_dir[2];
+	float	camara_dx;
 	int 	endpoint;
 }t_ray;
 
@@ -85,9 +85,12 @@ typedef struct s_player
 {
 	float pos_x;
 	float pos_y;
-	int direction;
+	//int direction;
 	float dx;
 	float dy;
+	///nuevo//
+	float scr_dx;
+	float scr_dy;
 }t_player;
 
 typedef struct s_game
@@ -128,6 +131,8 @@ float to_radians(int degrees);
 void calculate_delta(t_game *game);
 float calculate_sx(float dx , float dy);
 float calculate_sy(float dx , float dy);
+void init_player_dir(t_game *game, char dir);
+
 
 // float calculate_sx(t_game *game);
 // float calculate_sy(t_game *game);

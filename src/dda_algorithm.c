@@ -6,37 +6,37 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/05 18:10:31 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:07:39 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static void fix_distortion(t_ray *ray)
-{
-	float ray_angle;
-	float camera_angle;
-	float angle;
+// static void fix_distortion(t_ray *ray)
+// {
+// 	float ray_angle;
+// 	float camera_angle;
+// 	float angle;
 	
-	ray_angle = atan2(ray->delta[1], ray->delta[0]);
-	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
-	angle = camera_angle - ray_angle;
-	ray->distance *= cos(camera_angle - ray_angle);
-}
-static void calculate_distance(t_ray *ray) 
-{
-	if (ray->side == 0)
-	{
-		ray->distance = ray->delta_dis_x - ray->side_dis_x;
-		ray->endpoint = end_point(ray->distance, ray->camera_pos[1], ray->delta[1]);
-	}
-	else
-	{
-		ray->distance = ray->delta_dis_y - ray->side_dis_y;
-		ray->endpoint = end_point(ray->distance, ray->camera_pos[0], ray->delta[0]);
-	}
-	fix_distortion(ray);
-}
+// 	ray_angle = atan2(ray->delta[1], ray->delta[0]);
+// 	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
+// 	angle = camera_angle - ray_angle;
+// 	ray->distance *= cos(camera_angle - ray_angle);
+// }
+// static void calculate_distance(t_ray *ray) 
+// {
+// 	if (ray->side == 0)
+// 	{
+// 		ray->distance = ray->delta_dis_x - ray->side_dis_x;
+// 		ray->endpoint = end_point(ray->distance, ray->camera_pos[1], ray->delta[1]);
+// 	}
+// 	else
+// 	{
+// 		ray->distance = ray->delta_dis_y - ray->side_dis_y;
+// 		ray->endpoint = end_point(ray->distance, ray->camera_pos[0], ray->delta[0]);
+// 	}
+// 	fix_distortion(ray);
+// }
 
 static int is_wall(char **mapa, int x , int y)
 {
@@ -45,26 +45,26 @@ static int is_wall(char **mapa, int x , int y)
 		return (0);
 }
 
-static void init_ray(t_game *game, float angle)
+static void init_ray(t_game *game, int pixel)
 {
 	t_ray *ray;
 
 	ray = game->ray;
 	ray->camera_pos[0] = game->player->pos_x;
 	ray->camera_pos[1] = game->player->pos_y;
-	ray->delta[0] = cos(angle);
-	ray->delta[1] = sin(angle) * -1;
+	ray->camara_dx = 2 * pixel / (float)SCREEN_HIGH - 1; 
+	ray->ray_dir[0] = game->player->dx + game->player->scr_dx * ray->camara_dx;
+	ray->ray_dir[1] = game->player->dy + game->player->scr_dy * ray->camara_dx;;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
-	ray->side_dis_x = calculate_sx(ray->delta[0],ray->delta[1]);
-	ray->side_dis_y = calculate_sy(ray->delta[0],ray->delta[1]);
-	ray->camara_dir[0] = game->player->dx;
-	ray->camara_dir[1] = game->player->dy;
+	ray->side_dis_x = calculate_sx(ray->ray_dir[0],ray->ray_dir[1]);
+	ray->side_dis_y = calculate_sy(ray->ray_dir[0],ray->ray_dir[1]);
+	
 }
 
 static void setup_ray(t_ray *ray)
 {
-	if(ray->delta[0] < 0)
+	if(ray->ray_dir[0] < 0)
 	{
 		ray->stepx = -1;
 		ray->delta_dis_x = (ray->camera_pos[0] - ray->map_pos[0]) * ray->side_dis_x;
@@ -74,7 +74,7 @@ static void setup_ray(t_ray *ray)
 		ray->stepx = 1;
 		ray->delta_dis_x = (ray->map_pos[0] + 1 - ray->camera_pos[0]) * ray->side_dis_x;
 	}
-	if(ray->delta[1] < 0)
+	if(ray->ray_dir[1] < 0)
 	{
 		ray->stepy = - 1;
 		ray->delta_dis_y = (ray->camera_pos[1] - ray->map_pos[1]) * ray->side_dis_y;
@@ -105,34 +105,28 @@ void run_dda_al(t_ray *ray , char **map)
 			ray->side = 1;
 		}
 	}
-	calculate_distance(ray);
-	// if (ray->side == 0)
-		// ray->distance = fix_distortion(ray, ray->delta_dis_x, ray->side_dis_x);
-	// else
-		// ray->distance = fix_distortion(ray, ray->delta_dis_y, ray->side_dis_y);
+	if (ray->side == 0)
+		ray->distance = ray->delta_dis_x - ray->side_dis_x;
+	else
+		ray->distance = ray->delta_dis_y - ray->side_dis_y;
 }
 
 void draw_rays(t_game *game)
 {
-	t_ray *ray;
-	float start;
-	float increment;
-	int		count;
+	t_ray	*ray;
+	int		pixel_w;
 	
 	ray = game->ray;
-	start = to_radians(game->player->direction) + (11 * M_PI) / 60;
-	increment = ((11 * M_PI) / 30) / (SCREEN_WITH - 1);
-	count = 0;
-	while (count < SCREEN_WITH)
+	pixel_w = 0;
+	while (pixel_w < SCREEN_WITH)
 	{
-		init_ray(game , start);
+		init_ray(game , pixel_w);
 		setup_ray(ray);
 		run_dda_al(ray, game->map->map);
 		//print_point(ray, game->img);
-		draw_walls(game, count);
-		start -=increment;
-		count++;
-		printf("--%d\n", ray->endpoint);
+		draw_walls(game, pixel_w);
+		pixel_w++;
+		//printf("--%d\n", ray->endpoint);
 	}
 }
 

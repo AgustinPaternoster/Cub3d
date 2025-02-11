@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:36:49 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:14:15 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define BLUE 255
 # define LIGHT_BLUE 13434879
 # define GREY 13158600
-# define PI 3.141592
+# define RADIAN 0.01745329252 
 # define LINE_SIZE 10
 
 typedef struct s_ray
@@ -47,12 +47,12 @@ typedef struct s_ray
 	float side_dis_y;
 	int 	map_pos[2];
 	float	camera_pos[2];
-	float	delta[2];
+	float	ray_dir[2];
 	int 	side;
 	int 	stepx;
 	int 	stepy;
 	float	distance;
-	float	camara_dir[2];
+	float 	camera_dx;
 }t_ray;
 
 typedef struct  s_imgdata
@@ -86,9 +86,10 @@ typedef struct s_player
 {
 	float pos_x;
 	float pos_y;
-	int direction;
 	float dx;
 	float dy;
+	float scr_dx;
+	float scr_dy;
 }t_player;
 
 typedef struct s_game
@@ -119,12 +120,11 @@ void draw_walls(t_game *game, int column);
 void draw_rays(t_game *game);
 // Math
 float to_radians(int degrees);
-void calculate_delta(t_game *game);
+void init_player_dir(t_game *game, char dir);
 float calculate_sx(float dx , float dy);
 float calculate_sy(float dx , float dy);
+void update_delta(t_game *game, int dir);
 
-// float calculate_sx(t_game *game);
-// float calculate_sy(t_game *game);
 float end_point(float distance, float start, float dir);
 
 //DDA

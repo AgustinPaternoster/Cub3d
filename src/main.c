@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2024/12/22 05:52:29 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:57:16 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ static void	start_game(t_game *game)
 	mlx_loop(game->mlx_connection);
 }
 
-void player_pos(t_game *game, int posx, int posy, int direction)
+void player_pos(t_game *game, int posx, int posy, char dir)
 {
 	game->player->pos_x = (float)posx + 0.5;
 	game->player->pos_y = (float)posy + 0.5;
-	game->player->direction = direction;
-	calculate_delta(game);
+	init_player_dir(game, dir);
 }
 
 int parsing(int argc, char **argv, t_game *game)
@@ -79,7 +78,7 @@ int	main(int argc, char **argv)
 	if (parsing(argc, argv, &game))
 		return (1);
 	inits(&game);
-	player_pos(&game, 1 , 4, 130);
+	player_pos(&game, 1 , 4, 'N');
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game);

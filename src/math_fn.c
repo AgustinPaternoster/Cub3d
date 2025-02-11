@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/23 18:27:24 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:50:47 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,30 @@ float to_radians(int degrees)
 	return ((M_PI * degrees) / 180);
 }
 
-void calculate_delta(t_game *game)
+void init_player_dir(t_game *game, char dir)
 {
-	int direction;
-	
-	direction = game->player->direction;
-	game->player->dx = cos(to_radians(direction));
-	game->player->dy = -1 * sin(to_radians(direction));	
+	if (dir == 'N')
+	{
+		game->player->dx = 0;
+		game->player->dy = -1 * 1;	
+	}
+	if (dir == 'S')
+	{
+		game->player->dx = 0;
+		game->player->dy = -1 * -1;	
+	}
+	if (dir == 'E')
+	{
+		game->player->dx = 1;
+		game->player->dy = -1 * 0;	
+	}
+	if (dir == 'W')
+	{
+		game->player->dx = -1;
+		game->player->dy = -1 * 0;	
+	}
+	game->player->scr_dx = game->player->dy;
+	game->player->scr_dy = game->player->dx * - 0.66;
 }
 
 float calculate_sx(float dx , float dy)
@@ -45,4 +62,23 @@ float calculate_sy(float dx , float dy)
 float end_point(float distance, float start, float dir)
 {
 	return(start * GRIDSIZE + (distance * dir * GRIDSIZE));
+}
+
+void update_delta(t_game *game, int dir)
+{
+	float tmp_dirx;
+	float tmp_scrdx;
+	t_player *player;
+	
+	player = game->player;
+	tmp_dirx = player->dx;
+	player->dx = player->dx * cos(RADIAN * VELO_ROT  * dir) - 
+				player->dy * sin(RADIAN * VELO_ROT  * dir);
+	player->dy = tmp_dirx * sin(RADIAN * VELO_ROT  * dir) + 
+				player->dy * cos(RADIAN * VELO_ROT  * dir);
+	tmp_scrdx = player->scr_dx;
+	player->scr_dx = player->scr_dx * cos(RADIAN * VELO_ROT  * dir) -
+					player->scr_dy * sin(RADIAN * VELO_ROT  * dir);
+	player->scr_dy = tmp_scrdx * sin(RADIAN * VELO_ROT  * dir) +
+					player->scr_dy * cos(RADIAN * VELO_ROT  * dir);
 }

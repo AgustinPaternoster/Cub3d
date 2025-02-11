@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/01/17 13:39:11 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:15:21 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,9 @@ static void move_player(t_game *game, int keycode)
 static void rotate_player(t_game *game, int keycode)
 {
 	if (keycode == XK_d)
-	{
-		if (game->player->direction == 0)
-			game->player->direction = 360 - VELO_ROT;
-		else
-			game->player->direction -= VELO_ROT;
-	} 
+		update_delta(game, -1);
 	if (keycode == XK_a)
-	{
-		if (game->player->direction == 360)
-			game->player->direction = 0;
-		else
-			game->player->direction += VELO_ROT;
-	}
-	game->player->direction %= 360; // No + de 360
-	calculate_delta(game);	
+		update_delta(game, 1);	
 	render_frame(game);
 }
 

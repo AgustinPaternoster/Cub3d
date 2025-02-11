@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/10 17:54:43 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:41:49 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,31 @@ static void move_player(t_game *game, int keycode)
 static void rotate_player(t_game *game, int keycode)
 {
 	float tmp_dirx;
+	float tmp_scrdx;
 	t_player *player;
 	
 	player = game->player;
 	if (keycode == XK_d)
 	{
 		//if (game->player->direction == 0)
-		//	game->player->direction = 360 - VELO_ROT;
+		//	game->player->direction = 360 - (M_PI / 180);
 		//else
-		//	game->player->direction -= VELO_ROT;
+		//	game->player->direction -= (M_PI / 180);
 		tmp_dirx = player->dx;
 		player->dx = player->dx * cos((M_PI / 180) * -1) - player->dy * sin((M_PI / 180) * -1);
 		player->dy = tmp_dirx * sin((M_PI / 180) * -1) + player->dy * cos((M_PI / 180) * -1);
-		tmp_dirx = player->scr_dx;
+		tmp_scrdx = player->scr_dx;
 		player->scr_dx = player->scr_dx * cos((M_PI / 180) * -1) - player->scr_dy * sin((M_PI / 180) * -1);
-		player->scr_dy = tmp_dirx * sin((M_PI / 180) * -1) + player->scr_dx * cos((M_PI / 180) * -1);
+		player->scr_dy = tmp_scrdx * sin((M_PI / 180) * -1) + player->scr_dy * cos((M_PI / 180) * -1);
 	} 
 	if (keycode == XK_a)
 	{
 		tmp_dirx = player->dx;
-		player->dx = player->dx * cos(M_PI / 180) - player->dy * sin(M_PI / 180);
-		player->dy = tmp_dirx * sin(M_PI / 180) + player->dy * cos(M_PI / 180);
-		tmp_dirx = player->scr_dx;
-		player->scr_dx = player->scr_dx * cos(M_PI / 180) - player->scr_dy * sin(M_PI / 180);
-		player->scr_dy = tmp_dirx * sin(M_PI / 180) + player->scr_dx * cos(M_PI / 180);
+		player->dx = player->dx * cos((M_PI / 180)) - player->dy * sin((M_PI / 180));
+		player->dy = tmp_dirx * sin((M_PI / 180)) + player->dy * cos((M_PI / 180));
+		tmp_scrdx = player->scr_dx;
+		player->scr_dx = player->scr_dx * cos((M_PI / 180)) - player->scr_dy * sin((M_PI / 180));
+		player->scr_dy = tmp_scrdx * sin((M_PI / 180)) + player->scr_dy * cos((M_PI / 180));
 	}
 	render_frame(game);
 }

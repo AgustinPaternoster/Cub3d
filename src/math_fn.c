@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/10 17:53:25 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:21:03 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ float to_radians(int degrees)
 /// ///////////////************
 void init_player_dir(t_game *game, char dir)
 {
-	if (dir = 'N')
+	if (dir == 'N')
 	{
 		game->player->dx = 0;
 		game->player->dy = -1 * 1;	
 	}
-	if (dir = 'S')
+	if (dir == 'S')
 	{
 		game->player->dx = 0;
 		game->player->dy = -1 * -1;	
 	}
-	if (dir = 'E')
+	if (dir == 'E')
 	{
 		game->player->dx = 1;
 		game->player->dy = -1 * 0;	
 	}
-	if (dir = 'W')
+	if (dir == 'W')
 	{
 		game->player->dx = -1;
 		game->player->dy = -1 * 0;	
 	}
 	/// - calcular plano camera // 
 	game->player->scr_dx = game->player->dy;
-	game->player->scr_dy = game->player->dy * - 0.66;
+	game->player->scr_dy = game->player->dx * - 0.66;
 }
 
 

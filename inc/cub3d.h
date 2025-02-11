@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/10 17:57:38 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/11 09:39:29 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define SCREEN_WITH 800
 # define SCREEN_HIGH 600
 # define VELO_MOV 0.01
-# define VELO_ROT 5
+# define VELO_ROT 0.0174532925199
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
 # define RED 16711680
@@ -36,7 +36,6 @@
 # define BLUE 255
 # define LIGHT_BLUE 13434879
 # define GREY 13158600
-# define PI 3.141592
 # define LINE_SIZE 10
 # define TEXTURE_SIZE 100
 

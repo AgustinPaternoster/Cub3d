@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"*.sqlbook": "sql",
+		"*.ndjson": "jsonl",
+		"*.dbclient-js": "javascript",
+		"minishell.h": "c",
+		"type_traits": "c",
+		"utility": "c",
+		"cmath": "c",
+		"stdio.h": "c"
+	},
+	"workbench.colorTheme": "Visual Studio 2017 Dark - C++"
+}

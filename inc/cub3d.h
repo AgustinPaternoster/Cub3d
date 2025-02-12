@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/11 09:39:29 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:20:25 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define LINE_SIZE 10
 # define TEXTURE_SIZE 100
 
+
+
 typedef struct s_ray
 {
 	float delta_dis_x;
@@ -56,12 +58,14 @@ typedef struct s_ray
 	int 	endpoint;
 }t_ray;
 
-typedef struct s_text_info
+typedef struct s_texture
 {
-	int ** texture;
-	int hight;
-	int withd;
-}t_text_info;
+	int **texture_NO;
+	int **texture_SO;
+	int **texture_WE;
+	int **texture_EA;
+	int size;	
+}t_texture;
 
 
 typedef struct  s_imgdata
@@ -78,6 +82,7 @@ typedef struct s_map
 	char 	**map;
 	int 	sizex;
 	int 	sizey;
+	t_texture *textures;
 }t_map;
 
 typedef struct s_player
@@ -100,8 +105,6 @@ typedef struct s_game
 	t_player *player;
 	t_imgdata *img;
 	t_ray		*ray;
-	t_text_info *texture;
-	
 }			t_game;
 
 //// test minilibx

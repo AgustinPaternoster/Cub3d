@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/11 17:49:15 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:52:08 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void init_ray(t_game *game, int pixel)
 	ray->camera_pos[0] = player->pos_x;
 	ray->camera_pos[1] = player->pos_y;
 	ray->camera_dx = 2 * pixel / (double)SCREEN_WITH - 1;
-	ray->ray_dir[0] = player->dx + player->scr_dx * ray->camera_dx;
-	ray->ray_dir[1] = player->dy + player->scr_dy * ray->camera_dx;
+	ray->ray_dir[0] = player->dx + player->scr_dx * ray->camera_dx * -1;
+	ray->ray_dir[1] = player->dy + player->scr_dy * ray->camera_dx * -1;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
 	ray->side_dis_x = fabs(1 / ray->ray_dir[0]);

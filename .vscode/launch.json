@@ -6,7 +6,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/cub3D",  // Ruta del ejecutable
-		"args": [],  // Argumentos para pasar a tu minishell si es necesario
+		"args": ["./maps/test_map.cub"],  // Argumentos para pasar a tu minishell si es necesario
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",  // Directorio de trabajo
 		"environment": [],

@@ -6,37 +6,11 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/11 12:58:06 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:20:09 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// static void fix_distortion(t_ray *ray)
-// {
-// 	float ray_angle;
-// 	float camera_angle;
-// 	float angle;
-	
-// 	ray_angle = atan2(ray->delta[1], ray->delta[0]);
-// 	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
-// 	angle = camera_angle - ray_angle;
-// 	ray->distance *= cos(camera_angle - ray_angle);
-// }
-// static void calculate_distance(t_ray *ray) 
-// {
-// 	if (ray->side == 0)
-// 	{
-// 		ray->distance = ray->delta_dis_x - ray->side_dis_x;
-// 		ray->endpoint = end_point(ray->distance, ray->camera_pos[1], ray->delta[1]);
-// 	}
-// 	else
-// 	{
-// 		ray->distance = ray->delta_dis_y - ray->side_dis_y;
-// 		ray->endpoint = end_point(ray->distance, ray->camera_pos[0], ray->delta[0]);
-// 	}
-// 	fix_distortion(ray);
-// }
 
 static int is_wall(char **mapa, int x , int y)
 {
@@ -57,8 +31,6 @@ static void init_ray(t_game *game, int pixel)
 	ray->ray_dir[1] = game->player->dy + game->player->scr_dy * ray->camara_dx;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
-	// ray->side_dis_x = calculate_sx(ray->ray_dir[0],ray->ray_dir[1]);
-	// ray->side_dis_y = calculate_sy(ray->ray_dir[0],ray->ray_dir[1]);
 	ray->side_dis_x = fabs(1 / ray->ray_dir[0]);
 	ray->side_dis_y = fabs(1 / ray->ray_dir[1]);
 }
@@ -93,12 +65,14 @@ void run_dda_al(t_ray *ray , char **map)
 	
 	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
 	{
+		// hit x-side
 		if (ray->delta_dis_x < ray->delta_dis_y)
 		{
 			ray->map_pos[0] += ray->stepx;
 			ray->delta_dis_x += ray->side_dis_x;
 			ray->side = 0;
 		}
+		//hit 
 		else
 		{
 			ray->map_pos[1] += ray->stepy;

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/12 12:47:49 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:57:20 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,27 @@ static int get_color(t_imgdata *img, int x , int y)
 	color = *(int*)pixel;
 	return(color);
 }
-// static void xmp_to_int(t_text_info *text, char *path, t_game *game) 
-// {
-// 	int i;
-// 	int j;
-// 	t_imgdata img;
+// // static void xmp_to_int(t_text_info *text, char *path, t_game *game) 
+// // {
+// // 	int i;
+// // 	int j;
+// // 	t_imgdata img;
 	
-// 	img.img = mlx_xpm_file_to_image(game->mlx_connection,path,&text->hight, &text->withd);
-// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,&img.line_length, &img.endian);
-// 	i = 0;
-// 	while (i < text->hight)
-// 	{
-// 		j = 0 ;
-// 		while (j < text->withd)
-// 		{
-// 			text->texture[i][j] = get_color(&img, i, j);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// mlx_destroy_image(game->mlx_connection,img.img);
-// }
+// // 	img.img = mlx_xpm_file_to_image(game->mlx_connection,path,&text->hight, &text->withd);
+// // 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,&img.line_length, &img.endian);
+// // 	i = 0;
+// // 	while (i < text->hight)
+// // 	{
+// // 		j = 0 ;
+// // 		while (j < text->withd)
+// // 		{
+// // 			text->texture[i][j] = get_color(&img, i, j);
+// // 			j++;
+// // 		}
+// // 		i++;
+// // 	}
+// // mlx_destroy_image(game->mlx_connection,img.img);
+// // }
 
 t_bool init_texture(t_game *game, int size)
 {
@@ -82,4 +82,41 @@ t_bool init_texture(t_game *game, int size)
 	if(!txt->texture_WE)
 		return (FALSE);
 	txt->size = size;
+}
+
+static void xmp_to_int(t_imgdata *img, int **txt, int size) 
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while (i < size)
+	{
+		j = 0 ;
+		while (j < size)
+		{
+			txt[i][j] = get_color(img, i, j);
+			j++;
+		}
+		i++;
+	}
+}
+
+void parse_texture(t_game *game, char *path, char orientation)
+{
+	t_imgdata img;
+	t_texture *txt;
+	
+	txt = game->map->textures;
+	img.img = mlx_xpm_file_to_image(game->mlx_connection, path, &txt->size, &txt->size);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	if(orientation == 'N')
+		xmp_to_int(&img, txt->texture_NO, txt->size);
+	if(orientation == 'S')
+		xmp_to_int(&img, txt->texture_SO, txt->size);
+	if(orientation == 'E')
+		xmp_to_int(&img, txt->texture_EA, txt->size);
+	if(orientation == 'W')
+		xmp_to_int(&img, txt->texture_WE, txt->size);
+	mlx_destroy_image(game->mlx_connection, img.img);
 }

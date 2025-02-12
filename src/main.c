@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/12 12:46:32 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:57:33 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static void init_game(t_game *game)
 	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
 	init_texture(game, TEXTURE_SIZE);
-	
+	parse_texture(game, "./textura/NO.xpm", 'N');
+	parse_texture(game, "./textura/SO.xpm", 'S');
+	parse_texture(game, "./textura/EA.xpm", 'E');
+	parse_texture(game, "./textura/WE.xpm", 'W');
 }
 
 static void	start_game(t_game *game)

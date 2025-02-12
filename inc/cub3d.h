@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/12 12:40:17 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:07:51 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void draw_walls(t_game *game, int column);
 // texture
 void int_to_img(t_game *game);
 t_bool init_texture(t_game *game, int size);
-
+void parse_texture(t_game *game, char *path, char orientation);
 
 
 //DDA_alg

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/11 17:50:47 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:24:51 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void init_player_dir(t_game *game, char dir)
 		game->player->dx = -1;
 		game->player->dy = -1 * 0;	
 	}
-	game->player->scr_dx = game->player->dy;
-	game->player->scr_dy = game->player->dx * - 0.66;
+	game->player->scr_dx = game->player->dy ;
+	game->player->scr_dy = game->player->dx * - 1;
 }
 
 float calculate_sx(float dx , float dy)

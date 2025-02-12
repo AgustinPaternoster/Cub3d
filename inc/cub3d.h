@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/12 12:20:25 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:40:17 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@
 # define LINE_SIZE 10
 # define TEXTURE_SIZE 100
 
-
+typedef enum s_bool
+{
+	FALSE,
+	TRUE
+}t_bool;
 
 typedef struct s_ray
 {
@@ -122,8 +126,9 @@ void render_frame(t_game *game);
 void draw_walls(t_game *game, int column);
 
 // texture
-void init_texture(char *path , t_game *game);
 void int_to_img(t_game *game);
+t_bool init_texture(t_game *game, int size);
+
 
 
 //DDA_alg

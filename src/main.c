@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/11 09:34:39 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:46:32 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void init_game(t_game *game)
 	// game->img->img = mlx_new_image(game->mlx_connection, GRIDSIZE * game->map->sizex, GRIDSIZE * game->map->sizey);
 	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
-	init_texture("./grid.xpm", game);
+	init_texture(game, TEXTURE_SIZE);
+	
 }
 
 static void	start_game(t_game *game)
@@ -48,7 +49,7 @@ int	main(int argc, char **argv)
 	t_map	map;
 	t_player player;
 	t_ray	ray;
-	t_text_info texture;
+	t_texture texture;
 	
 	char *mapa[6];
 	mapa[0] = ft_strdup("1111111");
@@ -63,7 +64,7 @@ int	main(int argc, char **argv)
 	game.map = &map;
 	game.player = &player;
 	game.ray = &ray;
-	game.texture = &texture;
+	map.textures = &texture;
 	map.map = mapa;
 	map.sizey =  6;
 	map.sizex = 7;

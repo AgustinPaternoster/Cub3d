@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/13 10:04:58 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:44:39 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,34 @@ void draw_rays(t_game *game)
 		run_dda_al(ray, game->map->map);
 		//print_point(ray, game->img);
 		draw_walls(game, pixel_w);
+		select_tetxture(game, ray);
 		pixel_w++;
 		//printf("--%d\n", ray->endpoint);
 	}
+}
+int  **select_tetxture(t_game *game, t_ray *ray)
+{
+	t_texture *textures;
+	int **texture;
+	
+	textures = game->map->textures;
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir[0] < 0)
+			texture = textures->texture_WE;
+			// printf("-text: WE , dx:%f ,dy:%f\n",ray->ray_dir[0], ray->ray_dir[1]);
+		else
+			texture = textures->texture_EA;
+			// printf("-text: EA , dx:%f ,dy:%f\n",ray->ray_dir[0], ray->ray_dir[1]);
+	}
+	else
+	{
+		if (ray->ray_dir[1] < 0)
+			texture = textures->texture_NO;
+			// printf("-text: NO , dx:%f ,dy:%f\n",ray->ray_dir[0], ray->ray_dir[1]);
+		else
+			texture = textures->texture_SO;
+			// printf("-text: SO , dx:%f ,dy:%f\n",ray->ray_dir[0], ray->ray_dir[1]);
+	}
+	
 }

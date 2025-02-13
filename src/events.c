@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/11 12:41:49 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:08:18 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ static void rotate_player(t_game *game, int keycode)
 		//else
 		//	game->player->direction -= (M_PI / 180);
 		tmp_dirx = player->dx;
-		player->dx = player->dx * cos((M_PI / 180) * -1) - player->dy * sin((M_PI / 180) * -1);
-		player->dy = tmp_dirx * sin((M_PI / 180) * -1) + player->dy * cos((M_PI / 180) * -1);
-		tmp_scrdx = player->scr_dx;
-		player->scr_dx = player->scr_dx * cos((M_PI / 180) * -1) - player->scr_dy * sin((M_PI / 180) * -1);
-		player->scr_dy = tmp_scrdx * sin((M_PI / 180) * -1) + player->scr_dy * cos((M_PI / 180) * -1);
-	} 
-	if (keycode == XK_a)
-	{
-		tmp_dirx = player->dx;
 		player->dx = player->dx * cos((M_PI / 180)) - player->dy * sin((M_PI / 180));
 		player->dy = tmp_dirx * sin((M_PI / 180)) + player->dy * cos((M_PI / 180));
 		tmp_scrdx = player->scr_dx;
 		player->scr_dx = player->scr_dx * cos((M_PI / 180)) - player->scr_dy * sin((M_PI / 180));
 		player->scr_dy = tmp_scrdx * sin((M_PI / 180)) + player->scr_dy * cos((M_PI / 180));
+	} 
+	if (keycode == XK_a)
+	{
+		tmp_dirx = player->dx;
+		player->dx = player->dx * cos((M_PI / 180) * -1) - player->dy * sin((M_PI / 180) * -1);
+		player->dy = tmp_dirx * sin((M_PI / 180) * -1) + player->dy * cos((M_PI / 180) * -1);
+		tmp_scrdx = player->scr_dx;
+		player->scr_dx = player->scr_dx * cos((M_PI / 180) * -1) - player->scr_dy * sin((M_PI / 180) * -1);
+		player->scr_dy = tmp_scrdx * sin((M_PI / 180) * -1) + player->scr_dy * cos((M_PI / 180) * -1);
 	}
 	render_frame(game);
 }

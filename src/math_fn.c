@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:25:55 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/12 17:52:51 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:05:42 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void init_player_dir(t_game *game, char dir)
 	}
 	/// - calcular plano camera // 
 	game->player->scr_dx = game->player->dy;
-	game->player->scr_dy = game->player->dx * - 0.66;
+	game->player->scr_dy = game->player->dx * - 1;
 }
 
 

@@ -76,7 +76,10 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (parsing(argc, argv, &game))
+	{
+		free_parsing(&game);
 		return (1);
+	}
 	inits(&game);
 	player_pos(&game, 2 , 4, 'N');
 	init_game(&game);

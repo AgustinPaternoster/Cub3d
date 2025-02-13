@@ -67,3 +67,14 @@ void	free_structs(t_game *game)
 	free(game->player);
 	free(game->ray);
 }
+
+void	free_parsing(t_game *game)
+{
+	free(game->map->ea_texture);
+	free(game->map->no_texture);
+	free(game->map->so_texture);
+	free(game->map->we_texture);
+	free(game->map);
+	free(game->player);
+	free(game->mlx_connection);
+}

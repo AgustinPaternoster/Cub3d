@@ -212,7 +212,7 @@ int	get_map(t_game *game, char *filename)
 	game->map->fd = open(filename, O_RDONLY);
 	if (game->map->fd < 0 || map_size <= 0)
 	{
-		printline_fd(2, "Open failed or invalid map size\n");
+		printline_fd(2, "Error: open failed or invalid map size\n");
 		return (1);
 	}
 	result = malloc(sizeof(char *) * (map_size + 1));

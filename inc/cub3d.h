@@ -139,6 +139,7 @@ void	print_game_data(t_game *game);
 //void	clean_close(t_tmap *map, t_imgdata *img);
 void	free_structs(t_game *game);
 void	matrix_free(char **str);
+void	free_parsing(t_game *game);
 
 // get_map.c
 int	get_map(t_game *game, char *filename);

@@ -44,7 +44,7 @@ int parsing(int argc, char **argv, t_game *game)
 	game->map = malloc(sizeof(t_map));
 	game->player = malloc(sizeof(t_player));
 	if (get_map(game, argv[1]) == 1)
-		return (1);
+		return (2);
 	printmatrix_fd(2, game->map->matrix);
 	if (check_map(game->map->matrix) == 0)
 	{
@@ -74,10 +74,13 @@ void inits(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game	game;
+	int		status;
 
-	if (parsing(argc, argv, &game))
+	status = parsing(argc, argv, &game);
+	if (status)
 	{
-		free_parsing(&game);
+		if (status == 2)
+			free_parsing(&game);
 		return (1);
 	}
 	inits(&game);

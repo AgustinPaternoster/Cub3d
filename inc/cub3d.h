@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/13 11:28:29 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:02:14 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_ray
 	int 	stepy;
 	float	distance;
 	float	camara_dx;
-	int 	endpoint;
+	int 	texture_pixel;
 }t_ray;
 
 typedef struct s_texture

@@ -6,11 +6,36 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/13 11:44:39 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:56:46 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static void texture_x_coord(t_ray *ray)
+{
+	float endpoint;
+	
+	if (ray->side == 0)
+	{
+		endpoint = ray->camera_pos[1] + ray->distance * ray->ray_dir[1];
+		endpoint -= floor(endpoint); 
+		ray->texture_pixel = endpoint * (double)TEXTURE_SIZE;
+		if (ray->ray_dir[0] > 0)
+			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
+	}
+	else
+	{
+		endpoint = ray->camera_pos[0] + ray->distance * ray->ray_dir[0];
+		endpoint -= floor(endpoint);
+		ray->texture_pixel =(int)(endpoint * TEXTURE_SIZE) % TEXTURE_SIZE;
+		ray->texture_pixel = endpoint * (double)TEXTURE_SIZE;
+		if (ray->ray_dir[1] < 0 ) 
+			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
+	}
+}
+
+
 
 static int is_wall(char **mapa, int x , int y)
 {
@@ -98,9 +123,10 @@ void draw_rays(t_game *game)
 		init_ray(game , pixel_w);
 		setup_ray(ray);
 		run_dda_al(ray, game->map->map);
+		texture_x_coord(ray);
 		//print_point(ray, game->img);
 		draw_walls(game, pixel_w);
-		select_tetxture(game, ray);
+		//select_tetxture(game, ray);
 		pixel_w++;
 		//printf("--%d\n", ray->endpoint);
 	}

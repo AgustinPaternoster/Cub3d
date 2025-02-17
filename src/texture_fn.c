@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/12 16:57:20 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:01:40 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void xmp_to_int(t_imgdata *img, int **txt, int size)
 		j = 0 ;
 		while (j < size)
 		{
-			txt[i][j] = get_color(img, i, j);
+			txt[i][j] = get_color(img, j, i);
 			j++;
 		}
 		i++;

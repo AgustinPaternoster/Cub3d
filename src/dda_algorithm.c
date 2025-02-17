@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/14 11:56:46 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:34:22 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,12 @@ void run_dda_al(t_ray *ray , char **map)
 	
 	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
 	{
-		// hit x-side
 		if (ray->delta_dis_x < ray->delta_dis_y)
 		{
 			ray->map_pos[0] += ray->stepx;
 			ray->delta_dis_x += ray->side_dis_x;
 			ray->side = 0;
 		}
-		//hit y side
 		else
 		{
 			ray->map_pos[1] += ray->stepy;

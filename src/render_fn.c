@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/13 17:17:20 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:30:08 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,24 +134,57 @@ void render_frame(t_game *game)
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }
 
+// void draw_walls(t_game *game, int column)
+// {
+// 	int heigh;
+// 	int start_y;
+// 	int end;
+// 	t_ray *ray;
+
+// 	ray = game->ray;
+// 	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
+// 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
+// 	end = start_y + heigh;
+// 	if (start_y < 0)
+// 		start_y = 0;
+// 	if (end > SCREEN_HIGH)
+// 		end = SCREEN_HIGH;
+// 	while (start_y < end)
+// 	{
+// 		img_pixel_put(game->img,column, start_y,GREEN);
+// 		start_y++;
+// 	}
+// }
+
 void draw_walls(t_game *game, int column)
 {
 	int heigh;
 	int start_y;
 	int end;
 	t_ray *ray;
+	int **texture;
+	double step;
+	double textPos;
+	int texure_y;
+	int texture_x;
 
+	texture_x = ray->texture_pixel;
 	ray = game->ray;
-	heigh = ((GRIDSIZE / ray->distance) * 1.5 );
+	texture = select_tetxture(game, ray);
+	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
+	step = 1.0 * TEXTURE_SIZE / heigh;
+	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
 	if (start_y < 0)
 		start_y = 0;
 	if (end > SCREEN_HIGH)
-		end = SCREEN_HIGH;
+		end = SCREEN_HIGH - 1;
 	while (start_y < end)
 	{
-		img_pixel_put(game->img,column, start_y,GREEN);
+		texure_y = (int)textPos % TEXTURE_SIZE;
+		textPos += step;	
+		img_pixel_put(game->img,column, start_y,texture[texure_y][texture_x]);
 		start_y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/14 17:30:08 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/17 11:33:09 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,14 +175,14 @@ void draw_walls(t_game *game, int column)
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
 	step = 1.0 * TEXTURE_SIZE / heigh;
-	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
 	if (start_y < 0)
-		start_y = 0;
+	start_y = 0;
 	if (end > SCREEN_HIGH)
-		end = SCREEN_HIGH - 1;
+	end = SCREEN_HIGH - 1;
+	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
 	while (start_y < end)
 	{
-		texure_y = (int)textPos % TEXTURE_SIZE;
+		texure_y = (int)textPos;
 		textPos += step;	
 		img_pixel_put(game->img,column, start_y,texture[texure_y][texture_x]);
 		start_y++;

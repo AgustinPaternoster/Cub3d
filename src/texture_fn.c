@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/17 09:01:40 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:49:13 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,6 @@ static int get_color(t_imgdata *img, int x , int y)
 	color = *(int*)pixel;
 	return(color);
 }
-// // static void xmp_to_int(t_text_info *text, char *path, t_game *game) 
-// // {
-// // 	int i;
-// // 	int j;
-// // 	t_imgdata img;
-	
-// // 	img.img = mlx_xpm_file_to_image(game->mlx_connection,path,&text->hight, &text->withd);
-// // 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,&img.line_length, &img.endian);
-// // 	i = 0;
-// // 	while (i < text->hight)
-// // 	{
-// // 		j = 0 ;
-// // 		while (j < text->withd)
-// // 		{
-// // 			text->texture[i][j] = get_color(&img, i, j);
-// // 			j++;
-// // 		}
-// // 		i++;
-// // 	}
-// // mlx_destroy_image(game->mlx_connection,img.img);
-// // }
 
 t_bool init_texture(t_game *game, int size)
 {

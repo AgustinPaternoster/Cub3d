@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/17 11:46:29 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:54:50 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 static void init_game(t_game *game)
 {
 	game->mlx_connection = mlx_init();
-	// linea para imprimir el mapa
-	//game->mlx_window = mlx_new_window(game->mlx_connection, GRIDSIZE * game->map->sizex , GRIDSIZE * game->map->sizey, "cub3D");
 	game->mlx_window = mlx_new_window(game->mlx_connection, SCREEN_WITH , SCREEN_HIGH, "cub3D");
-	// linea para imprimir la imagen del mapa	
-	// game->img->img = mlx_new_image(game->mlx_connection, GRIDSIZE * game->map->sizex, GRIDSIZE * game->map->sizey);
 	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
 	init_texture(game, TEXTURE_SIZE);
@@ -41,7 +37,6 @@ void player_pos(t_game *game, int posx, int posy, char dir)
 {
 	game->player->pos_x = (float)posx + 0.5;
 	game->player->pos_y = (float)posy + 0.5;
-	//game->player->direction = direction;
 	init_player_dir(game, dir);
 }
 
@@ -62,7 +57,6 @@ int	main(int argc, char **argv)
 	mapa[4] = ft_strdup("1000001");
 	mapa[5] = ft_strdup("100N001");
 	mapa[6] = ft_strdup("1111111");
-	
 	
 	(void)argc;
 	(void)argv;

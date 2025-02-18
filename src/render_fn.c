@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/17 11:33:09 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:51:33 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,47 +114,14 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 	}		
 }
 
-// void print_point(t_ray *ray, t_imgdata *img)
-// {
-// 	int x;
-// 	int y;
-
-// 	x = end_point(ray->distance, ray->camera_pos[0], ray->delta[0]);
-// 	y = end_point(ray->distance, ray->camera_pos[1], ray->delta[1]);
-// 	img_pixel_put(img, x , y , GREEN);
-	
-// }
-
 void render_frame(t_game *game)
 {
-	//draw_map(game);
-	//draw_player(game);
 	paint_window(game, GREY);
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }
 
-// void draw_walls(t_game *game, int column)
-// {
-// 	int heigh;
-// 	int start_y;
-// 	int end;
-// 	t_ray *ray;
 
-// 	ray = game->ray;
-// 	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
-// 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
-// 	end = start_y + heigh;
-// 	if (start_y < 0)
-// 		start_y = 0;
-// 	if (end > SCREEN_HIGH)
-// 		end = SCREEN_HIGH;
-// 	while (start_y < end)
-// 	{
-// 		img_pixel_put(game->img,column, start_y,GREEN);
-// 		start_y++;
-// 	}
-// }
 
 void draw_walls(t_game *game, int column)
 {

@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/22 05:51:55 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:22:01 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -23,47 +24,136 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-//defines
-#define MALLOC "Malloc error\n"
 
-typedef struct s_player
-{
-	int 	x_pos;
-	int 	y_pos;
-	
-}t_player;
+# define SCREEN_WITH 800
+# define SCREEN_HIGH 600
+# define VELO_MOV 0.04
+# define VELO_ROT 5
+# define GRIDSIZE 100
+# define PLAYERSIZE 4
+# define RED 16711680
+# define GREEN 65280
+# define BLUE 255
+# define LIGHT_BLUE 13434879
+# define GREY 13158600
+# define RADIAN 0.01745329252 
+# define LINE_SIZE 10
+# define TEXTURE_SIZE 100
 
-typedef struct s_img
+typedef enum s_bool
 {
+	FALSE,
+	TRUE
+}t_bool;
+
+typedef struct s_ray
+{
+	float delta_dis_x;
+	float delta_dis_y;
+	float side_dis_x;
+	float side_dis_y;
+	int 	map_pos[2];
+	float	camera_pos[2];
+	float	ray_dir[2];
+	int 	side;
+	int 	stepx;
+	int 	stepy;
+	float	distance;
+	float 	camara_dx;
+	int 	texture_pixel;
+}t_ray;
+
+typedef struct s_texture
+{
+	int **texture_NO;
+	int **texture_SO;
+	int **texture_WE;
+	int **texture_EA;
+	int size;	
+}t_texture;
+
+typedef struct  s_imgdata
+{
+	void *img;
+	char *addr;
+	int  bits_per_pixel;
+	int line_length;
+	int endian;
 	int 	width;
-	int 	height;
-	void	*img_ptr;
-	
-}t_img;
+	int 	height; 
+}t_imgdata;
 
-typedef struct s_tmap
+typedef struct s_map
 {
+	char 	**map;
 	int		fd;
 	char	**cub;
 	char	**matrix;
-	int 	size_y;
-	int 	size_x;
+	int 	sizex;
+	int 	sizey;
 	int		ceiling;
 	int		floor;
-	t_img	*no_texture;
-	t_img	*so_texture;
-	t_img	*we_texture;
-	t_img	*ea_texture;
-}			t_tmap;
+	t_texture *textures;
+	t_imgdata	*no_texture;
+	t_imgdata	*so_texture;
+	t_imgdata	*we_texture;
+	t_imgdata	*ea_texture;
+}t_map;
+
+typedef struct s_player
+{
+	float pos_x;
+	float pos_y;
+	float dx;
+	float dy;
+	float scr_dx;
+	float scr_dy;
+}t_player;
 
 typedef struct s_game
 {
 	void 	*mlx_connection;
 	void	*mlx_window;
+	t_map	*map;
 	t_player *player;
-	t_tmap 	*map;
-}t_game;
+	t_imgdata *img;
+	t_ray		*ray;
+}			t_game;
 
+//// test minilibx
+void img_pixel_put(t_imgdata *img, int x, int y, int color);
+void screen(t_game *game, int color, int size, int offset );
+void clean_close(t_game *game);
+void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
+int handle_key(int keycode, t_game *game);
+int handle_close(t_game *game);
+///render
+void draw_player(t_game *game);
+void draw_map(t_game *game);
+void print_point(t_ray *ray, t_imgdata *img);
+void render_frame(t_game *game);
+void draw_walls(t_game *game, int column);
+
+// texture
+void int_to_img(t_game *game);
+t_bool init_texture(t_game *game, int size);
+void parse_texture(t_game *game, char *path, char orientation);
+int  **select_tetxture(t_game *game, t_ray *ray);
+
+//DDA_alg
+void draw_rays(t_game *game);
+// Math
+float to_radians(int degrees);
+void init_player_dir(t_game *game, char dir);
+float calculate_sx(float dx , float dy);
+float calculate_sy(float dx , float dy);
+void update_delta(t_game *game, int dir);
+
+//float end_point(float distance, float start, float dir);
+int  end_point(float distance, float start, float dir);
+
+//DDA
+void calculate_x_ray(t_game *game);
 
 // prints.c
 void    printline_fd(int fd, char *str);
@@ -71,12 +161,13 @@ void    printmatrix_fd(int fd, char **str);
 void	print_game_data(t_game *game);
 
 // frees.c
-void	clean_close(t_game *game);
+//void	clean_close(t_tmap *map, t_imgdata *img);
+void	free_structs(t_game *game);
 void	matrix_free(char **str);
-void	error_exit(char *msg, int exit_code, t_game *game);
+void	free_parsing(t_game *game);
 
 // get_map.c
-int		get_map(t_game *game, char *filename);
+int	get_map(t_game *game, char *filename);
 
 // check_map.c
 int check_map(char **matrix);
@@ -88,12 +179,13 @@ int get_num_rows(char **matrix);
 int even_map(char **matrix);
 int validate_holes(char **matrix);
 int validate_chars(char **matrix);
+int map_full_to_bottom(char **matrix);
 
 // resources.c
 void	init_resources(t_game *game, char *filename);
 
-// resources_utils.c
-void    set_player_pos(t_game *game);
+//resources_utils.c
 void    get_texture(char *prefix, t_game *game);
+void    set_player_pos(t_game *game);
 
 #endif

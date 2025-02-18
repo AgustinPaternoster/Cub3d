@@ -121,3 +121,35 @@ int validate_chars(char **matrix)
     }
     return (0);
 }
+
+int is_line_empty(char *line)
+{
+    int i;
+
+    i = 0;
+    if (!line)
+        return (1);
+    if (line[i] == '\0')
+        return (1);
+    if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+        return (0);
+    while (line[i] == ' ' || line[i] == '\t')
+        i++;
+    if (line[i] == '\0')
+        return (1);
+    return (0);
+}
+
+int map_full_to_bottom(char **matrix)
+{
+    int i;
+
+    i = 0;
+    while(matrix[i])
+    {
+        if (is_line_empty(matrix[i]))
+            return (0);
+        i++;
+    }
+    return (1);
+}

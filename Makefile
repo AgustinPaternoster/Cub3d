@@ -8,7 +8,7 @@ BONUS = 0
 
 # Compiler and compilation flags
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -g3 -fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall -g -fsanitize=address
 
 # Minilibx linux
 MLX_PATH	= minilibx/
@@ -23,7 +23,8 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 # Sources
 SRC_PATH = ./src/
 SRC		= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c \
-			resources.c resources_utils.c
+			resources.c resources_utils.c dda_algorithm.c events.c \
+			math_fn.c render_fn.c texture_fn.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

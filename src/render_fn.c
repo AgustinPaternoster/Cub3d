@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_fn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/11 17:51:45 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:24:27 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void paint_window(t_game *game, int color)
 		x++;
 	}
 }
+
 void draw_map(t_game *game)
 {
 	int x;
@@ -94,7 +95,6 @@ void draw_map(t_game *game)
 	}
 }
 
-
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 {
 	int x;
@@ -114,25 +114,14 @@ void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y)
 	}		
 }
 
-// void print_point(t_ray *ray, t_imgdata *img)
-// {
-// 	int x;
-// 	int y;
-
-// 	x = round(end_point(ray->distance, ray->camera_pos[0], ray->delta[0]));
-// 	y = round(end_point(ray->distance, ray->camera_pos[1], ray->delta[1]));
-// 	img_pixel_put(img, x , y , GREEN);
-	
-// }
-
 void render_frame(t_game *game)
 {
-	//draw_map(game);
-	//draw_player(game);
 	paint_window(game, GREY);
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }
+
+
 
 void draw_walls(t_game *game, int column)
 {
@@ -140,18 +129,29 @@ void draw_walls(t_game *game, int column)
 	int start_y;
 	int end;
 	t_ray *ray;
+	int **texture;
+	double step;
+	double textPos;
+	int texure_y;
+	int texture_x;
 
 	ray = game->ray;
-	heigh = ((GRIDSIZE / ray->distance) * 1.5 );
+	texture_x = ray->texture_pixel;
+	texture = select_tetxture(game, ray);
+	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
+	step = 1.0 * TEXTURE_SIZE / heigh;
 	if (start_y < 0)
-		start_y = 0;
+	start_y = 0;
 	if (end > SCREEN_HIGH)
-		end = SCREEN_HIGH;
+	end = SCREEN_HIGH - 1;
+	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
 	while (start_y < end)
 	{
-		img_pixel_put(game->img,column, start_y,GREEN);
+		texure_y = (int)textPos;
+		textPos += step;	
+		img_pixel_put(game->img,column, start_y,texture[texure_y][texture_x]);
 		start_y++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/11 17:14:15 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:22:01 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@
 # define GREY 13158600
 # define RADIAN 0.01745329252 
 # define LINE_SIZE 10
+# define TEXTURE_SIZE 100
+
+typedef enum s_bool
+{
+	FALSE,
+	TRUE
+}t_bool;
 
 typedef struct s_ray
 {
@@ -52,8 +59,18 @@ typedef struct s_ray
 	int 	stepx;
 	int 	stepy;
 	float	distance;
-	float 	camera_dx;
+	float 	camara_dx;
+	int 	texture_pixel;
 }t_ray;
+
+typedef struct s_texture
+{
+	int **texture_NO;
+	int **texture_SO;
+	int **texture_WE;
+	int **texture_EA;
+	int size;	
+}t_texture;
 
 typedef struct  s_imgdata
 {
@@ -76,6 +93,7 @@ typedef struct s_map
 	int 	sizey;
 	int		ceiling;
 	int		floor;
+	t_texture *textures;
 	t_imgdata	*no_texture;
 	t_imgdata	*so_texture;
 	t_imgdata	*we_texture;
@@ -116,6 +134,12 @@ void print_point(t_ray *ray, t_imgdata *img);
 void render_frame(t_game *game);
 void draw_walls(t_game *game, int column);
 
+// texture
+void int_to_img(t_game *game);
+t_bool init_texture(t_game *game, int size);
+void parse_texture(t_game *game, char *path, char orientation);
+int  **select_tetxture(t_game *game, t_ray *ray);
+
 //DDA_alg
 void draw_rays(t_game *game);
 // Math
@@ -125,7 +149,8 @@ float calculate_sx(float dx , float dy);
 float calculate_sy(float dx , float dy);
 void update_delta(t_game *game, int dir);
 
-float end_point(float distance, float start, float dir);
+//float end_point(float distance, float start, float dir);
+int  end_point(float distance, float start, float dir);
 
 //DDA
 void calculate_x_ray(t_game *game);

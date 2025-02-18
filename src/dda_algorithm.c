@@ -3,30 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/12 18:52:08 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:23:50 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// float fix_distortion(t_ray *ray, float delta_dis
-//, float side_dist)
-// {
-// 	float ray_angle;
-// 	float camera_angle;
-// 	float distance;
-// 	//borrar
-// 	float angle;
+static void texture_x_coord(t_ray *ray)
+{
+	float endpoint;
 	
-// 	distance = delta_dis - side_dist;
-// 	ray_angle = atan2(ray->ray_dir[1], ray->ray_dir[0]);
-// 	camera_angle = atan2(ray->camara_dir[1], ray->camara_dir[0]);;
-// 	angle = camera_angle - ray_angle;
-// 	return(distance * cos(angle)); 
-// }
+	if (ray->side == 0)
+	{
+		endpoint = ray->camera_pos[1] + ray->distance * ray->ray_dir[1];
+		endpoint -= floor(endpoint); 
+		ray->texture_pixel = endpoint * (double)TEXTURE_SIZE;
+		if (ray->ray_dir[0] > 0)
+			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
+	}
+	else
+	{
+		endpoint = ray->camera_pos[0] + ray->distance * ray->ray_dir[0];
+		endpoint -= floor(endpoint);
+		ray->texture_pixel =(int)(endpoint * TEXTURE_SIZE) % TEXTURE_SIZE;
+		ray->texture_pixel = endpoint * (double)TEXTURE_SIZE;
+		if (ray->ray_dir[1] < 0 ) 
+			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
+	}
+}
+
+
 
 static int is_wall(char **mapa, int x , int y)
 {
@@ -38,15 +47,13 @@ static int is_wall(char **mapa, int x , int y)
 static void init_ray(t_game *game, int pixel)
 {
 	t_ray *ray;
-	t_player *player;
-	
+
 	ray = game->ray;
-	player = game->player;
-	ray->camera_pos[0] = player->pos_x;
-	ray->camera_pos[1] = player->pos_y;
-	ray->camera_dx = 2 * pixel / (double)SCREEN_WITH - 1;
-	ray->ray_dir[0] = player->dx + player->scr_dx * ray->camera_dx * -1;
-	ray->ray_dir[1] = player->dy + player->scr_dy * ray->camera_dx * -1;
+	ray->camera_pos[0] = game->player->pos_x;
+	ray->camera_pos[1] = game->player->pos_y;
+	ray->camara_dx = 2 * pixel / (double)SCREEN_WITH - 1; 
+	ray->ray_dir[0] = game->player->dx + game->player->scr_dx * ray->camara_dx * -1;
+	ray->ray_dir[1] = game->player->dy + game->player->scr_dy * ray->camara_dx * -1;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
 	ray->side_dis_x = fabs(1 / ray->ray_dir[0]);
@@ -57,7 +64,6 @@ static void setup_ray(t_ray *ray)
 {
 	if(ray->ray_dir[0] < 0)
 	{
-		
 		ray->stepx = -1;
 		ray->delta_dis_x = (ray->camera_pos[0] - ray->map_pos[0]) * ray->side_dis_x;
 	}
@@ -79,7 +85,9 @@ static void setup_ray(t_ray *ray)
 }
 
 void run_dda_al(t_ray *ray , char **map)
-{	
+{
+	//float test;
+	
 	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
 	{
 		if (ray->delta_dis_x < ray->delta_dis_y)
@@ -103,8 +111,8 @@ void run_dda_al(t_ray *ray , char **map)
 
 void draw_rays(t_game *game)
 {
-	t_ray *ray;
-	int pixel_w;
+	t_ray	*ray;
+	int		pixel_w;
 	
 	ray = game->ray;
 	pixel_w = 0;
@@ -113,15 +121,31 @@ void draw_rays(t_game *game)
 		init_ray(game , pixel_w);
 		setup_ray(ray);
 		run_dda_al(ray, game->map->map);
-		//print_point(ray, game->img);
+		texture_x_coord(ray);
 		draw_walls(game, pixel_w);
 		pixel_w++;
 	}
 }
-
-// 
-// funcion para obtener la correcion del efecto ojo de pez
-// hay que multiplicar el valor de la distancia obtenida por
-// el coseno del angulo formado por el angulo formada por el vector del rayo y el la posicion
-// para obtener el angulo a partir de los ray_dir se utiliza
-// la funcion atan2.
+int  **select_tetxture(t_game *game, t_ray *ray)
+{
+	t_texture *textures;
+	int **texture;
+	
+	textures = game->map->textures;
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir[0] < 0)
+			texture = textures->texture_WE;
+		else
+			texture = textures->texture_EA;
+	}
+	else
+	{
+		if (ray->ray_dir[1] < 0)
+			texture = textures->texture_NO;
+		else
+			texture = textures->texture_SO;
+	}
+	//manu
+	return (texture);
+}

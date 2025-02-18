@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/12 18:49:44 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:43:56 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ static void init_game(t_game *game)
 	game->mlx_window = mlx_new_window(game->mlx_connection, SCREEN_WITH , SCREEN_HIGH, "cub3D");
 	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
+	game->map->textures = malloc(sizeof(t_texture));
+	init_texture(game, TEXTURE_SIZE);
+	parse_texture(game, "./textura/NO.xpm", 'N');
+	parse_texture(game, "./textura/SO.xpm", 'S');
+	parse_texture(game, "./textura/EA.xpm", 'E');
+	parse_texture(game, "./textura/WE.xpm", 'W');
 }
 
 static void	start_game(t_game *game)

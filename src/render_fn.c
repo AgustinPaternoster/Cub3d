@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/18 19:24:27 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 22:38:17 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void draw_walls(t_game *game, int column)
 	double textPos;
 	int texure_y;
 	int texture_x;
+	int n;
 
 	ray = game->ray;
 	texture_x = ray->texture_pixel;
@@ -147,11 +148,27 @@ void draw_walls(t_game *game, int column)
 	if (end > SCREEN_HIGH)
 	end = SCREEN_HIGH - 1;
 	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
+
+	//cielo
+	n = 0;
+	while (n < start_y)
+	{
+		img_pixel_put(game->img, column, n, game->map->ceiling);
+		n++;
+	}
+
 	while (start_y < end)
 	{
 		texure_y = (int)textPos;
 		textPos += step;	
 		img_pixel_put(game->img,column, start_y,texture[texure_y][texture_x]);
+		start_y++;
+	}
+	
+	//floor
+	while (start_y < SCREEN_HIGH)
+	{
+		img_pixel_put(game->img, column, start_y, game->map->floor);
 		start_y++;
 	}
 }

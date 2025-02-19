@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/19 21:08:30 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:45:16 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define GREY 13158600
 # define RADIAN 0.01745329252 
 # define LINE_SIZE 10
-# define TEXTURE_SIZE 100
+# define TEXTURE_SIZE 64
 
 typedef enum s_bool
 {
@@ -106,6 +106,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
+	char  direction;
 	float pos_x;
 	float pos_y;
 	float dx;
@@ -175,7 +176,7 @@ void	free_parsing(t_game *game);
 int	get_map(t_game *game, char *filename);
 
 // check_map.c
-int check_map(char **matrix);
+int check_map(t_game *game, char **matrix);
 
 // check_map_utils.c
 int get_full_height(char **matrix);

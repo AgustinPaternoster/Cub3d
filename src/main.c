@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/19 21:20:12 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:36:37 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,11 @@ static void init_game(t_game *game)
 	game->mlx_window = mlx_new_window(game->mlx_connection, SCREEN_WITH , SCREEN_HIGH, "cub3D");
 	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
-	//game->map->textures = malloc(sizeof(t_texture));
 	init_texture(game, TEXTURE_SIZE);
 	parse_texture(game, textures->path_NO, 'N');
 	parse_texture(game, textures->path_SO, 'S');
 	parse_texture(game, textures->path_EA, 'E');
 	parse_texture(game, textures->path_WE, 'W');
-	/*
-	parse_texture(game, textures->path_NO, textures->NO);
-	parse_texture(game, textures->path_SO, textures->SO);
-	parse_texture(game, textures->path_EA, textures->EA);
-	parse_texture(game, textures->path_WE, textures->WE);
-	*/
 }
 
 static void	start_game(t_game *game)
@@ -61,7 +54,7 @@ int parsing(int argc, char **argv, t_game *game)
 	if (get_map(game, argv[1]) == 1)
 		return (2);
 	printmatrix_fd(2, game->map->matrix);
-	if (check_map(game->map->matrix) == 0)
+	if (check_map(game, game->map->matrix) == 0)
 	{
 		printline_fd(2, "\nThe map is valid\n\n");
 		init_resources(game, argv[1]);
@@ -73,19 +66,15 @@ int parsing(int argc, char **argv, t_game *game)
 	return (0);
 }
 
-// como delimitar sizex??
+//game->map->sizex = 7;
 void inits(t_game *game)
 {
 	game->img = malloc(sizeof(t_imgdata));
 	game->ray = malloc(sizeof(t_ray));
 	game->map->map = game->map->matrix;
 	game->map->sizey =  get_full_height(game->map->matrix);
-	game->map->sizex = 7;
 }
 
-// TO DO
-// Bloquear ejecucion si no encuentra textura
-// Check bad maps
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -99,7 +88,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	inits(&game);
-	player_pos(&game, 2 , 4, 'N');
+	player_pos(&game, (&game)->player->pos_x, (&game)->player->pos_y, (&game)->player->direction);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game);

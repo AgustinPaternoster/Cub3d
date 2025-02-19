@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 21:10:59 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/22 03:25:45 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:32:41 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int is_it_closed(char **matrix, int full_height)
     return (1);
 }
 
-int does_player_exist(char **matrix)
+int does_player_exist(t_game *game, char **matrix)
 {
     int i;
     int j;
@@ -56,6 +56,7 @@ int does_player_exist(char **matrix)
             if (matrix[i][j] == 'N' || matrix[i][j] == 'E' || matrix[i][j] == 'W' || matrix[i][j] == 'S')
             {
                 player_count++;
+                game->player->direction = matrix[i][j];
                 if (player_count > 1)
                     return 1;
             }
@@ -120,7 +121,7 @@ int is_player_inside(char **matrix)
     return (0);   
 }
 
-int check_map(char **matrix)
+int check_map(t_game *game, char **matrix)
 {
     int full_height;
     int closed;
@@ -136,7 +137,7 @@ int check_map(char **matrix)
         return (1);
     full_height = get_full_height(matrix);
     closed = is_it_closed(matrix, full_height);
-    player = does_player_exist(matrix);
+    player = does_player_exist(game, matrix);
     player_valid = is_player_free(matrix);
     player_inside = is_player_inside(matrix);
     if (closed == 0 && player == 0

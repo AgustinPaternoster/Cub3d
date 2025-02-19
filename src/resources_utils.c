@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 03:36:00 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/02 04:02:11 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:16:16 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,14 @@ void load_texture(t_game *game, char *prefix, char *texture_path)
         return ;
     }
     assign_texture(game, prefix, img_ptr, width, height);
+    if (ft_strcmp(prefix, "NO") == 0)
+        game->map->textures->path_NO = ft_strdup(texture_path);
+    else if (ft_strcmp(prefix, "EA") == 0)
+        game->map->textures->path_EA = ft_strdup(texture_path);
+    else if (ft_strcmp(prefix, "WE") == 0)
+        game->map->textures->path_WE = ft_strdup(texture_path);
+    else if (ft_strcmp(prefix, "SO") == 0)
+        game->map->textures->path_SO = ft_strdup(texture_path);
     free(texture_path);
 }
 

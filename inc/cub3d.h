@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/19 18:51:49 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:08:30 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ typedef struct s_texture
 	int **texture_SO;
 	int **texture_WE;
 	int **texture_EA;
+	char *path_NO;
+	char *path_SO;
+	char *path_WE;
+	char *path_EA;
 	int size;	
 }t_texture;
 
@@ -142,6 +146,7 @@ int  **select_tetxture(t_game *game, t_ray *ray);
 
 //DDA_alg
 void draw_rays(t_game *game);
+
 // Math
 float to_radians(int degrees);
 void init_player_dir(t_game *game, char dir);

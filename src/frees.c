@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 04:56:51 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/01/02 03:46:08 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:10:24 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	clean_close(t_game *game)
 	free(game->player);
 	if (game->mlx_connection)
 	{
-		if (game->mlx_window)
-			mlx_destroy_window(game->mlx_connection, game->mlx_window);
+		/*if (game->mlx_window)
+			mlx_destroy_window(game->mlx_connection, game->mlx_window);*/
 		mlx_destroy_display(game->mlx_connection);
 		free (game->mlx_connection);
 	}

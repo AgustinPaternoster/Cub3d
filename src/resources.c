@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 03:04:09 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/22 05:16:05 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:16:16 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void init_resources(t_game *game, char *filename)
                 game->map->floor = color;
         }
     }
+    game->map->textures = malloc(sizeof(t_texture));
     game->map->sizey = get_full_height(game->map->matrix);
     game->map->sizex = get_full_width(game->map->matrix);
     set_player_pos(game);

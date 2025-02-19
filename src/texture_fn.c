@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/18 19:30:21 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:53:36 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ void parse_texture(t_game *game, char *path, char orientation)
 	
 	txt = game->map->textures;
 	img.img = mlx_xpm_file_to_image(game->mlx_connection, path, &txt->size, &txt->size);
+	if (!img.img)
+	{
+		printline_fd(2, "Error: couldn't get a texture!!\n");
+		exit(1);
+	}
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	if(orientation == 'N')
 		xmp_to_int(&img, txt->texture_NO, txt->size);

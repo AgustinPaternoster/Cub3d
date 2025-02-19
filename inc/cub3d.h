@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/18 19:22:01 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:51:49 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define SCREEN_WITH 800
 # define SCREEN_HIGH 600
 # define VELO_MOV 0.04
-# define VELO_ROT 5
+# define VELO_ROT 4
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
 # define RED 16711680
@@ -187,5 +187,11 @@ void	init_resources(t_game *game, char *filename);
 //resources_utils.c
 void    get_texture(char *prefix, t_game *game);
 void    set_player_pos(t_game *game);
+
+// events
+void rotate_r(t_player *player , float tmp_dirx, float tmp_scrdx);
+void rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
+
+
 
 #endif

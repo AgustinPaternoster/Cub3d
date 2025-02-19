@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/18 19:19:03 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:32:20 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,17 @@ static void move_player(t_game *game, int keycode)
 
 static void rotate_player(t_game *game, int keycode)
 {
-	float tmp_dirx;
-	float tmp_scrdx;
+	// float tmp_dirx;
+	// float tmp_scrdx;
 	t_player *player;
 	
 	player = game->player;
 	if (keycode == XK_d)
-	{
-		//if (game->player->direction == 0)
-		//	game->player->direction = 360 - (M_PI / 180);
-		//else
-		//	game->player->direction -= (M_PI / 180);
-		tmp_dirx = player->dx;
-		player->dx = player->dx * cos((M_PI / 180)) - player->dy * sin((M_PI / 180));
-		player->dy = tmp_dirx * sin((M_PI / 180)) + player->dy * cos((M_PI / 180));
-		tmp_scrdx = player->scr_dx;
-		player->scr_dx = player->scr_dx * cos((M_PI / 180)) - player->scr_dy * sin((M_PI / 180));
-		player->scr_dy = tmp_scrdx * sin((M_PI / 180)) + player->scr_dy * cos((M_PI / 180));
-	} 
+		rotate_r(player, player->dx, player->scr_dx);
 	if (keycode == XK_a)
-	{
-		tmp_dirx = player->dx;
-		player->dx = player->dx * cos((M_PI / 180) * -1) - player->dy * sin((M_PI / 180) * -1);
-		player->dy = tmp_dirx * sin((M_PI / 180) * -1) + player->dy * cos((M_PI / 180) * -1);
-		tmp_scrdx = player->scr_dx;
-		player->scr_dx = player->scr_dx * cos((M_PI / 180) * -1) - player->scr_dy * sin((M_PI / 180) * -1);
-		player->scr_dy = tmp_scrdx * sin((M_PI / 180) * -1) + player->scr_dy * cos((M_PI / 180) * -1);
-	}
+		rotate_l(player, player->dx, player->scr_dx);
 	render_frame(game);
 }
-
 
 int handle_key(int keycode, t_game *game)
 {

@@ -75,6 +75,14 @@ int	count_map_lines(int fd)
 	return (n);
 }
 
+int ends_with_cub(const char *filename)
+{
+    size_t len = ft_strlen(filename);
+    if (len < 4)
+        return 0;
+    return ft_strcmp(filename + len - 4, ".cub") == 0;
+}
+
 int	get_mapsize(char *filename)
 {
 	int	fd;
@@ -141,9 +149,9 @@ int	get_map(t_game *game, char *filename)
 	game->map->cub = NULL;
 	init_map_textures(game);
 	game->map->fd = open(filename, O_RDONLY);
-	if (game->map->fd < 0 || map_size <= 0)
+	if (game->map->fd < 0 || map_size <= 0 || !ends_with_cub(filename))
 	{
-		printline_fd(2, "Error: open failed or invalid map size\n");
+		printline_fd(2, "Error: invalid file or invalid map size!\n");
 		return (1);
 	}
 	result = malloc(sizeof(char *) * (map_size + 1));

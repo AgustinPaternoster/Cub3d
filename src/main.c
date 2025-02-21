@@ -89,6 +89,7 @@ int	main(int argc, char **argv)
 	}
 	inits(&game);
 	//player_pos(&game, (&game)->player->pos_x, (&game)->player->pos_y, (&game)->player->direction);
+	//test
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game);

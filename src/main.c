@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 12:32:09 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:46:36 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	inits(&game);
-	player_pos(&game, 2 , 4, 'N');
+	player_pos(&game, 2 , 3, 'N');
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game);

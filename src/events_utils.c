@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:41:08 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 12:15:46 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:09:20 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,26 @@ void	rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx)
 				player->scr_dy * cos((M_PI / 180) * VELO_ROT * -1);
 }
 
-t_bool check_wall(t_player *player)
+t_bool check_wall(t_game *game, int keycode)
 {
 	int projected_posx;
 	int projected_posy;
-	float dx_tmp;
-	float dy_tmp;
+	char **map;
+	t_player *player;
 
-	dx_tmp = player->dx* VELO_MOV;
-	dy_tmp = player->dy * VELO_MOV;
-	projected_posx = (int)(player->pos_x + dx_tmp);
-	projected_posy = (int)(player->pos_y + dy_tmp);
-	
-	if (projected_posx & projected_posy)
+	player = game->player;
+	map  = game->map->matrix;
+	if (keycode == XK_w )
+	{
+		projected_posx = (int)(player->pos_x + player->dx* VELO_MOV);
+		projected_posy = (int)(player->pos_y + player->dy * VELO_MOV);
+	}
+	else
+	{
+		projected_posx = (int)(player->pos_x - player->dx* VELO_MOV);
+		projected_posy = (int)(player->pos_y - player->dy * VELO_MOV);
+	}
+	if (map[projected_posy][projected_posx] == '1')
 		return(TRUE);
 	return(FALSE);
 }

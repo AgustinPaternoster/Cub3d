@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 12:27:13 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:04:48 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,10 +194,8 @@ void    set_player_pos(t_game *game);
 // events
 void rotate_r(t_player *player , float tmp_dirx, float tmp_scrdx);
 void rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
-t_bool check_wall(t_player *player);
 int handle_close(t_game *game);
 int handle_key(int keycode, t_game *game);
-
-
+t_bool check_wall(t_game *game, int keycode);
 
 #endif

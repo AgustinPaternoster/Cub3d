@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 12:12:48 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:05:11 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void move_player(t_game *game, int keycode)
 {
-		check_wall(game->player);
-		if (keycode == XK_w )
+		
+		if (keycode == XK_w && !check_wall(game, keycode))
 		{	
 				game->player->pos_y += game->player->dy * VELO_MOV;
 				game->player->pos_x += game->player->dx * VELO_MOV;
 		}
-		if (keycode == XK_s )
+		if (keycode == XK_s && !check_wall(game, keycode))
 		{
 				game->player->pos_y -= game->player->dy * VELO_MOV;
 				game->player->pos_x -= game->player->dx * VELO_MOV;

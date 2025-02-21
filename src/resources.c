@@ -15,12 +15,12 @@
 char	*get_next_line(int fd)
 {
 	static char	buffer[1024];
-	static int	buffer_read;
-	static int	buffer_pos;
+	static int	buffer_read = 0;
+	static int	buffer_pos = 0;
 	char		*line;
 	int			i;
 
-	if (fd < 0 || (line = malloc(70000)) == NULL)
+	if (fd < 0 || !(line = malloc(70000)))
 		return (NULL);
 	i = 0;
 	while (1)
@@ -30,12 +30,12 @@ char	*get_next_line(int fd)
 			buffer_read = read(fd, buffer, 1024);
 			buffer_pos = 0;
 			if (buffer_read <= 0)
-				break ;
+				break;
 		}
 		if (buffer[buffer_pos] == '\n')
 		{
 			line[i++] = buffer[buffer_pos++];
-			break ;
+			break;
 		}
 		line[i++] = buffer[buffer_pos++];
 	}
@@ -48,30 +48,38 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void get_cub(t_game *game, char *filename) {
-    game->map->fd = open(filename, O_RDONLY);
-    if (game->map->fd < 0) {
-        perror("Failed to open file");
-        return;
-    }
-
+void get_cub(t_game *game, char *filename)
+{
     char *line = NULL;
     size_t count = 0;
     size_t capacity = 10;
+
+    game->map->fd = open(filename, O_RDONLY);
+    if (game->map->fd < 0)
+    {
+        printf("Failed to open file");
+        return;
+    }
     game->map->cub = malloc(sizeof(char *) * capacity);
-    if (!game->map->cub) {
-        perror("Memory allocation failed");
+    if (!game->map->cub)
+    {
+        printf("Memory allocation failed");
         close(game->map->fd);
         return;
     }
-
-    while ((line = get_next_line(game->map->fd))) {
-        if (count >= capacity) {
+    while ((line = get_next_line(game->map->fd)))
+    {
+        if (count >= capacity - 1)
+        {
             capacity *= 2;
             char **new_cub = realloc(game->map->cub, sizeof(char *) * capacity);
-            if (!new_cub) {
-                perror("Memory allocation failed");
+            if (!new_cub)
+            {
+                printf("Memory allocation failed");
                 free(line);
+                for (size_t j = 0; j < count; j++)
+                    free(game->map->cub[j]);
+                free(game->map->cub);
                 close(game->map->fd);
                 return;
             }
@@ -92,14 +100,14 @@ int get_hex_from_cubline(char *line)
     while (line[i] == ' ' || line[i] == '\t')
         i++;
     if ((line[i] != 'C' && line[i] != 'F') || line[i + 1] != ' ')
-        return 0xFFFFFF;
+        return -1;
     i += 2;
     while (line[i] && ci < 3)
     {
         while (line[i] == ' ' || line[i] == '\t')
             i++;
         if (!isdigit(line[i]))
-            return 0xFFFFFF;
+            return -1;
         colors[ci] = 0;
         while (isdigit(line[i]))
         {
@@ -107,13 +115,13 @@ int get_hex_from_cubline(char *line)
             i++;
         }
         if (colors[ci] < 0 || colors[ci] > 255)
-            return 0xFFFFFF;
+            return -1;
         if (ci < 2)
         {
             while (line[i] == ' ' || line[i] == '\t')
                 i++;
             if (line[i] != ',')
-                return 0xFFFFFF;
+                return -1;
             i++;
         }
         ci++;
@@ -121,7 +129,7 @@ int get_hex_from_cubline(char *line)
     while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == '\r')
         i++;
     if (line[i] != '\0')
-        return 0xFFFFFF;
+        return -1;
     return (colors[0] << 16) | (colors[1] << 8) | colors[2];
 }
 
@@ -147,21 +155,46 @@ int get_full_width(char **matrix)
 
 void init_resources(t_game *game, char *filename)
 {
-    game->map->ceiling = 0xFFFFFF;
-    game->map->floor = 0xFFFFFF;
+    game->map->ceiling = -1;
+    game->map->floor = -1;
     get_cub(game, filename);
+
+    if (!game->map->cub)
+        exit (1);
     for (int i = 0; game->map->cub[i] != NULL; i++)
     {
-        if (game->map->cub[i][0] == 'C' || game->map->cub[i][0] == 'F')
+        char *line = game->map->cub[i];
+        while (*line == ' ' || *line == '\t')
+            line++;
+
+        if (line[0] == 'C' || line[0] == 'F')
         {
-            int color = get_hex_from_cubline(game->map->cub[i]);
-            if (game->map->cub[i][0] == 'C')
+            int color = get_hex_from_cubline(line);
+            if (color == -1)
+            {
+                printf("Error parsing color on line: %s\n", line);
+                exit(1);
+            }
+            if (line[0] == 'C')
                 game->map->ceiling = color;
             else
                 game->map->floor = color;
         }
     }
+
+    if (game->map->ceiling == -1 || game->map->floor == -1)
+    {
+        printf("Error: One or more colors not found\n");
+        exit(1);
+    }
+
     game->map->textures = malloc(sizeof(t_texture));
+    if (!game->map->textures)
+    {
+        printf("Memory allocation for textures failed");
+        exit(1);
+    }
+
     game->map->sizey = get_full_height(game->map->matrix);
     game->map->sizex = get_full_width(game->map->matrix);
     set_player_pos(game);

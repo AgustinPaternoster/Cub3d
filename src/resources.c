@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 03:04:09 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 20:44:44 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:52:42 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void init_resources(t_game *game, char *filename)
     }
     if (game->map->ceiling == -1 || game->map->floor == -1)
     {
-        printf("\nError: One or more colors not found\n");
+        printf("\nError: One or more colors not found\n\n");
         exit(1);
     }
     game->map->textures = malloc(sizeof(t_texture));

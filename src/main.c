@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 21:12:43 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:45:11 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int parsing(int argc, char **argv, t_game *game)
 	else
 		return (printline_fd(2, "\nError: the map is invalid\n\n"),
 			clean_close(game), 1);
+	if (!is_map_last(game->map->cub))
+	{
+		printline_fd(2, "\nError: the map is invalid\n(Hint) Watch out for newlines at the end of file!\n\n");
+		exit(1);
+	}
 	return (0);
 }
 

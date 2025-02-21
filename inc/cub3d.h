@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 20:17:39 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:33:50 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ void	matrix_free(char **str);
 void	free_parsing(t_game *game);
 
 // get_map.c
+int	is_map_line(char *line);
 int	get_map(t_game *game, char *filename);
 
 // check_map.c
@@ -183,6 +184,7 @@ int even_map(char **matrix);
 int validate_holes(char **matrix);
 int validate_chars(char **matrix);
 int map_full_to_bottom(char **matrix);
+int is_map_last(char **cub);
 
 // resources.c
 void	init_resources(t_game *game, char *filename);

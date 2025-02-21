@@ -6,11 +6,32 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 05:00:30 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/13 20:26:46 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:33:38 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int is_map_last(char **cub)
+{
+    int i;
+    int map_line;
+
+    i = 0;
+    map_line = 0;
+    while (cub[i])
+    {
+        if (is_map_line(cub[i]))
+            map_line++;
+        else
+        {
+            if (map_line != 0)
+                return (0);
+        }
+        i++;
+    }
+    return (1);
+}
 
 int get_full_height(char **matrix)
 {

@@ -36,7 +36,6 @@ int is_it_closed(char **matrix, int full_height)
     }
     if (validate_holes(matrix))
         return (0);
-    printline_fd(2, "hhhh\n");
     return (1);
 }
 

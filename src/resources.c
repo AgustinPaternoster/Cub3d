@@ -160,7 +160,7 @@ void init_resources(t_game *game, char *filename)
     get_cub(game, filename);
 
     if (!game->map->cub)
-        return;
+        exit (1);
     for (int i = 0; game->map->cub[i] != NULL; i++)
     {
         char *line = game->map->cub[i];

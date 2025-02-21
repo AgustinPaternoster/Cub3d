@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resources_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 03:36:00 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/19 21:16:16 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:56:54 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void    set_player_pos(t_game *game)
             if (game->map->matrix[i][j] == 'N' || game->map->matrix[i][j] == 'S'
                 || game->map->matrix[i][j] == 'E' || game->map->matrix[i][j] == 'W')
             {
-                game->player->pos_x = j;
-                game->player->pos_y = i;
+                game->player->pos_x = (float)j + 0.5;
+                game->player->pos_y = (float)i + 0.5;
                 return ;
             }
             j++;

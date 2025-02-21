@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/19 21:36:37 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:05:17 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	start_game(t_game *game)
 	mlx_loop(game->mlx_connection);
 }
 
-void player_pos(t_game *game, int posx, int posy, char dir)
-{
-	game->player->pos_x = (float)posx + 0.5;
-	game->player->pos_y = (float)posy + 0.5;
-	init_player_dir(game, dir);
-}
+// void player_pos(t_game *game, int posx, int posy, char dir)
+// {
+// 	game->player->pos_x = (float)posx + 0.5;
+// 	game->player->pos_y = (float)posy + 0.5;
+// 	init_player_dir(game, dir);
+// }
 
 int parsing(int argc, char **argv, t_game *game)
 {
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	inits(&game);
-	player_pos(&game, (&game)->player->pos_x, (&game)->player->pos_y, (&game)->player->direction);
+	//player_pos(&game, (&game)->player->pos_x, (&game)->player->pos_y, (&game)->player->direction);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 21:10:59 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/19 21:32:41 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:02:12 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ int does_player_exist(t_game *game, char **matrix)
             if (matrix[i][j] == 'N' || matrix[i][j] == 'E' || matrix[i][j] == 'W' || matrix[i][j] == 'S')
             {
                 player_count++;
-                game->player->direction = matrix[i][j];
-                if (player_count > 1)
+                //game->player->direction = matrix[i][j];
+                init_player_dir(game, matrix[i][j]);
+				if (player_count > 1)
                     return 1;
             }
             j++;

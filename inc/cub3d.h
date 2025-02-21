@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 21:33:50 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:58:01 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void clean_close(t_game *game);
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
 int handle_close(t_game *game);
+
 //render
 void draw_player(t_game *game);
 void draw_map(t_game *game);

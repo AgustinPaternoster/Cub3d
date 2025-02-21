@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:20 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/19 20:53:36 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:56:11 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int get_color(t_imgdata *img, int x , int y)
 t_bool init_texture(t_game *game, int size)
 {
 	t_texture *txt;
-	//int i;
 	
 	txt = game->map->textures;
 	txt->texture_NO = create_txt_array(size);
@@ -61,7 +60,6 @@ t_bool init_texture(t_game *game, int size)
 	if(!txt->texture_WE)
 		return (FALSE);
 	txt->size = size;
-	//manu
 	return (TRUE);
 }
 
@@ -92,7 +90,7 @@ void parse_texture(t_game *game, char *path, char orientation)
 	img.img = mlx_xpm_file_to_image(game->mlx_connection, path, &txt->size, &txt->size);
 	if (!img.img)
 	{
-		printline_fd(2, "Error: couldn't get a texture!!\n");
+		printline_fd(2, "Error: couldn't get a texture!\n");
 		exit(1);
 	}
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);

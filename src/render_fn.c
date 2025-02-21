@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/19 22:38:17 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:23:09 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void draw_map(t_game *game)
 {
 	int x;
 	int y;
-	//int offset;
 
 	y = 0;
 	

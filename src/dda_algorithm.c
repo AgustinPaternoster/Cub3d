@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/18 19:23:50 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:30:30 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ static void setup_ray(t_ray *ray)
 
 void run_dda_al(t_ray *ray , char **map)
 {
-	//float test;
-	
 	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
 	{
 		if (ray->delta_dis_x < ray->delta_dis_y)
@@ -146,6 +144,5 @@ int  **select_tetxture(t_game *game, t_ray *ray)
 		else
 			texture = textures->texture_SO;
 	}
-	//manu
 	return (texture);
 }

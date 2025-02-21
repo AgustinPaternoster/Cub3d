@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/19 21:45:16 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:17:39 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,14 @@ typedef struct s_game
 	t_ray		*ray;
 }			t_game;
 
-//// test minilibx
+// test minilibx
 void img_pixel_put(t_imgdata *img, int x, int y, int color);
 void screen(t_game *game, int color, int size, int offset );
 void clean_close(t_game *game);
 void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
 int handle_key(int keycode, t_game *game);
 int handle_close(t_game *game);
-///render
+//render
 void draw_player(t_game *game);
 void draw_map(t_game *game);
 void print_point(t_ray *ray, t_imgdata *img);
@@ -154,8 +154,6 @@ void init_player_dir(t_game *game, char dir);
 float calculate_sx(float dx , float dy);
 float calculate_sy(float dx , float dy);
 void update_delta(t_game *game, int dir);
-
-//float end_point(float distance, float start, float dir);
 int  end_point(float distance, float start, float dir);
 
 //DDA
@@ -167,7 +165,6 @@ void    printmatrix_fd(int fd, char **str);
 void	print_game_data(t_game *game);
 
 // frees.c
-//void	clean_close(t_tmap *map, t_imgdata *img);
 void	free_structs(t_game *game);
 void	matrix_free(char **str);
 void	free_parsing(t_game *game);
@@ -194,9 +191,12 @@ void	init_resources(t_game *game, char *filename);
 void    get_texture(char *prefix, t_game *game);
 void    set_player_pos(t_game *game);
 
-// events
+// events.c
 void rotate_r(t_player *player , float tmp_dirx, float tmp_scrdx);
 void rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
+
+// main.c
+void	malloc_err(void);
 
 
 

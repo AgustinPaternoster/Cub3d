@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:59:10 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/22 04:10:43 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:22:32 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ void	print_game_data(t_game *game)
     printf("Floor color: %d\n", game->map->floor);
     printf("Map width: %d\n", game->map->sizex);
     printf("Map height: %d\n", game->map->sizey);
-    //printf("Player position: %dX, %dY\n", game->player->x_pos, game->player->y_pos);
 }

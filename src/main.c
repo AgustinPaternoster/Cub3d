@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 17:05:17 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:43:19 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	malloc_err(void)
+{
+	printline_fd(2, "Error: malloc error\n");
+	exit(1);
+}
 
 static void init_game(t_game *game)
 {
@@ -35,13 +41,7 @@ static void	start_game(t_game *game)
 	mlx_loop(game->mlx_connection);
 }
 
-// void player_pos(t_game *game, int posx, int posy, char dir)
-// {
-// 	game->player->pos_x = (float)posx + 0.5;
-// 	game->player->pos_y = (float)posy + 0.5;
-// 	init_player_dir(game, dir);
-// }
-
+//printline_fd(2, "\nThe map is valid\n\n");
 int parsing(int argc, char **argv, t_game *game)
 {
 	if (argc != 2)
@@ -50,27 +50,29 @@ int parsing(int argc, char **argv, t_game *game)
 			printline_fd(2, "only argument to the program\n\n"), 1);
 	game->mlx_connection = mlx_init();
 	game->map = malloc(sizeof(t_map));
+	if (!game->map)
+		malloc_err();
 	game->player = malloc(sizeof(t_player));
+	if (!game->player)
+		malloc_err();
 	if (get_map(game, argv[1]) == 1)
 		return (2);
-	printmatrix_fd(2, game->map->matrix);
 	if (check_map(game, game->map->matrix) == 0)
-	{
-		printline_fd(2, "\nThe map is valid\n\n");
 		init_resources(game, argv[1]);
-		print_game_data(game);
-	}
 	else
 		return (printline_fd(2, "\nError: the map is invalid\n\n"),
 			clean_close(game), 1);
 	return (0);
 }
 
-//game->map->sizex = 7;
 void inits(t_game *game)
 {
 	game->img = malloc(sizeof(t_imgdata));
+	if (!game->img)
+		malloc_err();
 	game->ray = malloc(sizeof(t_ray));
+	if (!game->ray)
+		malloc_err();
 	game->map->map = game->map->matrix;
 	game->map->sizey =  get_full_height(game->map->matrix);
 }
@@ -88,7 +90,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	inits(&game);
-	//player_pos(&game, (&game)->player->pos_x, (&game)->player->pos_y, (&game)->player->direction);
 	init_game(&game);
 	start_game(&game);
 	clean_close(&game);

@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:52:26 by mgimon-c          #+#    #+#             */
-/*   Updated: 2024/12/22 05:54:06 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:21:37 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int	count_map_lines(int fd)
 
 int ends_with_cub(const char *filename)
 {
-    size_t len = ft_strlen(filename);
+    size_t len;
+	
+	len = ft_strlen(filename);
     if (len < 4)
         return 0;
     return ft_strcmp(filename + len - 4, ".cub") == 0;
@@ -99,9 +101,17 @@ int	get_mapsize(char *filename)
 void	init_map_textures(t_game *game)
 {
 	game->map->no_texture = malloc(sizeof(t_imgdata));
+	if (!game->map->no_texture)
+		malloc_err();
 	game->map->so_texture = malloc(sizeof(t_imgdata));
+	if (!game->map->so_texture)
+		malloc_err();
 	game->map->ea_texture = malloc(sizeof(t_imgdata));
+	if (!game->map->ea_texture)
+		malloc_err();
 	game->map->we_texture = malloc(sizeof(t_imgdata));
+	if (!game->map->we_texture)
+		malloc_err();
 }
 
 int	store_map_line(t_game *game, char **result, int *k, char *line)
@@ -156,10 +166,7 @@ int	get_map(t_game *game, char *filename)
 	}
 	result = malloc(sizeof(char *) * (map_size + 1));
 	if (!result)
-	{
-		close(game->map->fd);
-		return (1);
-	}
+		return (close(game->map->fd), 1);
 	if (process_map_lines(game, result))
 		return (1);
 	close(game->map->fd);

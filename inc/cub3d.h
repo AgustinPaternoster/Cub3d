@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/19 21:08:30 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:27:13 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct  s_imgdata
 
 typedef struct s_map
 {
-	char 	**map;
+//	char 	**map;
 	int		fd;
 	char	**cub;
 	char	**matrix;
@@ -125,18 +125,16 @@ typedef struct s_game
 }			t_game;
 
 //// test minilibx
-void img_pixel_put(t_imgdata *img, int x, int y, int color);
-void screen(t_game *game, int color, int size, int offset );
-void clean_close(t_game *game);
-void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
-int handle_key(int keycode, t_game *game);
-int handle_close(t_game *game);
 ///render
 void draw_player(t_game *game);
 void draw_map(t_game *game);
 void print_point(t_ray *ray, t_imgdata *img);
 void render_frame(t_game *game);
-void draw_walls(t_game *game, int column);
+void draw_walls(t_game *game, int column, t_ray *ray);
+void paint_window(t_game *game, int color);
+void img_pixel_put(t_imgdata *img, int x, int y, int color);
+void draw_pixels(t_game *game, int color, int size, int offset_x, int offset_y);
+void screen(t_game *game, int color, int size, int offset );
 
 // texture
 void int_to_img(t_game *game);
@@ -145,12 +143,10 @@ void parse_texture(t_game *game, char *path, char orientation);
 int  **select_tetxture(t_game *game, t_ray *ray);
 
 //DDA_alg
-void draw_rays(t_game *game);
 
 // Math
-float to_radians(int degrees);
 void init_player_dir(t_game *game, char dir);
-float calculate_sx(float dx , float dy);
+
 float calculate_sy(float dx , float dy);
 void update_delta(t_game *game, int dir);
 
@@ -159,6 +155,7 @@ int  end_point(float distance, float start, float dir);
 
 //DDA
 void calculate_x_ray(t_game *game);
+void draw_rays(t_game *game);
 
 // prints.c
 void    printline_fd(int fd, char *str);
@@ -170,6 +167,7 @@ void	print_game_data(t_game *game);
 void	free_structs(t_game *game);
 void	matrix_free(char **str);
 void	free_parsing(t_game *game);
+void clean_close(t_game *game);
 
 // get_map.c
 int	get_map(t_game *game, char *filename);
@@ -196,6 +194,9 @@ void    set_player_pos(t_game *game);
 // events
 void rotate_r(t_player *player , float tmp_dirx, float tmp_scrdx);
 void rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
+t_bool check_wall(t_player *player);
+int handle_close(t_game *game);
+int handle_key(int keycode, t_game *game);
 
 
 

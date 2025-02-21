@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/18 19:23:50 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:23:06 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void draw_rays(t_game *game)
 	{
 		init_ray(game , pixel_w);
 		setup_ray(ray);
-		run_dda_al(ray, game->map->map);
+		run_dda_al(ray, game->map->matrix);
 		texture_x_coord(ray);
-		draw_walls(game, pixel_w);
+		draw_walls(game, pixel_w, ray);
 		pixel_w++;
 	}
 }

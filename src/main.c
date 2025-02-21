@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/19 21:20:12 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:32:09 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void inits(t_game *game)
 {
 	game->img = malloc(sizeof(t_imgdata));
 	game->ray = malloc(sizeof(t_ray));
-	game->map->map = game->map->matrix;
-	game->map->sizey =  get_full_height(game->map->matrix);
-	game->map->sizex = 7;
+//	game->map->map = game->map->matrix;
+//	game->map->sizey =  get_full_height(game->map->matrix);
+//	game->map->sizex = 7;
 }
 
 // TO DO

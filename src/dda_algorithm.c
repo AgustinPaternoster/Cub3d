@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/22 14:51:11 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:59:26 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static void texture_x_coord(t_ray *ray)
 			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
 	}
 }
-
-
 
 static int is_wall(char **mapa, int x , int y)
 {

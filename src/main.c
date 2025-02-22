@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 21:45:11 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:04:40 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void init_game(t_game *game)
 	game->mlx_window = mlx_new_window(game->mlx_connection, SCREEN_WITH , SCREEN_HIGH, "cub3D");
 	game->img->img = mlx_new_image(game->mlx_connection, SCREEN_WITH, SCREEN_HIGH);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bits_per_pixel, &game->img->line_length, & game->img->endian);
-	init_texture(game, TEXTURE_SIZE);
+	if (!init_texture(game, TEXTURE_SIZE));
+		malloc_err();
 	parse_texture(game, textures->path_NO, 'N');
 	parse_texture(game, textures->path_SO, 'S');
 	parse_texture(game, textures->path_EA, 'E');

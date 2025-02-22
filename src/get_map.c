@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:52:26 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 20:21:37 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:37:12 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ char	*read_line(int fd)
 	if (!line)
 		return (NULL);
 	i = 0;
-	while ((bytes_read = read(fd, &line[i], 1)) > 0)
+	bytes_read = read(fd, &line[i], 1);
+	while (bytes_read > 0)
 	{
 		if (line[i] == '\n')
 			break ;
 		i++;
+		bytes_read = read(fd, &line[i], 1);
 	}
 	if (bytes_read <= 0 && i == 0)
 	{
@@ -35,67 +37,6 @@ char	*read_line(int fd)
 	}
 	line[i] = '\0';
 	return (line);
-}
-
-int	cub_size(int fd)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	while ((line = read_line(fd)) != NULL)
-		i++;
-	return (i);
-}
-
-int	is_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	if (line[i] == '1' || line[i] == '0')
-		return (1);
-	return (0);
-}
-
-int	count_map_lines(int fd)
-{
-	int		n;
-	char	*line;
-
-	n = 0;
-	while ((line = read_line(fd)) != NULL)
-	{
-		if (is_map_line(line))
-			n++;
-		free(line);
-	}
-	return (n);
-}
-
-int ends_with_cub(const char *filename)
-{
-    size_t len;
-	
-	len = ft_strlen(filename);
-    if (len < 4)
-        return 0;
-    return ft_strcmp(filename + len - 4, ".cub") == 0;
-}
-
-int	get_mapsize(char *filename)
-{
-	int	fd;
-	int	map_size;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	map_size = count_map_lines(fd);
-	close(fd);
-	return (map_size);
 }
 
 void	init_map_textures(t_game *game)
@@ -136,7 +77,8 @@ int	process_map_lines(t_game *game, char **result)
 	char	*line;
 
 	k = 0;
-	while ((line = read_line(game->map->fd)) != NULL)
+	line = read_line(game->map->fd);
+	while (line != NULL)
 	{
 		if (is_map_line(line))
 		{
@@ -145,6 +87,7 @@ int	process_map_lines(t_game *game, char **result)
 		}
 		else
 			free(line);
+		line = read_line(game->map->fd);
 	}
 	result[k] = NULL;
 	return (0);

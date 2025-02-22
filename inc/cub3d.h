@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 21:09:32 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:39:49 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,12 @@ void	free_parsing(t_game *game);
 
 // get_map.c
 int	is_map_line(char *line);
+char	*read_line(int fd);
 int	get_map(t_game *game, char *filename);
+int	get_mapsize(char *filename);
+int	ends_with_cub(const char *filename);
+int	count_map_lines(int fd);
+int	cub_size(int fd);
 
 // check_map.c
 int check_map(t_game *game, char **matrix);

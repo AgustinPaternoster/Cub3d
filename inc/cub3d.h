@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 14:51:30 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:09:32 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,9 @@ void calculate_x_ray(t_game *game);
 void draw_rays(t_game *game);
 void paint_sky(t_game *game, int start_y , int column);
 void paint_floor(t_game *game, int start_y , int column);
+
+void	texture_x_coord(t_ray *ray);
+int	is_wall(char **mapa, int x, int y);
 
 // prints.c
 void    printline_fd(int fd, char *str);

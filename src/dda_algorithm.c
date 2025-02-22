@@ -6,85 +6,61 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:18:32 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/22 15:59:26 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:03:03 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static void texture_x_coord(t_ray *ray)
+static void	init_ray(t_game *game, int pixel)
 {
-	float endpoint;
-	
-	if (ray->side == 0)
-	{
-		endpoint = ray->camera_pos[1] + ray->distance * ray->ray_dir[1];
-		endpoint -= floor(endpoint); 
-		ray->texture_pixel = endpoint * (double)TEXTURE_SIZE;
-		if (ray->ray_dir[0] > 0)
-			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
-	}
-	else
-	{
-		endpoint = ray->camera_pos[0] + ray->distance * ray->ray_dir[0];
-		endpoint -= floor(endpoint);
-		ray->texture_pixel =(int)(endpoint * TEXTURE_SIZE) % TEXTURE_SIZE;
-		ray->texture_pixel = endpoint * (double)TEXTURE_SIZE;
-		if (ray->ray_dir[1] < 0 ) 
-			ray->texture_pixel = TEXTURE_SIZE - ray->texture_pixel - 1;
-	}
-}
-
-static int is_wall(char **mapa, int x , int y)
-{
-		if(mapa[y][x] == '1')
-			return (1);
-		return (0);
-}
-
-static void init_ray(t_game *game, int pixel)
-{
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = game->ray;
 	ray->camera_pos[0] = game->player->pos_x;
 	ray->camera_pos[1] = game->player->pos_y;
-	ray->camara_dx = 2 * pixel / (double)SCREEN_WITH - 1; 
-	ray->ray_dir[0] = game->player->dx + game->player->scr_dx * ray->camara_dx * -1;
-	ray->ray_dir[1] = game->player->dy + game->player->scr_dy * ray->camara_dx * -1;
+	ray->camara_dx = 2 * pixel / (double)SCREEN_WITH - 1;
+	ray->ray_dir[0] = game->player->dx + game->player->scr_dx * ray->camara_dx
+		* -1;
+	ray->ray_dir[1] = game->player->dy + game->player->scr_dy * ray->camara_dx
+		* -1;
 	ray->map_pos[0] = (int)game->player->pos_x;
 	ray->map_pos[1] = (int)game->player->pos_y;
 	ray->side_dis_x = fabs(1 / ray->ray_dir[0]);
 	ray->side_dis_y = fabs(1 / ray->ray_dir[1]);
 }
 
-static void setup_ray(t_ray *ray)
+static void	setup_ray(t_ray *ray)
 {
-	if(ray->ray_dir[0] < 0)
+	if (ray->ray_dir[0] < 0)
 	{
 		ray->stepx = -1;
-		ray->delta_dis_x = (ray->camera_pos[0] - ray->map_pos[0]) * ray->side_dis_x;
+		ray->delta_dis_x = (ray->camera_pos[0] - ray->map_pos[0])
+			* ray->side_dis_x;
 	}
 	else
 	{
 		ray->stepx = 1;
-		ray->delta_dis_x = (ray->map_pos[0] + 1 - ray->camera_pos[0]) * ray->side_dis_x;
+		ray->delta_dis_x = (ray->map_pos[0] + 1 - ray->camera_pos[0])
+			* ray->side_dis_x;
 	}
-	if(ray->ray_dir[1] < 0)
+	if (ray->ray_dir[1] < 0)
 	{
-		ray->stepy = - 1;
-		ray->delta_dis_y = (ray->camera_pos[1] - ray->map_pos[1]) * ray->side_dis_y;
+		ray->stepy = -1;
+		ray->delta_dis_y = (ray->camera_pos[1] - ray->map_pos[1])
+			* ray->side_dis_y;
 	}
-		else
+	else
 	{
 		ray->stepy = 1;
-		ray->delta_dis_y = (ray->map_pos[1] + 1 - ray->camera_pos[1]) * ray->side_dis_y;
+		ray->delta_dis_y = (ray->map_pos[1] + 1 - ray->camera_pos[1])
+			* ray->side_dis_y;
 	}
 }
 
-void run_dda_al(t_ray *ray , char **map)
+void	run_dda_al(t_ray *ray, char **map)
 {
-	while (!is_wall(map, ray->map_pos[0],ray->map_pos[1]))
+	while (!is_wall(map, ray->map_pos[0], ray->map_pos[1]))
 	{
 		if (ray->delta_dis_x < ray->delta_dis_y)
 		{
@@ -105,16 +81,16 @@ void run_dda_al(t_ray *ray , char **map)
 		ray->distance = ray->delta_dis_y - ray->side_dis_y;
 }
 
-void draw_rays(t_game *game)
+void	draw_rays(t_game *game)
 {
 	t_ray	*ray;
 	int		pixel_w;
-	
+
 	ray = game->ray;
 	pixel_w = 0;
 	while (pixel_w < SCREEN_WITH)
 	{
-		init_ray(game , pixel_w);
+		init_ray(game, pixel_w);
 		setup_ray(ray);
 		run_dda_al(ray, game->map->map);
 		texture_x_coord(ray);
@@ -122,11 +98,12 @@ void draw_rays(t_game *game)
 		pixel_w++;
 	}
 }
-int  **select_tetxture(t_game *game, t_ray *ray)
+
+int	**select_tetxture(t_game *game, t_ray *ray)
 {
-	t_texture *textures;
-	int **texture;
-	
+	t_texture	*textures;
+	int			**texture;
+
 	textures = game->map->textures;
 	if (ray->side == 0)
 	{

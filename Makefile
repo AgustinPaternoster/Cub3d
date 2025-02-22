@@ -24,7 +24,8 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 SRC_PATH = ./src/
 SRC		= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c \
 			resources.c resources_utils.c dda_algorithm.c events.c \
-			math_fn.c render_fn.c texture_fn.c events_utils.c
+			math_fn.c render_fn.c texture_fn.c events_utils.c \
+			render_utils.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

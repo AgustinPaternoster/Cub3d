@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 13:50:55 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:51:30 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-
 
 # define SCREEN_WITH 800
 # define SCREEN_HIGH 600
@@ -138,7 +137,7 @@ void draw_player(t_game *game);
 void draw_map(t_game *game);
 void print_point(t_ray *ray, t_imgdata *img);
 void render_frame(t_game *game);
-void draw_walls(t_game *game, int column);
+void draw_walls(t_game *game, int column , t_ray *ray);
 
 // texture
 void int_to_img(t_game *game);
@@ -147,17 +146,18 @@ void parse_texture(t_game *game, char *path, char orientation);
 int  **select_tetxture(t_game *game, t_ray *ray);
 
 // Math
-float to_radians(int degrees);
+//float to_radians(int degrees);
 void init_player_dir(t_game *game, char dir);
-float calculate_sx(float dx , float dy);
-float calculate_sy(float dx , float dy);
+//float calculate_sx(float dx , float dy);
+//float calculate_sy(float dx , float dy);
 void update_delta(t_game *game, int dir);
-int  end_point(float distance, float start, float dir);
+//int  end_point(float distance, float start, float dir);
 
 //DDA
 void calculate_x_ray(t_game *game);
 void draw_rays(t_game *game);
-
+void paint_sky(t_game *game, int start_y , int column);
+void paint_floor(t_game *game, int start_y , int column);
 
 // prints.c
 void    printline_fd(int fd, char *str);

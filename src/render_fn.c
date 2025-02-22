@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/22 12:45:41 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:48:43 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,53 +51,39 @@ void render_frame(t_game *game)
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
 }
 
+static void check_height(int *start_y , int *end)
+{
+	if (*start_y < 0)
+		*start_y = 0;
+	if (*end > SCREEN_HIGH)
+		*end = SCREEN_HIGH - 1;
+}
 
-void draw_walls(t_game *game, int column)
+void draw_walls(t_game *game, int column , t_ray *ray)
 {
 	int heigh;
 	int start_y;
 	int end;
-	t_ray *ray;
 	int **texture;
 	double step;
 	double textPos;
 	int texure_y;
-	int texture_x;
-	int n;
 
-	ray = game->ray;
-	texture_x = ray->texture_pixel;
 	texture = select_tetxture(game, ray);
 	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
 	step = 1.0 * TEXTURE_SIZE / heigh;
-	if (start_y < 0)
-	start_y = 0;
-	if (end > SCREEN_HIGH)
-	end = SCREEN_HIGH - 1;
+	check_height(&start_y, &end);
 	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
-
-	//cielo
-	n = 0;
-	while (n < start_y)
-	{
-		img_pixel_put(game->img, column, n, game->map->ceiling);
-		n++;
-	}
-
+	paint_sky(game, start_y, column);
 	while (start_y < end)
 	{
 		texure_y = (int)textPos;
 		textPos += step;	
-		img_pixel_put(game->img,column, start_y,texture[texure_y][texture_x]);
+		img_pixel_put(game->img, column, start_y,
+						texture[texure_y][ray->texture_pixel]);
 		start_y++;
 	}
-	
-	//floor
-	while (start_y < SCREEN_HIGH)
-	{
-		img_pixel_put(game->img, column, start_y, game->map->floor);
-		start_y++;
-	}
+	paint_floor(game, start_y, column);
 }

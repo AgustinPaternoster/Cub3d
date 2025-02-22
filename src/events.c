@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:05:57 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/21 20:17:34 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:34:08 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 static void move_player(t_game *game, int keycode)
 {
-		if (keycode == XK_w && round(game->player->pos_y * 100) > PLAYERSIZE + 1)
+		if (keycode == XK_w && !check_wall(game, keycode))
 		{
 			game->player->pos_y += game->player->dy * VELO_MOV;
 			game->player->pos_x += game->player->dx * VELO_MOV;
 		}
-		if (keycode == XK_s &&
-			game->player->pos_y < (game->map->sizey * GRIDSIZE) - PLAYERSIZE * 2) 
+			if (keycode == XK_s && !check_wall(game, keycode)) 
 		{
 			game->player->pos_y -= game->player->dy * VELO_MOV;
 			game->player->pos_x -= game->player->dx * VELO_MOV;
 		}
-		if (keycode == XK_a)
+		if (keycode == XK_a && !check_wall(game, keycode))
 		{
 			game->player->pos_y -= game->player->dx * VELO_MOV;
 			game->player->pos_x += game->player->dy * VELO_MOV;
 		}
-		if (keycode == XK_d)
+		if (keycode == XK_d && !check_wall(game, keycode))
 		{
 			game->player->pos_y += game->player->dx * VELO_MOV;
 			game->player->pos_x -= game->player->dy * VELO_MOV;

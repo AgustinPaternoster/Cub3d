@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:01 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:50:55 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,6 @@ t_bool init_texture(t_game *game, int size);
 void parse_texture(t_game *game, char *path, char orientation);
 int  **select_tetxture(t_game *game, t_ray *ray);
 
-//DDA_alg
-void draw_rays(t_game *game);
-
 // Math
 float to_radians(int degrees);
 void init_player_dir(t_game *game, char dir);
@@ -159,6 +156,8 @@ int  end_point(float distance, float start, float dir);
 
 //DDA
 void calculate_x_ray(t_game *game);
+void draw_rays(t_game *game);
+
 
 // prints.c
 void    printline_fd(int fd, char *str);
@@ -197,10 +196,8 @@ void    set_player_pos(t_game *game);
 // events.c
 void rotate_r(t_player *player , float tmp_dirx, float tmp_scrdx);
 void rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
+t_bool check_wall(t_game *game, int keycode);
 
 // main.c
 void	malloc_err(void);
-
-
-
 #endif

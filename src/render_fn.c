@@ -6,37 +6,35 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/22 14:48:43 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:50:34 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void img_pixel_put(t_imgdata *img, int x, int y, int color)
+void	img_pixel_put(t_imgdata *img, int x, int y, int color)
 {
-	char *pixel;
+	char	*pixel;
 
 	pixel = img->addr + y * img->line_length + x * (img->bits_per_pixel / 8);
-	*(int*)pixel = color;
+	*(int *)pixel = color;
 }
 
-void paint_window(t_game *game, int color)
+void	paint_window(t_game *game, int color)
 {
-	int x;
-	int y;
-	int size_x;
-	int size_y;	
+	int	x;
+	int	y;
+	int	size_x;
+	int	size_y;
 
 	size_x = SCREEN_WITH;
 	size_y = SCREEN_WITH;
-
 	x = 0;
-	while(x < size_x)
+	while (x < size_x)
 	{
 		y = 0;
 		while (y < size_y)
 		{
-			
 			img_pixel_put(game->img, x, y, color);
 			y++;
 		}
@@ -44,14 +42,15 @@ void paint_window(t_game *game, int color)
 	}
 }
 
-void render_frame(t_game *game)
+void	render_frame(t_game *game)
 {
 	paint_window(game, GREY);
 	draw_rays(game);
-	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,game->img->img,0,0);
+	mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
+		game->img->img, 0, 0);
 }
 
-static void check_height(int *start_y , int *end)
+static void	check_height(int *start_y, int *end)
 {
 	if (*start_y < 0)
 		*start_y = 0;
@@ -59,15 +58,15 @@ static void check_height(int *start_y , int *end)
 		*end = SCREEN_HIGH - 1;
 }
 
-void draw_walls(t_game *game, int column , t_ray *ray)
+void	draw_walls(t_game *game, int column, t_ray *ray)
 {
-	int heigh;
-	int start_y;
-	int end;
-	int **texture;
-	double step;
-	double textPos;
-	int texure_y;
+	int		heigh;
+	int		start_y;
+	int		end;
+	int		**texture;
+	double	step;
+	double	textPos;
+	int		texure_y;
 
 	texture = select_tetxture(game, ray);
 	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
@@ -80,9 +79,9 @@ void draw_walls(t_game *game, int column , t_ray *ray)
 	while (start_y < end)
 	{
 		texure_y = (int)textPos;
-		textPos += step;	
+		textPos += step;
 		img_pixel_put(game->img, column, start_y,
-						texture[texure_y][ray->texture_pixel]);
+			texture[texure_y][ray->texture_pixel]);
 		start_y++;
 	}
 	paint_floor(game, start_y, column);

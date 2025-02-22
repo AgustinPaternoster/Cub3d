@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:59:10 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/21 20:22:32 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:50:20 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	print_game_data(t_game *game)
 {
 	printmatrix_fd(2, game->map->cub);
 	printf("\n");
-    printf("Ceiling color: %d\n", game->map->ceiling);
-    printf("Floor color: %d\n", game->map->floor);
-    printf("Map width: %d\n", game->map->sizex);
-    printf("Map height: %d\n", game->map->sizey);
+	printf("Ceiling color: %d\n", game->map->ceiling);
+	printf("Floor color: %d\n", game->map->floor);
+	printf("Map width: %d\n", game->map->sizex);
+	printf("Map height: %d\n", game->map->sizey);
 }

@@ -26,7 +26,7 @@ SRC		= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c \
 			resources.c resources_utils.c dda_algorithm.c events.c \
 			math_fn.c render_fn.c texture_fn.c events_utils.c \
 			render_utils.c check_map_utils_2.c dda_algorithm_2.c \
-			get_map_2.c
+			get_map_2.c resources_utils_2.c resources_utils_3.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

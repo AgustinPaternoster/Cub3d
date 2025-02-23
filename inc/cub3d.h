@@ -147,12 +147,8 @@ void			parse_texture(t_game *game, char *path, char orientation);
 int				**select_tetxture(t_game *game, t_ray *ray);
 
 // Math
-// float to_radians(int degrees);
 void			init_player_dir(t_game *game, char dir);
-// float calculate_sx(float dx , float dy);
-// float calculate_sy(float dx , float dy);
 void			update_delta(t_game *game, int dir);
-// int  end_point(float distance, float start, float dir);
 
 // DDA
 void			calculate_x_ray(t_game *game);
@@ -197,10 +193,24 @@ int				is_map_last(char **cub);
 
 // resources.c
 void			init_resources(t_game *game, char *filename);
-
+int				get_hex_from_cubline(char *line);
 // resources_utils.c
 void			get_texture(char *prefix, t_game *game);
 void			set_player_pos(t_game *game);
+// resources_utils_2.c
+int				read_buffer(int fd, char *buffer,
+					int *buffer_read, int *buffer_pos);
+char			*process_buffer(char *buffer,
+					int *buffer_pos, char *line, int *i);
+char			*get_next_line(int fd);
+void			expand_cub(t_game *game, size_t *capacity);
+void			read_cub_file(t_game *game, size_t *count, size_t *capacity);
+//resources_utils_3.c
+int				parse_color_component(char *line, int *i);
+int				validate_color_line(char *line, int i);
+void			iterate_line(char *line, int *i);
+int				get_full_width(char **matrix);
+void			parse_colors(t_game *game, char *line);
 
 // events.c
 void			rotate_r(t_player *player, float tmp_dirx, float tmp_scrdx);

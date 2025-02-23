@@ -12,47 +12,8 @@
 
 #include "../inc/cub3d.h"
 
-char	*get_next_line(int fd)
-{
-	static char	buffer[1024];
-	static int	buffer_read = 0;
-	static int	buffer_pos = 0;
-	char		*line;
-	int			i;
-
-	line = malloc(70000);
-	if (fd < 0 || !line)
-		return (NULL);
-	i = 0;
-	while (1)
-	{
-		if (buffer_pos >= buffer_read)
-		{
-			buffer_read = read(fd, buffer, 1024);
-			buffer_pos = 0;
-			if (buffer_read <= 0)
-				break ;
-		}
-		if (buffer[buffer_pos] == '\n')
-		{
-			line[i++] = buffer[buffer_pos++];
-			break ;
-		}
-		line[i++] = buffer[buffer_pos++];
-	}
-	line[i] = '\0';
-	if (i == 0)
-	{
-		free(line);
-		return (NULL);
-	}
-	return (line);
-}
-
 void	get_cub(t_game *game, char *filename)
 {
-	char	**new_cub;
-	char	*line;
 	size_t	count;
 	size_t	capacity;
 
@@ -67,20 +28,7 @@ void	get_cub(t_game *game, char *filename)
 	game->map->cub = malloc(sizeof(char *) * capacity);
 	if (!game->map->cub)
 		malloc_err();
-	line = get_next_line(game->map->fd);
-	while (line)
-	{
-		if (count >= capacity - 1)
-		{
-			capacity *= 2;
-			new_cub = realloc(game->map->cub, sizeof(char *) * capacity);
-			if (!new_cub)
-				malloc_err();
-			game->map->cub = new_cub;
-		}
-		game->map->cub[count++] = line;
-		line = get_next_line(game->map->fd);
-	}
+	read_cub_file(game, &count, &capacity);
 	game->map->cub[count] = NULL;
 	close(game->map->fd);
 }
@@ -89,112 +37,74 @@ int	get_hex_from_cubline(char *line)
 {
 	int	i;
 	int	ci;
-	int	colors[3] = {0, 0, 0};
+	int	colors[3];
 
 	i = 0;
 	ci = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
+	iterate_line(line, &i);
 	if ((line[i] != 'C' && line[i] != 'F') || line[i + 1] != ' ')
 		return (-1);
 	i += 2;
 	while (line[i] && ci < 3)
 	{
-		while (line[i] == ' ' || line[i] == '\t')
-			i++;
+		iterate_line(line, &i);
 		if (!ft_isdigit(line[i]))
 			return (-1);
-		colors[ci] = 0;
-		while (ft_isdigit(line[i]))
-		{
-			colors[ci] = colors[ci] * 10 + (line[i] - '0');
-			i++;
-		}
-		if (colors[ci] < 0 || colors[ci] > 255)
+		colors[ci] = parse_color_component(line, &i);
+		if (colors[ci] == -1)
 			return (-1);
-		if (ci < 2)
-		{
-			while (line[i] == ' ' || line[i] == '\t')
-				i++;
-			if (line[i] != ',')
-				return (-1);
-			i++;
-		}
+		if (ci < 2 && line[i++] != ',')
+			return (-1);
 		ci++;
 	}
-	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'
-		|| line[i] == '\r')
-		i++;
-	if (line[i] != '\0')
+	if (validate_color_line(line, i) == -1)
 		return (-1);
 	return ((colors[0] << 16) | (colors[1] << 8) | colors[2]);
 }
 
-int	get_full_width(char **matrix)
+static void	load_textures(t_game *game)
 {
-	int	i;
-	int	j;
-	int	width;
-
-	i = 0;
-	width = 0;
-	while (matrix[i])
-	{
-		j = 0;
-		while (matrix[i][j])
-			j++;
-		if (j > width)
-			width = j;
-		i++;
-	}
-	return (width);
+	game->map->textures = malloc(sizeof(t_texture));
+	if (!game->map->textures)
+		malloc_err();
+	get_texture("NO", game);
+	get_texture("EA", game);
+	get_texture("WE", game);
+	get_texture("SO", game);
 }
 
-void	init_resources(t_game *game, char *filename)
+static void	process_cub_lines(t_game *game)
 {
 	int		i;
 	char	*line;
-	int		color;
 
 	i = 0;
-	game->map->ceiling = -1;
-	game->map->floor = -1;
-	get_cub(game, filename);
-	if (!game->map->cub)
-		exit(1);
 	while (game->map->cub[i] != NULL)
 	{
 		line = game->map->cub[i];
 		while (*line == ' ' || *line == '\t')
 			line++;
 		if (line[0] == 'C' || line[0] == 'F')
-		{
-			color = get_hex_from_cubline(line);
-			if (color == -1)
-			{
-				printf("\nError parsing color on line: %s\n", line);
-				exit(1);
-			}
-			if (line[0] == 'C')
-				game->map->ceiling = color;
-			else
-				game->map->floor = color;
-		}
+			parse_colors(game, line);
 		i++;
 	}
+}
+
+void	init_resources(t_game *game, char *filename)
+{
+	game->map->ceiling = -1;
+	game->map->floor = -1;
+	get_cub(game, filename);
+	if (!game->map->cub)
+		exit(1);
+	process_cub_lines(game);
 	if (game->map->ceiling == -1 || game->map->floor == -1)
 	{
 		printf("\nError: One or more colors not found\n\n");
 		exit(1);
 	}
-	game->map->textures = malloc(sizeof(t_texture));
-	if (!game->map->textures)
-		malloc_err();
 	game->map->sizey = get_full_height(game->map->matrix);
 	game->map->sizex = get_full_width(game->map->matrix);
 	set_player_pos(game);
-	get_texture("NO", game);
-	get_texture("EA", game);
-	get_texture("WE", game);
-	get_texture("SO", game);
+	load_textures(game);
 }

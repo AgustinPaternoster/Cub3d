@@ -46,17 +46,17 @@ t_bool	init_texture(t_game *game, int size)
 	t_texture	*txt;
 
 	txt = game->map->textures;
-	txt->texture_NO = create_txt_array(size);
-	if (!txt->texture_NO)
+	txt->texture_no = create_txt_array(size);
+	if (!txt->texture_no)
 		return (FALSE);
-	txt->texture_SO = create_txt_array(size);
-	if (!txt->texture_SO)
+	txt->texture_so = create_txt_array(size);
+	if (!txt->texture_so)
 		return (FALSE);
-	txt->texture_EA = create_txt_array(size);
-	if (!txt->texture_EA)
+	txt->texture_ea = create_txt_array(size);
+	if (!txt->texture_ea)
 		return (FALSE);
-	txt->texture_WE = create_txt_array(size);
-	if (!txt->texture_WE)
+	txt->texture_we = create_txt_array(size);
+	if (!txt->texture_we)
 		return (FALSE);
 	txt->size = size;
 	return (TRUE);
@@ -96,12 +96,12 @@ void	parse_texture(t_game *game, char *path, char orientation)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
 	if (orientation == 'N')
-		xmp_to_int(&img, txt->texture_NO, txt->size);
+		xmp_to_int(&img, txt->texture_no, txt->size);
 	if (orientation == 'S')
-		xmp_to_int(&img, txt->texture_SO, txt->size);
+		xmp_to_int(&img, txt->texture_so, txt->size);
 	if (orientation == 'E')
-		xmp_to_int(&img, txt->texture_EA, txt->size);
+		xmp_to_int(&img, txt->texture_ea, txt->size);
 	if (orientation == 'W')
-		xmp_to_int(&img, txt->texture_WE, txt->size);
+		xmp_to_int(&img, txt->texture_we, txt->size);
 	mlx_destroy_image(game->mlx_connection, img.img);
 }

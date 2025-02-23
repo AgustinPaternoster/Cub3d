@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 22:07:33 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/23 21:38:10 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ typedef struct s_ray
 
 typedef struct s_texture
 {
-	int			**texture_NO;
-	int			**texture_SO;
-	int			**texture_WE;
-	int			**texture_EA;
-	char		*path_NO;
-	char		*path_SO;
-	char		*path_WE;
-	char		*path_EA;
+	int			**texture_no;
+	int			**texture_so;
+	int			**texture_we;
+	int			**texture_ea;
+	char		*path_no;
+	char		*path_so;
+	char		*path_we;
+	char		*path_ea;
 	int			size;
 }				t_texture;
 
@@ -128,95 +128,122 @@ typedef struct s_game
 void			img_pixel_put(t_imgdata *img, int x, int y, int color);
 void			screen(t_game *game, int color, int size, int offset);
 void			clean_close(t_game *game);
-void			draw_pixels(t_game *game, int color, int size, int offset_x,
-					int offset_y);
 int				handle_key(int keycode, t_game *game);
 int				handle_close(t_game *game);
 
-// render
-void			draw_player(t_game *game);
-void			draw_map(t_game *game);
-void			print_point(t_ray *ray, t_imgdata *img);
-void			render_frame(t_game *game);
-void			draw_walls(t_game *game, int column, t_ray *ray);
-
-// texture
-void			int_to_img(t_game *game);
-t_bool			init_texture(t_game *game, int size);
-void			parse_texture(t_game *game, char *path, char orientation);
-int				**select_tetxture(t_game *game, t_ray *ray);
-
-// Math
-void			init_player_dir(t_game *game, char dir);
-void			update_delta(t_game *game, int dir);
-
-// DDA
-void			calculate_x_ray(t_game *game);
-void			draw_rays(t_game *game);
-void			paint_sky(t_game *game, int start_y, int column);
-void			paint_floor(t_game *game, int start_y, int column);
-
-void			texture_x_coord(t_ray *ray);
-int				is_wall(char **mapa, int x, int y);
-
-// prints.c
-void			printline_fd(int fd, char *str);
-void			printmatrix_fd(int fd, char **str);
-void			print_game_data(t_game *game);
-
-// frees.c
-void			free_structs(t_game *game);
-void			matrix_free(char **str);
-void			free_parsing(t_game *game);
+// main.c
+int				parsing(int argc, char **argv, t_game *game);
+void			inits(t_game *game);
 
 // get_map.c
-int				is_map_line(char *line);
 char			*read_line(int fd);
+void			init_map_textures(t_game *game);
+int				store_map_line(t_game *game, char **result, int *k, char *line);
+int				process_map_lines(t_game *game, char **result);
 int				get_map(t_game *game, char *filename);
-int				get_mapsize(char *filename);
-int				ends_with_cub(const char *filename);
-int				count_map_lines(int fd);
+
+// get_map_2.c
 int				cub_size(int fd);
+int				is_map_line(char *line);
+int				count_map_lines(int fd);
+int				ends_with_cub(const char *filename);
+int				get_mapsize(char *filename);
 
 // check_map.c
+int				is_it_closed(char **matrix, int full_height);
+int				does_player_exist(t_game *game, char **matrix);
+int				is_player_free(char **matrix);
+int				is_player_inside(char **matrix);
 int				check_map(t_game *game, char **matrix);
 
 // check_map_utils.c
-int				get_full_height(char **matrix);
-int				check_line_ends(char *str);
-int				get_num_rows(char **matrix);
 int				even_map(char **matrix);
 int				validate_holes(char **matrix);
 int				validate_chars(char **matrix);
+int				is_line_empty(char *line);
 int				map_full_to_bottom(char **matrix);
+
+// check_map_utils_2.c
 int				is_map_last(char **cub);
+int				get_full_height(char **matrix);
+int				check_line_ends(char *str);
+int				get_num_rows(char **matrix);
+
+// events.c
+int				handle_key(int keycode, t_game *game);
+int				handle_close(t_game *game);
+
+// events_utils.c
+void			rotate_r(t_player *player, float tmp_dirx, float tmp_scrdx);
+void			rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
+t_bool			check_wall(t_game *game, int keycode);
+
+// render_fn.c
+void			img_pixel_put(t_imgdata *img, int x, int y, int color);
+void			paint_window(t_game *game, int color);
+void			render_frame(t_game *game);
+void			draw_walls(t_game *game, int column, t_ray *ray);
+
+// render_utils.c
+void			paint_sky(t_game *game, int start_y, int column);
+void			paint_floor(t_game *game, int start_y, int column);
+
+// dda_algorithm.c
+void			run_dda_al(t_ray *ray, char **map);
+void			draw_rays(t_game *game);
+int				**select_tetxture(t_game *game, t_ray *ray);
+
+// dda_algorithm_2.c
+void			texture_x_coord(t_ray *ray);
+int				is_wall(char **mapa, int x, int y);
+
+// math_fn.c
+void			init_player_dir(t_game *game, char dir);
 
 // resources.c
-void			init_resources(t_game *game, char *filename);
+void			get_cub(t_game *game, char *filename);
 int				get_hex_from_cubline(char *line);
+void			init_resources(t_game *game, char *filename);
+
 // resources_utils.c
-void			get_texture(char *prefix, t_game *game);
 void			set_player_pos(t_game *game);
+char			*extract_texture_path(char *line, char *prefix);
+void			assign_texture(t_game *game, char *prefix, void *img_ptr);
+void			load_texture(t_game *game, char *prefix, char *texture_path);
+void			get_texture(char *prefix, t_game *game);
+
 // resources_utils_2.c
-int				read_buffer(int fd, char *buffer,
-					int *buffer_read, int *buffer_pos);
-char			*process_buffer(char *buffer,
-					int *buffer_pos, char *line, int *i);
+int				read_buffer(int fd, char *buffer, int *buffer_read,
+					int *buffer_pos);
+char			*process_buffer(char *buffer, int *buffer_pos, char *line,
+					int *i);
 char			*get_next_line(int fd);
 void			expand_cub(t_game *game, size_t *capacity);
 void			read_cub_file(t_game *game, size_t *count, size_t *capacity);
-//resources_utils_3.c
+
+// resources_utils_3.c
 int				parse_color_component(char *line, int *i);
 int				validate_color_line(char *line, int i);
 void			iterate_line(char *line, int *i);
 int				get_full_width(char **matrix);
 void			parse_colors(t_game *game, char *line);
 
-// events.c
-void			rotate_r(t_player *player, float tmp_dirx, float tmp_scrdx);
-void			rotate_l(t_player *player, float tmp_dirx, float tmp_scrdx);
-t_bool			check_wall(t_game *game, int keycode);
+// texture_fn.c
+int				**create_txt_array(int size);
+t_bool			init_texture(t_game *game, int size);
+void			parse_texture(t_game *game, char *path, char orientation);
 
-// main.c
+// frees.c
+void			free_parsing(t_game *game);
+void			free_destroy_parsing(t_game *game);
+void			clean_close(t_game *game);
+void			error_exit(char *msg, int exit_code, t_game *game);
+void			free_structs(t_game *game);
+
+// prints.c
 void			malloc_err(void);
+void			printline_fd(int fd, char *str);
+void			printmatrix_fd(int fd, char **str);
+void			print_game_data(t_game *game);
+
 #endif

@@ -108,16 +108,16 @@ int	**select_tetxture(t_game *game, t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->ray_dir[0] < 0)
-			texture = textures->texture_WE;
+			texture = textures->texture_we;
 		else
-			texture = textures->texture_EA;
+			texture = textures->texture_ea;
 	}
 	else
 	{
 		if (ray->ray_dir[1] < 0)
-			texture = textures->texture_NO;
+			texture = textures->texture_no;
 		else
-			texture = textures->texture_SO;
+			texture = textures->texture_so;
 	}
 	return (texture);
 }

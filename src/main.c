@@ -6,17 +6,11 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/22 22:00:33 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/23 21:19:05 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	malloc_err(void)
-{
-	printline_fd(2, "Error: malloc error\n");
-	exit(1);
-}
 
 static void	init_game(t_game *game)
 {
@@ -32,10 +26,10 @@ static void	init_game(t_game *game)
 			&game->img->endian);
 	if (!init_texture(game, TEXTURE_SIZE))
 		malloc_err();
-	parse_texture(game, textures->path_NO, 'N');
-	parse_texture(game, textures->path_SO, 'S');
-	parse_texture(game, textures->path_EA, 'E');
-	parse_texture(game, textures->path_WE, 'W');
+	parse_texture(game, textures->path_no, 'N');
+	parse_texture(game, textures->path_so, 'S');
+	parse_texture(game, textures->path_ea, 'E');
+	parse_texture(game, textures->path_we, 'W');
 }
 
 static void	start_game(t_game *game)
@@ -69,8 +63,8 @@ int	parsing(int argc, char **argv, t_game *game)
 			clean_close(game), 1);
 	if (!is_map_last(game->map->cub))
 	{
-		printline_fd(2,
-			"\nError: the map is invalid\n(Hint) Watch out for newlines at the end of file!\n\n");
+		printline_fd(2, "\nError: the map is invalid\n");
+		printline_fd(2, "(Hint) Watch out for newlines at the end of file!\n");
 		exit(1);
 	}
 	return (0);

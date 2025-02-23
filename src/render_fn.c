@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_fn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:55:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/22 21:50:34 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/23 21:12:39 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,53 @@ static void	check_height(int *start_y, int *end)
 		*end = SCREEN_HIGH - 1;
 }
 
+//void	draw_walls(t_game *game, int column, t_ray *ray)
+//{
+//	int		heigh;
+//	int		start_y;
+//	int		end;
+//	int		**texture;
+//	double	step;
+//	double	textpos;
+//	int		texure_y;
+//
+//	texture = select_tetxture(game, ray);
+//	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
+//	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
+//	end = start_y + heigh;
+//	step = 1.0 * TEXTURE_SIZE / heigh;
+//	check_height(&start_y, &end);
+//	textpos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
+//	paint_sky(game, start_y, column);
+//	while (start_y < end)
+//	{
+//		texure_y = (int)textpos;
+//		textpos += step;
+//		img_pixel_put(game->img, column, start_y,
+//			texture[texure_y][ray->texture_pixel]);
+//		start_y++;
+//	}
+//	paint_floor(game, start_y, column);
+//}
+
 void	draw_walls(t_game *game, int column, t_ray *ray)
 {
-	int		heigh;
-	int		start_y;
-	int		end;
-	int		**texture;
-	double	step;
-	double	textPos;
-	int		texure_y;
+	int	heigh;
+	int	start_y;
+	int	end;
+	int	**texture;
+	int	texure_y;
 
 	texture = select_tetxture(game, ray);
 	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
 	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
 	end = start_y + heigh;
-	step = 1.0 * TEXTURE_SIZE / heigh;
 	check_height(&start_y, &end);
-	textPos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
 	paint_sky(game, start_y, column);
 	while (start_y < end)
 	{
-		texure_y = (int)textPos;
-		textPos += step;
+		texure_y = (int)((start_y - SCREEN_HIGH / 2 + heigh / 2)
+				* (1.0 * TEXTURE_SIZE / heigh));
 		img_pixel_put(game->img, column, start_y,
 			texture[texure_y][ray->texture_pixel]);
 		start_y++;

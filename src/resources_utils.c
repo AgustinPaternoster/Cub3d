@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resources_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 03:36:00 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 21:59:40 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/23 21:20:00 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ char	*extract_texture_path(char *line, char *prefix)
 				+ 2] == '\t'))
 	{
 		j += 3;
-		while (line[j] == ' ' || line[j] == '\t')
-			j++;
+		iterate_line(line, &j);
 		path = ft_strdup(&line[j]);
 		if (!path)
 			return (NULL);
@@ -67,33 +66,16 @@ char	*extract_texture_path(char *line, char *prefix)
 	return (NULL);
 }
 
-void	assign_texture(t_game *game, char *prefix, void *img_ptr, int width,
-		int height)
+void	assign_texture(t_game *game, char *prefix, void *img_ptr)
 {
 	if (ft_strcmp(prefix, "NO") == 0)
-	{
 		game->map->no_texture->img = img_ptr;
-		game->map->no_texture->width = width;
-		game->map->no_texture->height = height;
-	}
 	else if (ft_strcmp(prefix, "SO") == 0)
-	{
 		game->map->so_texture->img = img_ptr;
-		game->map->so_texture->width = width;
-		game->map->so_texture->height = height;
-	}
 	else if (ft_strcmp(prefix, "WE") == 0)
-	{
 		game->map->we_texture->img = img_ptr;
-		game->map->we_texture->width = width;
-		game->map->we_texture->height = height;
-	}
 	else if (ft_strcmp(prefix, "EA") == 0)
-	{
 		game->map->ea_texture->img = img_ptr;
-		game->map->ea_texture->width = width;
-		game->map->ea_texture->height = height;
-	}
 }
 
 void	load_texture(t_game *game, char *prefix, char *texture_path)
@@ -111,15 +93,15 @@ void	load_texture(t_game *game, char *prefix, char *texture_path)
 		free(texture_path);
 		return ;
 	}
-	assign_texture(game, prefix, img_ptr, width, height);
+	assign_texture(game, prefix, img_ptr);
 	if (ft_strcmp(prefix, "NO") == 0)
-		game->map->textures->path_NO = ft_strdup(texture_path);
+		game->map->textures->path_no = ft_strdup(texture_path);
 	else if (ft_strcmp(prefix, "EA") == 0)
-		game->map->textures->path_EA = ft_strdup(texture_path);
+		game->map->textures->path_ea = ft_strdup(texture_path);
 	else if (ft_strcmp(prefix, "WE") == 0)
-		game->map->textures->path_WE = ft_strdup(texture_path);
+		game->map->textures->path_we = ft_strdup(texture_path);
 	else if (ft_strcmp(prefix, "SO") == 0)
-		game->map->textures->path_SO = ft_strdup(texture_path);
+		game->map->textures->path_so = ft_strdup(texture_path);
 	free(texture_path);
 }
 

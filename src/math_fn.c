@@ -34,6 +34,6 @@ void	init_player_dir(t_game *game, char dir)
 		game->player->dx = -1;
 		game->player->dy = -1 * 0;
 	}
-	game->player->scr_dx = game->player->dy * 1;
-	game->player->scr_dy = game->player->dx * -1 * 1;
+	game->player->scr_dx = game->player->dy * 0.66;
+	game->player->scr_dy = game->player->dx * -1 * 0.66;
 }

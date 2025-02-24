@@ -24,8 +24,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define SCREEN_WITH 1200
-# define SCREEN_HIGH 900
+# define SCREEN_WITH 1000
+# define SCREEN_HIGH 750
 # define VELO_MOV 0.02
 # define VELO_ROT 2
 # define GRIDSIZE 100
@@ -37,7 +37,7 @@
 # define GREY 13158600
 # define RADIAN 0.01745329252
 # define LINE_SIZE 10
-# define TEXTURE_SIZE 64
+# define TEXTURE_SIZE 100
 
 typedef enum s_bool
 {

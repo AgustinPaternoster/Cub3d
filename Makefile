@@ -38,6 +38,8 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 INC			=	-I ./inc/\
 				-I ./libft/\
 				-I ./minilibx/
+HEADER		= inc/cub3d.h
+
 
 # Main rule
 all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
@@ -51,7 +53,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -c $< -o $@ $(INC)
 
 # Project file rule
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HEADER) Makefile
 	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJS) -o $@ $(INC) $(LIBFT) $(MLX) -lXext -lX11 -lm
 
 # Libft rule

@@ -24,10 +24,10 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define SCREEN_WITH 800
-# define SCREEN_HIGH 600
-# define VELO_MOV 0.04
-# define VELO_ROT 4
+# define SCREEN_WITH 1200
+# define SCREEN_HIGH 900
+# define VELO_MOV 0.02
+# define VELO_ROT 2
 # define GRIDSIZE 100
 # define PLAYERSIZE 4
 # define RED 16711680

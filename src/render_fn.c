@@ -58,35 +58,6 @@ static void	check_height(int *start_y, int *end)
 		*end = SCREEN_HIGH - 1;
 }
 
-//void	draw_walls(t_game *game, int column, t_ray *ray)
-//{
-//	int		heigh;
-//	int		start_y;
-//	int		end;
-//	int		**texture;
-//	double	step;
-//	double	textpos;
-//	int		texure_y;
-//
-//	texture = select_tetxture(game, ray);
-//	heigh = ((SCREEN_HIGH / ray->distance) * 0.5);
-//	start_y = (SCREEN_HIGH / 2) - (heigh / 2);
-//	end = start_y + heigh;
-//	step = 1.0 * TEXTURE_SIZE / heigh;
-//	check_height(&start_y, &end);
-//	textpos = (start_y - SCREEN_HIGH / 2 + heigh / 2) * step;
-//	paint_sky(game, start_y, column);
-//	while (start_y < end)
-//	{
-//		texure_y = (int)textpos;
-//		textpos += step;
-//		img_pixel_put(game->img, column, start_y,
-//			texture[texure_y][ray->texture_pixel]);
-//		start_y++;
-//	}
-//	paint_floor(game, start_y, column);
-//}
-
 void	draw_walls(t_game *game, int column, t_ray *ray)
 {
 	int	heigh;

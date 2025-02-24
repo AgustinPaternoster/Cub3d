@@ -28,7 +28,7 @@ void	paint_window(t_game *game, int color)
 	int	size_y;
 
 	size_x = SCREEN_WITH;
-	size_y = SCREEN_WITH;
+	size_y = SCREEN_HIGH;
 	x = 0;
 	while (x < size_x)
 	{

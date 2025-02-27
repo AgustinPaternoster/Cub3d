@@ -94,7 +94,7 @@ int	parsing(int argc, char **argv, t_game *game)
 		malloc_err();
 	if (get_map(game, argv[1]) == 1)
 		return (2);
-	if (check_map(game, game->map->matrix) == 0 && check_corners(game->map->matrix) == 0 && !inner_holes(game->map->matrix))
+	if (check_map(game, game->map->matrix) == 0 && check_corners(game->map->matrix) == 0)
 		init_resources(game, argv[1]);
 	else
 		return (printline_fd(2, "\nError: the map is invalid\n\n"),

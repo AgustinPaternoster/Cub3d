@@ -40,6 +40,44 @@ static void	start_game(t_game *game)
 	mlx_loop(game->mlx_connection);
 }
 
+// segfaults don't happen -
+// this function is never called for first or last lines
+// (previously checked for no '0's)
+int any_space_around(char **matrix, int i, int j)
+{
+    if (matrix[i][j] == ' ')
+        return (1);
+    if (matrix[i][j] == ' ' || matrix[i][j - 1] == ' ' || matrix[i][j + 1] == ' ' ||
+        matrix[i - 1][j] == ' ' || matrix[i + 1][j] == ' ' ||
+        matrix[i - 1][j - 1] == ' ' || matrix[i - 1][j + 1] == ' ' ||
+        matrix[i + 1][j - 1] == ' ' || matrix[i + 1][j + 1] == ' ') 
+        return (1);
+    return (0);
+}
+
+int check_corners(char **matrix)
+{
+    int i;
+    int j;
+
+	i = 0;
+    while (matrix[i])
+    {
+        j = 0;
+        while (matrix[i][j])
+        {
+            if (matrix[i][j] == '0' || matrix[i][j] == 'N' || matrix[i][j] == 'S' || matrix[i][j] == 'E' || matrix[i][j] == 'W')
+            {
+                if (any_space_around(matrix, i, j))
+                    return (1);
+            }
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+
 // printline_fd(2, "\nThe map is valid\n\n");
 int	parsing(int argc, char **argv, t_game *game)
 {
@@ -56,7 +94,7 @@ int	parsing(int argc, char **argv, t_game *game)
 		malloc_err();
 	if (get_map(game, argv[1]) == 1)
 		return (2);
-	if (check_map(game, game->map->matrix) == 0)
+	if (check_map(game, game->map->matrix) == 0 && check_corners(game->map->matrix) == 0 && !inner_holes(game->map->matrix))
 		init_resources(game, argv[1]);
 	else
 		return (printline_fd(2, "\nError: the map is invalid\n\n"),

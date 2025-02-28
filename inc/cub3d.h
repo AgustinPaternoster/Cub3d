@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon <mgimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/23 21:38:10 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/02/28 02:43:07 by mgimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,10 @@ int				is_map_last(char **cub);
 int				get_full_height(char **matrix);
 int				check_line_ends(char *str);
 int				get_num_rows(char **matrix);
+
+// check_map_utils_3.c
+int				any_space_around(char **matrix, int i, int j);
+int				check_corners(t_game *game);
 
 // events.c
 int				handle_key(int keycode, t_game *game);

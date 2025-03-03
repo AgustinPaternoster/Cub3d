@@ -3,12 +3,10 @@
 # Program file name
 NAME	= cub3D
 
-# Mode
-BONUS = 0
-
 # Compiler and compilation flags
 CC		= gcc
 CFLAGS	= -Werror -Wextra -Wall -g -fsanitize=address
+LFLAGS	= -Llibft -lft -Lminilibx -lmlx
 
 # Minilibx linux
 MLX_PATH	= minilibx/
@@ -21,56 +19,42 @@ LIBFT_NAME	= libft.a
 LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # Sources
-SRC_PATH = ./src/
-SRC		= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c \
-			resources.c resources_utils.c dda_algorithm.c events.c \
-			math_fn.c render_fn.c texture_fn.c events_utils.c \
-			render_utils.c check_map_utils_2.c dda_algorithm_2.c \
-			get_map_2.c resources_utils_2.c resources_utils_3.c \
-			check_map_utils_3.c
-SRCS	= $(addprefix $(SRC_PATH), $(SRC))
-
-# Objects
-OBJ_PATH	= ./objects/
-OBJ			= $(SRC:.c=.o)
-OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
+SRC_PATH 	= ./src/
+SRC			= 	main.c get_map.c prints.c frees.c check_map.c check_map_utils.c \
+				resources.c resources_utils.c dda_algorithm.c events.c \
+				math_fn.c render_fn.c texture_fn.c events_utils.c \
+				render_utils.c check_map_utils_2.c dda_algorithm_2.c \
+				get_map_2.c resources_utils_2.c resources_utils_3.c \
+				check_map_utils_3.c
+SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 # Includes
 INC			=	-I ./inc/\
 				-I ./libft/\
 				-I ./minilibx/
-HEADER		= inc/cub3d.h
+HEADER		=	inc/cub3d.h
 
 
 # Main rule
-all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
-
-# Objects directory rule
-$(OBJ_PATH):
-	mkdir -p $(OBJ_PATH)
-
-# Objects rule
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -c $< -o $@ $(INC)
+all: library $(MLX) $(NAME)
 
 # Project file rule
-$(NAME): $(OBJS) $(HEADER) Makefile
-	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJS) -o $@ $(INC) $(LIBFT) $(MLX) -lXext -lX11 -lm
+$(NAME):$(LIBFT) $(SRCS) $(HEADER) Makefile
+	$(CC) $(SRCS) $(CFLAGS) $(LFLAGS) $(INC) -lXext -lX11 -lm  -o $@ 
+
 
 # Libft rule
-$(LIBFT):
-	make -sC $(LIBFT_PATH)
+library:
+	make -C $(LIBFT_PATH)
 
 # MLX rule
 $(MLX):
 	make -sC $(MLX_PATH)
 
-bonus:
-	make all BONUS=1
 
 # Clean up build files rule
 clean:
-	rm -rf $(OBJ_PATH)
+	#rm -rf $(OBJ_PATH)
 	make -C $(LIBFT_PATH) clean
 	make -C $(MLX_PATH) clean
 

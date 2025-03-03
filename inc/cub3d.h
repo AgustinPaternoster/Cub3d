@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon <mgimon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/28 02:43:07 by mgimon           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:00:45 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ int				does_player_exist(t_game *game, char **matrix);
 int				is_player_free(char **matrix);
 int				is_player_inside(char **matrix);
 int				check_map(t_game *game, char **matrix);
+
+
 
 // check_map_utils.c
 int				even_map(char **matrix);

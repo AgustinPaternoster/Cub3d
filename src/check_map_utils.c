@@ -3,85 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 05:00:30 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/03/03 14:42:57 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:43:29 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	ft_bspace(void *s, size_t n)
-{
-	size_t			i;
-	unsigned char	*byte_s;
-
-	byte_s = (unsigned char *)s;
-	i = 0;
-	while (i < n && n != 0)
-	{
-		byte_s[i] = 32;
-		i++;
-	}
-}
-
-void fix_line(char **matrix , int i , int max_len)
-{
-	char *new_line;
-	int j;
-	int size;
-	
-	size = ft_strlen(matrix[i]);
-	new_line = malloc(sizeof(char) * max_len + 1);
-	ft_bspace(new_line, max_len);
-	j = 0;
-	while(j < size)
-	{
-		new_line[j] = matrix[i][j];
-		j++;
-	}
-	free(matrix[i]);
-	new_line[max_len] = '\0';
-	matrix[i] = new_line;
-}
-
-int length(char **matrix)
-{
-	int i;
-	int row;
-	int max_value;
-	
-	i = 0;
-	row = 0;
-	while(matrix[row])
-		row++;
-	max_value = 0;
-	while(i < row)
-	{
-		if ((int)ft_strlen(matrix[i]) > max_value)
-			max_value = (int)ft_strlen(matrix[i]);
-		i++;
-	}
-	return (max_value);
-}
-
-
-
 int	even_map(char **matrix)
 {
 	int	i;
-	//int	j;
-	//int	k;
-	int max_length;
-	
+	int	max_length;
+
 	max_length = length(matrix);
 	i = 0;
-	//k = ft_strlen(matrix[i]);
 	while (matrix[i])
 	{
 		if ((int)ft_strlen(matrix[i]) < max_length)
-			fix_line(matrix,i,max_length);
+			fix_line(matrix, i, max_length);
 		i++;
 	}
 	(void)max_length;

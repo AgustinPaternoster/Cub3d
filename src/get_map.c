@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:52:26 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 21:37:12 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:46:19 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	get_map(t_game *game, char *filename)
 	game->map->fd = open(filename, O_RDONLY);
 	if (game->map->fd < 0 || map_size <= 0 || !ends_with_cub(filename))
 	{
-		printline_fd(2, "Error: invalid file or invalid map size!\n");
+		printline_fd(2, "Error:\nInvalid file or invalid map size!\n");
 		return (1);
 	}
 	result = malloc(sizeof(char *) * (map_size + 1));

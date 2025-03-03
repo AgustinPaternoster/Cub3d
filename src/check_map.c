@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 21:10:59 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/03/03 12:41:47 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:44:36 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,7 @@ int	check_map(t_game *game, char **matrix)
 	if (!matrix || !matrix[0])
 		return (1);
 	if (!even_map(matrix) || !map_full_to_bottom(matrix))
-		return (printline_fd(2, "\nError: uneven map\n"), 1);
-	// if (!map_full_to_bottom(matrix))
-	// 		return (printline_fd(2, "\nError: uneven map\n"), 1);
+		return (printline_fd(2, "Error: \nUneven map\n"), 1);
 	if (validate_chars(matrix))
 		return (1);
 	full_height = get_full_height(matrix);

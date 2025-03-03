@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 03:04:09 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 21:57:04 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:52:22 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_cub(t_game *game, char *filename)
 	game->map->fd = open(filename, O_RDONLY);
 	if (game->map->fd < 0)
 	{
-		printf("Failed to open file\n");
+		printf("Error:\nFailed to open file\n");
 		return ;
 	}
 	game->map->cub = malloc(sizeof(char *) * capacity);
@@ -100,7 +100,7 @@ void	init_resources(t_game *game, char *filename)
 	process_cub_lines(game);
 	if (game->map->ceiling == -1 || game->map->floor == -1)
 	{
-		printf("\nError: One or more colors not found\n\n");
+		printf("Error:\nOne or more colors not found\n");
 		exit(1);
 	}
 	game->map->sizey = get_full_height(game->map->matrix);

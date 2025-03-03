@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 03:36:00 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/23 21:20:00 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:51:15 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	load_texture(t_game *game, char *prefix, char *texture_path)
 			&height);
 	if (!img_ptr)
 	{
-		printline_fd(2, "Error: mlx couldn't get one texture\n\n");
+		printline_fd(2, "Error:\nMlx couldn't get one texture\n");
 		printf("Texture path is: %s\n", texture_path);
 		free(texture_path);
 		return ;
@@ -121,5 +121,5 @@ void	get_texture(char *prefix, t_game *game)
 		}
 		i++;
 	}
-	printline_fd(2, "Error: Texture prefix not found in .cub file\n");
+	printline_fd(2, "Error:\nTexture prefix not found in .cub file\n");
 }

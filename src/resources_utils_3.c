@@ -6,7 +6,7 @@
 /*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:57:04 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/02/22 21:57:04 by mgimon-c         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:53:30 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parse_colors(t_game *game, char *line)
 	color = get_hex_from_cubline(line);
 	if (color == -1)
 	{
-		printf("\nError parsing color on line: %s\n", line);
+		printf("Error:\nparsing color on line: %s", line);
 		exit(1);
 	}
 	if (line[0] == 'C')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 03:11:12 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/03/03 13:00:45 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:11:40 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,6 @@ int				is_player_free(char **matrix);
 int				is_player_inside(char **matrix);
 int				check_map(t_game *game, char **matrix);
 
-
-
 // check_map_utils.c
 int				even_map(char **matrix);
 int				validate_holes(char **matrix);
@@ -174,6 +172,9 @@ int				get_num_rows(char **matrix);
 // check_map_utils_3.c
 int				any_space_around(char **matrix, int i, int j);
 int				check_corners(t_game *game);
+void			ft_bspace(void *s, size_t n);
+void			fix_line(char **matrix, int i, int max_len);
+int				length(char **matrix);
 
 // events.c
 int				handle_key(int keycode, t_game *game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgimon <mgimon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgimon-c <mgimon-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:44:10 by apaterno          #+#    #+#             */
-/*   Updated: 2025/02/28 02:43:12 by mgimon           ###   ########.fr       */
+/*   Updated: 2025/03/03 18:49:03 by mgimon-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void	start_game(t_game *game)
 int	parsing(int argc, char **argv, t_game *game)
 {
 	if (argc != 2)
-		return (printline_fd(2, "\nError: invalid arguments\n"), printline_fd(2,
+		return (printline_fd(2, "Error:\nInvalid arguments!\n"), printline_fd(2,
 				"You must provide a .cub map route as "), printline_fd(2,
-				"only argument to the program\n\n"), 1);
+				"only argument to the program\n"), 1);
 	game->mlx_connection = mlx_init();
 	game->map = malloc(sizeof(t_map));
 	if (!game->map)
@@ -59,11 +59,11 @@ int	parsing(int argc, char **argv, t_game *game)
 	if (!check_map(game, game->map->matrix) && !check_corners(game))
 		init_resources(game, argv[1]);
 	else
-		return (printline_fd(2, "\nError: the map is invalid\n\n"),
+		return (printline_fd(2, "Error:\nThe map is invalid\n"),
 			clean_close(game), 1);
 	if (!is_map_last(game->map->cub))
 	{
-		printline_fd(2, "\nError: the map is invalid\n");
+		printline_fd(2, "Error:\nThe map is invalid\n");
 		printline_fd(2, "(Hint) Watch out for newlines at the end of file!\n");
 		exit(1);
 	}

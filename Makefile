@@ -5,7 +5,7 @@ NAME	= cub3D
 
 # Compiler and compilation flags
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall #-g
 LFLAGS	= -Llibft -lft -Lminilibx -lmlx
 
 # Minilibx linux

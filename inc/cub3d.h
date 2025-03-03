@@ -37,7 +37,7 @@
 # define GREY 13158600
 # define RADIAN 0.01745329252
 # define LINE_SIZE 10
-# define TEXTURE_SIZE 64
+# define TEXTURE_SIZE 100
 
 typedef enum s_bool
 {

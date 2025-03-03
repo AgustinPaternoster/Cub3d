@@ -6,7 +6,7 @@
 /*   By: apaterno <apaterno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 05:00:30 by mgimon-c          #+#    #+#             */
-/*   Updated: 2025/03/03 13:48:04 by apaterno         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:42:57 by apaterno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void fix_line(char **matrix , int i , int max_len)
 	int size;
 	
 	size = ft_strlen(matrix[i]);
-	new_line = malloc(sizeof(char) * max_len);
+	new_line = malloc(sizeof(char) * max_len + 1);
 	ft_bspace(new_line, max_len);
 	j = 0;
 	while(j < size)
